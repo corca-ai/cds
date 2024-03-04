@@ -1,0 +1,197 @@
+import { type InputHTMLAttributes, type ReactElement, cloneElement, ReactNode } from 'react';
+
+import styled from '@emotion/styled';
+
+import Icon from '../Icon';
+import { B3, B5, B7 } from '../Text';
+import { Tooltip, type TooltipProps } from '../Tooltip';
+import { color, typography } from '../styles';
+
+export type InputTooltipProps = Omit<TooltipProps, 'children'>;
+
+export interface InputBaseProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'width'> {
+  label?: string;
+  description?: string;
+  error?: string;
+  children: ReactElement;
+  width?: number;
+  tooltip?: InputTooltipProps;
+  rightSection?: ReactNode;
+  leftSection?: ReactNode;
+  cursorPointer?: boolean;
+}
+
+export function InputContainer({
+  label,
+  description,
+  required = false,
+  error,
+  children,
+  width,
+  tooltip,
+  rightSection,
+  leftSection,
+  onClick,
+  cursorPointer,
+  ...props
+}: InputBaseProps) {
+  return (
+    <InputWrapper
+      width={width}
+      onClick={onClick}
+      {...(cursorPointer && { cursorPointer })}
+      {...props}
+    >
+      {label && (
+        <LabelContainer>
+          <B7>
+            {label} {required && <Star> *</Star>}
+          </B7>
+          {tooltip != null && (
+            <Tooltip
+              content={tooltip.content}
+              direction={tooltip.direction}
+              withArrow={tooltip.withArrow}
+            >
+              <QuestionIconWrapper>
+                <Icon.QuestionCircle />
+              </QuestionIconWrapper>
+            </Tooltip>
+          )}
+        </LabelContainer>
+      )}
+      {description && (
+        <Description>
+          <B5 c="grey-60">{description}</B5>
+        </Description>
+      )}
+      {rightSection || leftSection ? (
+        <InputChildrenWrapper>
+          {leftSection && <LeftSectionWrapper aria-hidden="true">{leftSection}</LeftSectionWrapper>}
+          {cloneElement(children, {
+            isRightSection: !!rightSection,
+            isLeftSection: !!leftSection,
+          })}
+          {rightSection && (
+            <RightSectionWrapper aria-hidden="true">{rightSection}</RightSectionWrapper>
+          )}
+        </InputChildrenWrapper>
+      ) : (
+        children
+      )}
+      {error && (
+        <ErrorContainer>
+          <Icon.AlertCircle color={color['error-30']} />
+          <B3 c="error-30">{error}</B3>
+        </ErrorContainer>
+      )}
+    </InputWrapper>
+  );
+}
+
+const InputWrapper = styled.div<{ width?: number; cursorPointer?: boolean }>`
+  width: ${({ width }) => (width ? `${width}px` : '100%')};
+  position: relative;
+  cursor: ${({ cursorPointer }) => (cursorPointer ? 'pointer' : 'default')};
+`;
+
+const Star = styled.span`
+  color: #ff5362;
+`;
+
+const Description = styled.div`
+  display: flex;
+  margin-bottom: 8px;
+  line-height: 17px;
+`;
+
+const LabelContainer = styled.div`
+  display: flex;
+  margin-bottom: 8px;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+  align-items: center;
+`;
+
+export const ErrorContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+  gap: 4px;
+`;
+
+export const BaseInput = styled.input<{
+  error?: string;
+  isRightSection?: boolean;
+  isLeftSection?: boolean;
+  height?: string | number;
+  cursorPointer?: boolean;
+}>`
+  width: 100%;
+  padding: ${({ isRightSection, isLeftSection }) => {
+    if (isLeftSection) return '6px 12px 6px 34px';
+    return isRightSection ? '6px 36px 6px 12px' : '6px 12px';
+  }};
+  outline: none;
+  border: 1px solid ${color['grey-50']};
+  font-style: normal;
+  font-weight: 500;
+  font-size: ${typography.size.xs}px;
+  color: ${color['grey-80']};
+  background: ${color.white};
+  border-radius: 8px;
+  height: ${p => (typeof p.height === 'number' ? `${p.height}px` : p.height || '34px')};
+
+  &:disabled {
+    border: none;
+    background: ${color['grey-20']};
+    color: ${color['grey-50']};
+    cursor: not-allowed;
+  }
+
+  &::placeholder {
+    color: ${color['grey-50']};
+    font-size: ${typography.size.xs}px;
+  }
+
+  ${({ error }) =>
+    error
+      ? `
+    border: 1px solid ${color['error-30']};
+    background: ${color['error-10']};
+  `
+      : `
+    &:focus-visible,
+    &:focus {
+      border: 1px solid ${color['grey-80']};
+    }
+  `}
+  cursor: ${({ cursorPointer }) => (cursorPointer ? 'pointer' : 'default')};
+`;
+
+const QuestionIconWrapper = styled.i`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+`;
+
+const InputChildrenWrapper = styled.div`
+  position: relative;
+`;
+
+const RightSectionWrapper = styled.div`
+  position: absolute;
+  display: flex;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 8px;
+`;
+
+const LeftSectionWrapper = styled.div`
+  position: absolute;
+  display: flex;
+  top: 50%;
+  transform: translateY(-50%);
+  padding-left: 10px;
+`;
