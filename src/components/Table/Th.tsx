@@ -61,7 +61,7 @@ const TABLE_TH_STYLE: TableThStyleType = {
   },
 };
 
-interface Props {
+export interface Props {
   text: string;
   icon?: ReactNode;
   width?: string;

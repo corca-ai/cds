@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { color } from '../styles';
 import { ReactNode } from 'react';
 
-interface Props {
+export interface Props {
   children: ReactNode;
   cursorPointer?: boolean;
   onClick?: () => void;

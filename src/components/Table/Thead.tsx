@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 import { color } from '../styles';
 
-interface TheadProps {
+export interface TheadProps {
   children: ReactNode;
   height?: number;
 }
