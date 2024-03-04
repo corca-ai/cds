@@ -1,4 +1,22 @@
 {
   "editor.formatOnSave": true,
-  "prettier.enable": true
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.workingDirectories": [
+    { "pattern": "platforms/**/*" },
+    { "pattern": "packages/**/*" },
+    { "pattern": "services/**/*" }
+  ],
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "cSpell.words": ["craco", "infisical", "kakao", "kakaotalk"],
+  "svg.preview.background": "dark-transparent",
+  "[svg]": {
+    "editor.defaultFormatter": "jock.svg"
+  }
 }
