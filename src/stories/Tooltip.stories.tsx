@@ -35,7 +35,8 @@ export const Basic = Template.bind({});
 Basic.args = {
   direction: 'top',
   withArrow: true,
-  content: 'Corca Design System\nTooltip',
+  content:
+    'Corca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design ',
 };
 
 export const Direction = () => {
@@ -69,8 +70,7 @@ export const Direction = () => {
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
-  padding: 50px 0px;
+  height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;

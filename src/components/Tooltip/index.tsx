@@ -27,13 +27,14 @@ export function Tooltip({
   return (
     <TooltipContainer>
       <Content
-        data-tooltip-offset={withArrow ? TOOLTIP_SIZE / 2 : 2}
+        data-tooltip-offset={withArrow ? TOOLTIP_SIZE / 2 + 2 : 2}
         data-tooltip-id={id}
         data-tooltip-delay-hide={10000000000}
+        data-tooltip-place={direction}
       >
         {children}
       </Content>
-      <TooltipBox id={id} noArrow={!withArrow} place={direction} positionStrategy="fixed">
+      <TooltipBox id={id} noArrow={!withArrow} place={direction}>
         {content}
       </TooltipBox>
     </TooltipContainer>
@@ -53,11 +54,10 @@ const TOOLTIP_TOP_BOTTOM_ARROW_SIZE = 15;
 
 const TooltipBox = styled(BasicTooltip)`
   width: auto;
-  max-width: 200px;
+  max-width: 300px;
   overflow-wrap: break-word;
   white-space: pre-wrap;
   z-index: 10;
-  position: absolute !important;
 
   // override tooltip's default style
   padding: 7px 10px !important;
@@ -81,6 +81,20 @@ const TooltipBox = styled(BasicTooltip)`
         return `
             right: calc(50% - ${TOOLTIP_TOP_BOTTOM_ARROW_SIZE}px - ${TOOLTIP_SIZE}px) !important;
             left: auto !important;
+        `;
+      }
+    }
+
+    if (position === 'right' || position === 'left') {
+      if (direction === 'start') {
+        return `
+          top: calc(50% - ${TOOLTIP_SIZE * 2}px) !important;  
+        `;
+      }
+      if (direction === 'end') {
+        return `
+          bottom: calc(50% - ${TOOLTIP_SIZE * 2}px) !important;
+          top: auto !important;
         `;
       }
     }
