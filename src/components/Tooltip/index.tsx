@@ -7,7 +7,7 @@ import { color, typography } from '../styles';
 
 export type Direction = PlacesType;
 
-interface TooltipProps {
+export interface TooltipProps {
   direction: Direction;
   withArrow?: boolean;
   children: ReactNode;
