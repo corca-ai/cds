@@ -21,7 +21,8 @@
     "react-datepicker": "^4.25.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
-    "react-i18next": "^12.1.4"
+    "react-i18next": "^12.1.4",
+    "react-tooltip": "^5.26.3"
   },
   "devDependencies": {
     "@storybook/addon-designs": "^7.0.9",

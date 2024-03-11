@@ -1,26 +1,39 @@
-import { ReactNode } from 'react';
-import { css } from '@emotion/react';
-import { type ReactElement } from 'react';
+import { ReactElement, ReactNode, useId } from 'react';
+import { Tooltip as BasicTooltip, PlacesType } from 'react-tooltip';
 
 import styled from '@emotion/styled';
 
 import { color, typography } from '../styles';
 
-type Direction = 'top' | 'bottom' | 'left' | 'right';
-export interface TooltipProps {
-  direction?: Direction;
+export type Direction = PlacesType;
+
+interface TooltipProps {
+  direction: Direction;
   withArrow?: boolean;
   children: ReactNode;
   content: string | ReactElement;
 }
 
-type TooltipStylesProps = Omit<TooltipProps, 'children' | 'content'>;
+const TOOLTIP_SIZE = 10;
 
-export function Tooltip({ direction = 'top', withArrow = true, children, content }: TooltipProps) {
+export function Tooltip({
+  direction = 'bottom',
+  withArrow = true,
+  children,
+  content,
+}: TooltipProps) {
+  const id = useId();
+
   return (
     <TooltipContainer>
-      {children}
-      <TooltipBox className="tooltip-box" withArrow={withArrow} direction={direction}>
+      <Content
+        data-tooltip-offset={withArrow ? TOOLTIP_SIZE / 2 : 2}
+        data-tooltip-id={id}
+        data-tooltip-delay-hide={10000000000}
+      >
+        {children}
+      </Content>
+      <TooltipBox id={id} noArrow={!withArrow} place={direction} positionStrategy="fixed">
         {content}
       </TooltipBox>
     </TooltipContainer>
@@ -28,122 +41,86 @@ export function Tooltip({ direction = 'top', withArrow = true, children, content
 }
 
 const TooltipContainer = styled.div`
-  position: relative;
-  &:hover {
-    .tooltip-box {
-      visibility: visible;
-      opacity: 1;
-      transition: opacity 0.3s ease-in-out;
-    }
-  }
+  display: flex;
+  width: fit-content;
 `;
 
-const TOOLTIP_ARROW_WIDTH = 9;
-const TOOLTIP_ARROW_HEIGHT = 5;
-const DISTANCE_OF_ARROW_ELEMENT = 4;
+const Content = styled.div`
+  display: flex;
+`;
 
-const directionStylesheet = ({
-  direction,
-  withArrow,
-}: {
-  direction?: Direction;
-  withArrow?: boolean;
-}) => {
-  const directionStyle = {
-    bubblePosition: `calc(100% + ${
-      withArrow ? TOOLTIP_ARROW_HEIGHT + DISTANCE_OF_ARROW_ELEMENT : DISTANCE_OF_ARROW_ELEMENT
-    }px)`,
-    arrowPosition: `calc(100% - ${DISTANCE_OF_ARROW_ELEMENT}px)`,
-    arrowRadius: '2px',
-  } as const;
+const TOOLTIP_TOP_BOTTOM_ARROW_SIZE = 15;
 
-  switch (direction) {
-    case 'top':
-      return css`
-        bottom: ${directionStyle.bubblePosition};
-        left: 50%;
-        transform: translate(-50%, 1px);
+const TooltipBox = styled(BasicTooltip)`
+  width: auto;
+  max-width: 200px;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  z-index: 10;
+  position: absolute !important;
 
-        &::after {
-          top: ${directionStyle.arrowPosition};
-          left: 50%;
-          transform: translate(-50%, -1px) rotate(45deg);
-          border-bottom-right-radius: ${directionStyle.arrowRadius};
-        }
-      `;
-    case 'bottom':
-      return css`
-        top: ${directionStyle.bubblePosition};
-        left: 50%;
-        transform: translate(-50%, 1px);
+  // override tooltip's default style
+  padding: 7px 10px !important;
+  font-size: ${typography.size.xxs}px !important;
+  font-weight: ${typography.weight.regular} !important;
+  line-height: normal;
+  border-radius: 8px !important;
+  background: ${color['main-black']} !important;
+  transform: rotate(0) !important;
 
-        &::after {
-          bottom: ${directionStyle.arrowPosition};
-          left: 50%;
-          transform: translate(-50%, 1px) rotate(45deg);
-          border-top-left-radius: ${directionStyle.arrowRadius};
-        }
-      `;
-    case 'left':
-      return css`
-        top: 50%;
-        right: ${directionStyle.bubblePosition};
-        transform: translate(1px, -50%);
-
-        &::after {
-          top: 40%;
-          left: ${directionStyle.arrowPosition};
-          transform: translateX(-1px) rotate(45deg);
-          border-top-right-radius: ${directionStyle.arrowRadius};
-        }
-      `;
-    case 'right':
-      return css`
-        top: 50%;
-        left: ${directionStyle.bubblePosition};
-        transform: translate(1px, -50%);
-
-        &::after {
-          top: 40%;
-          right: ${directionStyle.arrowPosition};
-          transform: translateX(1px) rotate(45deg);
-          border-bottom-left-radius: ${directionStyle.arrowRadius};
-        }
-      `;
-    default:
-      return css``;
-  }
-};
-
-const TooltipBox = styled.div<TooltipStylesProps>`
-  position: relative;
-  cursor: help;
-  z-index: 10000;
-  opacity: 0;
-
-  ${({ direction, withArrow }) => directionStylesheet({ direction, withArrow })}
-
-  position: absolute;
-  visibility: hidden;
-  width: max-content;
-  height: max-content;
-
-  background: ${color['main-black']};
-  color: ${color.white};
-  font-size: ${typography.size.xxs}px;
-  font-weight: ${typography.weight.regular};
-  padding: 7px 10px;
-  border-radius: 7px;
-
-  ${({ withArrow }) =>
-    withArrow &&
-    css`
-      &::after {
-        content: '';
-        position: absolute;
-        width: ${TOOLTIP_ARROW_WIDTH}px;
-        height: ${TOOLTIP_ARROW_WIDTH}px; // arrow의 base인 정사각형 세로 height
-        background: ${color['main-black']};
+  ${props => {
+    const [position, direction] = props.place!.split('-');
+    if (position === 'top' || position === 'bottom') {
+      if (direction === 'start') {
+        return `
+            left: calc(50% - ${TOOLTIP_TOP_BOTTOM_ARROW_SIZE}px - ${TOOLTIP_SIZE}px) !important;
+          `;
       }
-    `}
+
+      if (direction === 'end') {
+        return `
+            right: calc(50% - ${TOOLTIP_TOP_BOTTOM_ARROW_SIZE}px - ${TOOLTIP_SIZE}px) !important;
+            left: auto !important;
+        `;
+      }
+    }
+  }}
+
+  .react-tooltip-arrow {
+    width: ${TOOLTIP_SIZE}px;
+    height: ${TOOLTIP_SIZE}px;
+    border-bottom-right-radius: 2px;
+    ${props => {
+      const [position, direction] = props.place!.split('-');
+      if (position === 'top' || position === 'bottom') {
+        if (direction === 'start') {
+          return `
+            left: ${TOOLTIP_TOP_BOTTOM_ARROW_SIZE + TOOLTIP_SIZE / 2}px !important;
+          `;
+        }
+
+        if (direction === 'end') {
+          return `
+            left: auto !important;
+            right: calc(${TOOLTIP_TOP_BOTTOM_ARROW_SIZE + TOOLTIP_SIZE / 2}px) !important;
+        `;
+        }
+      }
+
+      if (position === 'right' || position === 'left') {
+        if (direction === 'start') {
+          return `
+            top: ${TOOLTIP_TOP_BOTTOM_ARROW_SIZE}px !important;
+          `;
+        }
+
+        if (direction === 'end') {
+          return `
+            top: auto !important;
+            bottom: ${TOOLTIP_TOP_BOTTOM_ARROW_SIZE}px !important;
+        `;
+        }
+      }
+    }}
+  }
 `;
