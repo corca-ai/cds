@@ -21,3 +21,4 @@ export * from './Tooltip';
 export * from './Topbar';
 export * from './Filter';
 export * from './Spinner';
+export * from './Tooltip';

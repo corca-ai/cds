@@ -2,7 +2,8 @@ import { Meta, StoryFn } from '@storybook/react';
 
 import styled from '@emotion/styled';
 import Icon from '../components/Icon';
-import { type Direction as DirectionType, Tooltip } from '../components/Tooltip';
+import { type Direction as DirectionType, Tooltip, Button } from '../components';
+import { B7 } from '../components';
 
 export default {
   title: 'Components/Tooltip',
@@ -31,38 +32,111 @@ const Template: StoryFn<typeof Tooltip> = args => {
   );
 };
 
+const TOOLTIP_CONTENT =
+  'Corca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design ';
+
 export const Basic = Template.bind({});
 Basic.args = {
   direction: 'top',
   withArrow: true,
-  content:
-    'Corca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design ',
+  content: TOOLTIP_CONTENT,
+};
+
+export const Arrow = () => {
+  return (
+    <ArrowContainer>
+      <ArrowContent>
+        <B7>Arrow Tooltip</B7>
+        <Tooltip direction="bottom" withArrow content="Arrow Tooltip">
+          <Icon.QuestionCircle />
+        </Tooltip>
+      </ArrowContent>
+
+      <ArrowContent>
+        <B7>No Arrow Tooltip</B7>
+        <Tooltip direction="bottom" withArrow={false} content="No Arrow Tooltip">
+          <Icon.QuestionCircle />
+        </Tooltip>
+      </ArrowContent>
+    </ArrowContainer>
+  );
 };
 
 export const Direction = () => {
-  const DirectionList: DirectionType[] = [
-    'top',
-    'top-start',
-    'top-end',
-    'right',
-    'right-start',
-    'right-end',
-    'bottom',
-    'bottom-start',
-    'bottom-end',
-    'left',
-    'left-start',
-    'left-end',
-  ];
-
   return (
     <DirectionContainer>
       <DirectionContent>
-        {DirectionList.map(place => (
-          <Tooltip key={place} content={`Hello world from the ${place}!`} direction={place}>
-            <Icon.QuestionCircle />
+        <Tooltip content={TOOLTIP_CONTENT} direction="top-start">
+          <Button size="small" variant="filled">
+            top start
+          </Button>
+        </Tooltip>
+        <Tooltip content={TOOLTIP_CONTENT} direction="top">
+          <Button size="small" variant="filled">
+            top
+          </Button>
+        </Tooltip>
+        <Tooltip content={TOOLTIP_CONTENT} direction="top-end">
+          <Button size="small" variant="filled">
+            top end
+          </Button>
+        </Tooltip>
+      </DirectionContent>
+
+      <DirectionContent>
+        <DirectionLeftAndRightWrapper align="start">
+          <Tooltip content={TOOLTIP_CONTENT} direction="left-start">
+            <Button size="small" variant="filled">
+              left start
+            </Button>
           </Tooltip>
-        ))}
+          <Tooltip content={TOOLTIP_CONTENT} direction="left">
+            <Button size="small" variant="filled">
+              left
+            </Button>
+          </Tooltip>
+          <Tooltip content={TOOLTIP_CONTENT} direction="left-end">
+            <Button size="small" variant="filled">
+              left end
+            </Button>
+          </Tooltip>
+        </DirectionLeftAndRightWrapper>
+
+        <DirectionLeftAndRightWrapper align="end">
+          <Tooltip content={TOOLTIP_CONTENT} direction="left-start">
+            <Button size="small" variant="filled">
+              left start
+            </Button>
+          </Tooltip>
+          <Tooltip content={TOOLTIP_CONTENT} direction="left">
+            <Button size="small" variant="filled">
+              left
+            </Button>
+          </Tooltip>
+          <Tooltip content={TOOLTIP_CONTENT} direction="left-end">
+            <Button size="small" variant="filled">
+              left end
+            </Button>
+          </Tooltip>
+        </DirectionLeftAndRightWrapper>
+      </DirectionContent>
+
+      <DirectionContent>
+        <Tooltip content={TOOLTIP_CONTENT} direction="bottom-start">
+          <Button size="small" variant="filled">
+            bottom start
+          </Button>
+        </Tooltip>
+        <Tooltip content={TOOLTIP_CONTENT} direction="bottom">
+          <Button size="small" variant="filled">
+            bottom
+          </Button>
+        </Tooltip>
+        <Tooltip content={TOOLTIP_CONTENT} direction="bottom-end">
+          <Button size="small" variant="filled">
+            bottom end
+          </Button>
+        </Tooltip>
       </DirectionContent>
     </DirectionContainer>
   );
@@ -70,7 +144,7 @@ export const Direction = () => {
 
 const Container = styled.div`
   width: 100%;
-  height: 300px;
+  min-height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -90,6 +164,8 @@ const ArrowContent = styled.div`
 const DirectionContainer = styled(Container)`
   gap: 50px;
   flex-direction: column;
+  width: 100%;
+  height: 500px;
 `;
 
 const DirectionContent = styled.div`
