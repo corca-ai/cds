@@ -2,7 +2,7 @@ import { Meta, StoryFn } from '@storybook/react';
 
 import styled from '@emotion/styled';
 import Icon from '../components/Icon';
-import { type Direction as DirectionType, Tooltip, Button } from '../components';
+import { Tooltip, Button } from '../components';
 import { B7 } from '../components';
 
 export default {
@@ -103,19 +103,19 @@ export const Direction = () => {
         </DirectionLeftAndRightWrapper>
 
         <DirectionLeftAndRightWrapper align="end">
-          <Tooltip content={TOOLTIP_CONTENT} direction="left-start">
+          <Tooltip content={TOOLTIP_CONTENT} direction="right-start">
             <Button size="small" variant="filled">
-              left start
+              right start
             </Button>
           </Tooltip>
-          <Tooltip content={TOOLTIP_CONTENT} direction="left">
+          <Tooltip content={TOOLTIP_CONTENT} direction="right">
             <Button size="small" variant="filled">
-              left
+              right
             </Button>
           </Tooltip>
-          <Tooltip content={TOOLTIP_CONTENT} direction="left-end">
+          <Tooltip content={TOOLTIP_CONTENT} direction="right-end">
             <Button size="small" variant="filled">
-              left end
+              right end
             </Button>
           </Tooltip>
         </DirectionLeftAndRightWrapper>

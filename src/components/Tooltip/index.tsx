@@ -26,7 +26,12 @@ export function Tooltip({
 
   return (
     <TooltipContainer>
-      <Content data-tooltip-offset={withArrow ? TOOLTIP_SIZE / 2 + 2 : 2} data-tooltip-id={id}>
+      <Content
+        data-tooltip-offset={withArrow ? TOOLTIP_SIZE / 2 + 2 : 2}
+        data-tooltip-id={id}
+        data-tooltip-delay-show={0}
+        data-tooltip-delay-hide={0}
+      >
         {children}
       </Content>
       <TooltipBox id={id} noArrow={!withArrow} place={direction}>
@@ -59,6 +64,7 @@ const TooltipBox = styled(BasicTooltip)`
   line-height: normal;
   border-radius: 8px !important;
   background: ${color['main-black']} !important;
+  opacity: 1 !important;
 
   .react-tooltip-arrow {
     width: ${TOOLTIP_SIZE}px;
