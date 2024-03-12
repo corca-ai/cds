@@ -10,6 +10,7 @@ interface NavItemType {
   icon: (icon: IconProps) => ReactElement;
   label: string;
   href: string;
+  selected?: boolean;
 }
 
 export interface NavbarGroup {
@@ -94,7 +95,6 @@ const BottomSection = styled.div`
 `;
 
 export function Navigation({
-  currentPathname,
   logoImage,
   logoHref,
   bottom,
@@ -102,7 +102,6 @@ export function Navigation({
   selectedColor,
   LinkElement,
 }: {
-  currentPathname: string;
   logoImage: { src: string; width: number; height: number };
   logoHref: string;
   bottom?: ReactNode;
@@ -140,10 +139,9 @@ export function Navigation({
               </TitleWrapper>
               {section.navItems.map(item => {
                 const Icon = item.icon;
-                const selectedItem = currentPathname.includes(item.href);
                 return (
                   <Link href={item.href} key={item.label}>
-                    <NavItem {...(selectedColor && { selectedColor })} selected={selectedItem}>
+                    <NavItem {...(selectedColor && { selectedColor })} selected={!!item.selected}>
                       <Icon size={20} />
                       <Text size="s" fw="regular">
                         {item.label}
