@@ -164,8 +164,9 @@ const ArrowContent = styled.div`
 const DirectionContainer = styled(Container)`
   gap: 50px;
   flex-direction: column;
+  justify-content: center;
   width: 100%;
-  height: 500px;
+  height: 700px;
 `;
 
 const DirectionContent = styled.div`

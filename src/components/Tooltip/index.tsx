@@ -25,28 +25,26 @@ export function Tooltip({
   const id = useId();
 
   return (
-    <TooltipContainer>
-      <Content
-        data-tooltip-offset={withArrow ? TOOLTIP_SIZE / 2 + 2 : 2}
-        data-tooltip-id={id}
-        data-tooltip-delay-show={0}
-        data-tooltip-delay-hide={0}
-      >
-        {children}
-      </Content>
+    <Container
+      data-tooltip-offset={withArrow ? TOOLTIP_SIZE / 2 + 2 : 2}
+      data-tooltip-id={id}
+      data-tooltip-delay-show={0}
+      data-tooltip-delay-hide={1000000}
+    >
+      <Contents>{children}</Contents>
       <TooltipBox id={id} noArrow={!withArrow} place={direction}>
         {content}
       </TooltipBox>
-    </TooltipContainer>
+    </Container>
   );
 }
 
-const TooltipContainer = styled.div`
+const Container = styled.div`
   display: flex;
-  width: fit-content;
+  position: relative;
 `;
 
-const Content = styled.div`
+const Contents = styled.div`
   display: flex;
 `;
 
@@ -56,6 +54,7 @@ const TooltipBox = styled(BasicTooltip)`
   overflow-wrap: break-word;
   white-space: pre-wrap;
   z-index: 10;
+  /* position: absolute !important; */
 
   // override tooltip's default style
   padding: 7px 10px !important;
@@ -66,9 +65,47 @@ const TooltipBox = styled(BasicTooltip)`
   background: ${color['main-black']} !important;
   opacity: 1 !important;
 
-  .react-tooltip-arrow {
-    width: ${TOOLTIP_SIZE}px;
-    height: ${TOOLTIP_SIZE}px;
-    border-bottom-right-radius: 2px;
-  }
+  ${props => {
+    const [position, direction] = props.place!.split('-');
+    let transform = '';
+    let arrowTransform = '';
+    let specificPosition = '';
+
+    switch (position) {
+      case 'top':
+      case 'bottom':
+        if (direction === 'start') {
+          // transform = 'translate(-21px)';
+          arrowTransform = 'rotate(45deg)';
+          specificPosition = 'left: 25% !important;';
+        } else if (direction === 'end') {
+          // transform = 'translate(21px)';
+          arrowTransform = 'rotate(45deg)';
+          specificPosition = 'left: auto !important; right: 25% !important;';
+        }
+        break;
+      case 'right':
+      case 'left':
+        if (direction === 'start') {
+          transform = 'translateY(-10px)';
+          arrowTransform = 'rotate(315deg) translate(-7px, 7px)';
+        } else if (direction === 'end') {
+          transform = 'translateY(10px)';
+          arrowTransform = 'rotate(315deg) translate(7px, -7px)';
+        }
+        break;
+      default:
+        break;
+    }
+
+    return `
+      transform: ${transform} !important;
+      .react-tooltip-arrow {
+        width: ${TOOLTIP_SIZE}px !important;
+        height: ${TOOLTIP_SIZE}px !important;
+        border-radius: 2px;
+        transform: ${arrowTransform} !important;
+      }
+    `;
+  }}
 `;
