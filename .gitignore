@@ -6,6 +6,7 @@ tsconfig.tsbuildinfo
 
 node_modules
 dist
+storybook-static
 dist-ssr
 *.local
 
