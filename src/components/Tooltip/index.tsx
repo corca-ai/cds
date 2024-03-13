@@ -50,6 +50,8 @@ const TooltipContainer = styled.div`
 
 const TooltipWrapper = styled.div`
   z-index: 10;
+  visibility: hidden;
+  opacity: 0;
 `;
 
 const ContentsWrapper = styled.div`
