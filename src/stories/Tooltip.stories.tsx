@@ -73,7 +73,7 @@ export const Direction = () => {
         </Tooltip>
         <Tooltip content={TOOLTIP_CONTENT} direction="bottom-center">
           <Button size="small" variant="filled">
-            bottom
+            bottom center
           </Button>
         </Tooltip>
         <Tooltip content={TOOLTIP_CONTENT} direction="bottom-end">
@@ -92,7 +92,7 @@ export const Direction = () => {
           </Tooltip>
           <Tooltip content={TOOLTIP_CONTENT} direction="left-center">
             <Button size="small" variant="filled">
-              left
+              left center
             </Button>
           </Tooltip>
           <Tooltip content={TOOLTIP_CONTENT} direction="left-end">
@@ -110,7 +110,7 @@ export const Direction = () => {
           </Tooltip>
           <Tooltip content={TOOLTIP_CONTENT} direction="right-center">
             <Button size="small" variant="filled">
-              right
+              right center
             </Button>
           </Tooltip>
           <Tooltip content={TOOLTIP_CONTENT} direction="right-end">
@@ -129,7 +129,7 @@ export const Direction = () => {
         </Tooltip>
         <Tooltip content={TOOLTIP_CONTENT} direction="top-center">
           <Button size="small" variant="filled">
-            top
+            top center
           </Button>
         </Tooltip>
         <Tooltip content={TOOLTIP_CONTENT} direction="top-end">
