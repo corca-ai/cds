@@ -40,6 +40,7 @@ const TooltipContainer = styled.div`
 `;
 
 const TooltipWrapper = styled.div`
+  z-index: 10;
   /* visibility: hidden;
   opacity: 0; */
 `;
@@ -49,6 +50,7 @@ const ContentsWrapper = styled.div`
 `;
 
 const TOOLTIP_ARROW_WIDTH = 10;
+const TOP_BOTTOM_ARROW_DISTANCE = 15;
 
 const TooltipArrow = styled.div`
   position: absolute;
@@ -64,9 +66,9 @@ const TooltipArrow = styled.div`
 
 const TooltipBubble = styled.div`
   position: absolute;
-  bottom: calc(100% + 20px); // 시작 높이: 입힐 컴포넌트 + arrow 전체 height
+  bottom: calc(100% + ${TOOLTIP_ARROW_WIDTH / 2}px + 1px);
   left: calc(50%);
-  transform: translateX(-25px); // 툴팁의 절반인 10px + 툴팁과 bubble사이 거리 15px
+  transform: translateX(-${TOP_BOTTOM_ARROW_DISTANCE + TOOLTIP_ARROW_WIDTH}px);
   width: max-content;
   height: max-content;
   max-width: 200px;
