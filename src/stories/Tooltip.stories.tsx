@@ -38,7 +38,7 @@ const TOOLTIP_CONTENT =
 
 export const Basic = Template.bind({});
 Basic.args = {
-  direction: 'top',
+  direction: 'top-center',
   withArrow: true,
   content: TOOLTIP_CONTENT,
 };
@@ -48,14 +48,14 @@ export const Arrow = () => {
     <ArrowContainer>
       <ArrowContent>
         <B7>Arrow Tooltip</B7>
-        <Tooltip direction="bottom" withArrow content="Arrow Tooltip">
+        <Tooltip direction="bottom-center" withArrow content="Arrow Tooltip">
           <Icon.QuestionCircle />
         </Tooltip>
       </ArrowContent>
 
       <ArrowContent>
         <B7>No Arrow Tooltip</B7>
-        <Tooltip direction="bottom" withArrow={false} content="No Arrow Tooltip">
+        <Tooltip direction="bottom-center" withArrow={false} content="No Arrow Tooltip">
           <Icon.QuestionCircle />
         </Tooltip>
       </ArrowContent>
@@ -63,85 +63,85 @@ export const Arrow = () => {
   );
 };
 
-// export const Direction = () => {
-//   return (
-//     <DirectionContainer>
-//       <DirectionContent>
-//         <Tooltip content={TOOLTIP_CONTENT} direction="top-start">
-//           <Button size="small" variant="filled">
-//             top start
-//           </Button>
-//         </Tooltip>
-//         <Tooltip content={TOOLTIP_CONTENT} direction="top">
-//           <Button size="small" variant="filled">
-//             top
-//           </Button>
-//         </Tooltip>
-//         <Tooltip content={TOOLTIP_CONTENT} direction="top-end">
-//           <Button size="small" variant="filled">
-//             top end
-//           </Button>
-//         </Tooltip>
-//       </DirectionContent>
+export const Direction = () => {
+  return (
+    <DirectionContainer>
+      <DirectionContent>
+        <Tooltip content={TOOLTIP_CONTENT} direction="bottom-start">
+          <Button size="small" variant="filled">
+            bottom start
+          </Button>
+        </Tooltip>
+        <Tooltip content={TOOLTIP_CONTENT} direction="bottom-center">
+          <Button size="small" variant="filled">
+            bottom
+          </Button>
+        </Tooltip>
+        <Tooltip content={TOOLTIP_CONTENT} direction="bottom-end">
+          <Button size="small" variant="filled">
+            bottom end
+          </Button>
+        </Tooltip>
+      </DirectionContent>
 
-//       <DirectionContent>
-//         <DirectionLeftAndRightWrapper align="start">
-//           <Tooltip content={TOOLTIP_CONTENT} direction="left-start">
-//             <Button size="small" variant="filled">
-//               left start
-//             </Button>
-//           </Tooltip>
-//           <Tooltip content={TOOLTIP_CONTENT} direction="left">
-//             <Button size="small" variant="filled">
-//               left
-//             </Button>
-//           </Tooltip>
-//           <Tooltip content={TOOLTIP_CONTENT} direction="left-end">
-//             <Button size="small" variant="filled">
-//               left end
-//             </Button>
-//           </Tooltip>
-//         </DirectionLeftAndRightWrapper>
+      <DirectionContent>
+        <DirectionLeftAndRightWrapper align="start">
+          <Tooltip content={TOOLTIP_CONTENT} direction="left-start">
+            <Button size="small" variant="filled">
+              left start
+            </Button>
+          </Tooltip>
+          <Tooltip content={TOOLTIP_CONTENT} direction="left-center">
+            <Button size="small" variant="filled">
+              left
+            </Button>
+          </Tooltip>
+          <Tooltip content={TOOLTIP_CONTENT} direction="left-end">
+            <Button size="small" variant="filled">
+              left end
+            </Button>
+          </Tooltip>
+        </DirectionLeftAndRightWrapper>
 
-//         <DirectionLeftAndRightWrapper align="end">
-//           <Tooltip content={TOOLTIP_CONTENT} direction="right-start">
-//             <Button size="small" variant="filled">
-//               right start
-//             </Button>
-//           </Tooltip>
-//           <Tooltip content={TOOLTIP_CONTENT} direction="right">
-//             <Button size="small" variant="filled">
-//               right
-//             </Button>
-//           </Tooltip>
-//           <Tooltip content={TOOLTIP_CONTENT} direction="right-end">
-//             <Button size="small" variant="filled">
-//               right end
-//             </Button>
-//           </Tooltip>
-//         </DirectionLeftAndRightWrapper>
-//       </DirectionContent>
+        <DirectionLeftAndRightWrapper align="end">
+          <Tooltip content={TOOLTIP_CONTENT} direction="right-start">
+            <Button size="small" variant="filled">
+              right start
+            </Button>
+          </Tooltip>
+          <Tooltip content={TOOLTIP_CONTENT} direction="right-center">
+            <Button size="small" variant="filled">
+              right
+            </Button>
+          </Tooltip>
+          <Tooltip content={TOOLTIP_CONTENT} direction="right-end">
+            <Button size="small" variant="filled">
+              right end
+            </Button>
+          </Tooltip>
+        </DirectionLeftAndRightWrapper>
+      </DirectionContent>
 
-//       <DirectionContent>
-//         <Tooltip content={TOOLTIP_CONTENT} direction="bottom-start">
-//           <Button size="small" variant="filled">
-//             bottom start
-//           </Button>
-//         </Tooltip>
-//         <Tooltip content={TOOLTIP_CONTENT} direction="bottom">
-//           <Button size="small" variant="filled">
-//             bottom
-//           </Button>
-//         </Tooltip>
-//         <Tooltip content={TOOLTIP_CONTENT} direction="bottom-end">
-//           <Button size="small" variant="filled">
-//             bottom end
-//           </Button>
-//         </Tooltip>
-//       </DirectionContent>
-//     </DirectionContainer>
-//   );
-// };
+      <DirectionContent>
+        <Tooltip content={TOOLTIP_CONTENT} direction="top-start">
+          <Button size="small" variant="filled">
+            top start
+          </Button>
+        </Tooltip>
+        <Tooltip content={TOOLTIP_CONTENT} direction="top-center">
+          <Button size="small" variant="filled">
+            top
+          </Button>
+        </Tooltip>
+        <Tooltip content={TOOLTIP_CONTENT} direction="top-end">
+          <Button size="small" variant="filled">
+            top end
+          </Button>
+        </Tooltip>
+      </DirectionContent>
+    </DirectionContainer>
+  );
+};
 
 const Container = styled.div`
   width: 100%;
