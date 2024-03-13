@@ -2,7 +2,7 @@ import { Meta, StoryFn } from '@storybook/react';
 
 import styled from '@emotion/styled';
 import Icon from '../components/Icon';
-import { Tooltip, Button, Badge, Thumbnail } from '../components';
+import { Tooltip, Button } from '../components';
 import { B7 } from '../components';
 
 export default {
@@ -27,9 +27,7 @@ export default {
 const Template: StoryFn<typeof Tooltip> = args => {
   return (
     <Tooltip {...args}>
-      <Thumbnail url="https://via.placeholder.com/150" alt="thumbnail" size={100} />
-      {/* <Icon.QuestionCircle /> */}
-      {/* <Badge label="디자인시스템" variant="green" /> */}
+      <Icon.QuestionCircle />
     </Tooltip>
   );
 };

@@ -57,6 +57,7 @@ const ContentsWrapper = styled.div`
 `;
 
 const TOOLTIP_ARROW_WIDTH = 10;
+const ARROW_DIAGONAL = Math.sqrt(TOOLTIP_ARROW_WIDTH ** 2 + TOOLTIP_ARROW_WIDTH ** 2);
 
 const TooltipArrow = styled.div<{ placement: Placement }>`
   position: absolute;
@@ -67,32 +68,32 @@ const TooltipArrow = styled.div<{ placement: Placement }>`
 
   ${props => {
     const BORDER_ARROW_RADIUS = 2;
-    const HALF_ARROW_WIDTH = TOOLTIP_ARROW_WIDTH / 2;
+    const DISTANCE_ARROW_TO_ELEMENT = ARROW_DIAGONAL / 2 - 2;
 
     switch (props.placement) {
       case 'bottom':
         return css`
           border-bottom-right-radius: ${BORDER_ARROW_RADIUS}px;
-          bottom: calc(100% + ${HALF_ARROW_WIDTH}px);
-          left: calc(50% - ${HALF_ARROW_WIDTH}px);
+          bottom: calc(100% + ${DISTANCE_ARROW_TO_ELEMENT}px);
+          left: calc(50% - ${DISTANCE_ARROW_TO_ELEMENT}px);
         `;
       case 'top':
         return css`
           border-top-left-radius: ${BORDER_ARROW_RADIUS}px;
-          left: calc(50% - ${HALF_ARROW_WIDTH}px);
-          top: calc(100% + ${HALF_ARROW_WIDTH}px);
+          left: calc(50% - ${DISTANCE_ARROW_TO_ELEMENT}px);
+          top: calc(100% + ${DISTANCE_ARROW_TO_ELEMENT}px);
         `;
       case 'left':
         return css`
           border-top-right-radius: ${BORDER_ARROW_RADIUS}px;
-          right: calc(100% + ${HALF_ARROW_WIDTH}px);
+          right: calc(100% + ${DISTANCE_ARROW_TO_ELEMENT}px);
           top: 50%;
           transform: translateY(-50%) rotate(45deg);
         `;
       case 'right':
         return css`
           border-bottom-left-radius: ${BORDER_ARROW_RADIUS}px;
-          left: calc(100% + ${HALF_ARROW_WIDTH}px);
+          left: calc(100% + ${DISTANCE_ARROW_TO_ELEMENT}px);
           top: 50%;
           transform: translateY(-50%) rotate(45deg);
         `;
@@ -105,8 +106,9 @@ const TooltipArrow = styled.div<{ placement: Placement }>`
 const TOP_BOTTOM_ARROW_DISTANCE = 15;
 const LEFT_RIGHT_ARROW_DISTANCE = 9;
 const DISTANCE_FROM_CONTENT_TO_ARROW = 2;
-const VERT_ARROW_OFFSET = TOOLTIP_ARROW_WIDTH + TOP_BOTTOM_ARROW_DISTANCE;
-const HORI_ARROW_OFFSET = TOOLTIP_ARROW_WIDTH + LEFT_RIGHT_ARROW_DISTANCE;
+
+const VERT_ARROW_OFFSET = ARROW_DIAGONAL + TOP_BOTTOM_ARROW_DISTANCE;
+const HORI_ARROW_OFFSET = ARROW_DIAGONAL + LEFT_RIGHT_ARROW_DISTANCE;
 
 const TooltipBubble = styled.div<{
   placement: Placement;
@@ -184,14 +186,20 @@ const TooltipBubble = styled.div<{
         return css`
           top: 50%;
           left: 100%;
-          transform: translate(calc(-${TOOLTIP_ARROW_WIDTH}px + ${offset}px), -50%);
+          transform: translate(calc(${TOOLTIP_ARROW_WIDTH}px - ${offset}px), -50%);
           ${props.position === 'start' &&
           css`
-            transform: translate(${TOOLTIP_ARROW_WIDTH}px, calc(-${HORI_ARROW_OFFSET}px));
+            transform: translate(
+              calc(${TOOLTIP_ARROW_WIDTH}px - ${offset}px),
+              calc(-${HORI_ARROW_OFFSET}px)
+            );
           `}
           ${props.position === 'end' &&
           css`
-            transform: translate(${TOOLTIP_ARROW_WIDTH}px, calc(-100% + ${HORI_ARROW_OFFSET}px));
+            transform: translate(
+              calc(${TOOLTIP_ARROW_WIDTH}px - ${offset}px),
+              calc(-100% + ${HORI_ARROW_OFFSET}px)
+            );
           `}
         `;
       default:
