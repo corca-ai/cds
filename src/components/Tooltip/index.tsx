@@ -1,5 +1,6 @@
-import { ReactNode, ReactElement } from 'react';
 import { css } from '@emotion/react';
+import { ReactElement, ReactNode } from 'react';
+
 import styled from '@emotion/styled';
 
 import { color, typography } from '../styles';
@@ -50,8 +51,8 @@ const TooltipContainer = styled.div`
 
 const TooltipWrapper = styled.div`
   z-index: 10;
-  visibility: hidden;
-  opacity: 0;
+  /* visibility: hidden;
+  opacity: 0; */
 `;
 
 const ContentsWrapper = styled.div`
@@ -60,6 +61,7 @@ const ContentsWrapper = styled.div`
 
 const TOOLTIP_ARROW_WIDTH = 10;
 const ARROW_DIAGONAL = Math.sqrt(TOOLTIP_ARROW_WIDTH ** 2 + TOOLTIP_ARROW_WIDTH ** 2);
+const ARROW_CORNER_LENGTH = (ARROW_DIAGONAL * Math.sqrt(2)) / 2;
 
 const TooltipArrow = styled.div<{ placement: Placement }>`
   position: absolute;
@@ -70,7 +72,7 @@ const TooltipArrow = styled.div<{ placement: Placement }>`
 
   ${props => {
     const BORDER_ARROW_RADIUS = 2;
-    const DISTANCE_ARROW_TO_ELEMENT = ARROW_DIAGONAL / 2 - 2;
+    const DISTANCE_ARROW_TO_ELEMENT = ARROW_DIAGONAL - ARROW_CORNER_LENGTH;
 
     switch (props.placement) {
       case 'bottom':
@@ -138,7 +140,7 @@ const TooltipBubble = styled.div<{
     switch (props.placement) {
       case 'top':
         return css`
-          top: calc(100% + ${TOOLTIP_ARROW_WIDTH}px);
+          top: calc(100% + ${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px);
           left: 50%;
           transform: translate(-50%, ${-offset}px);
           ${props.position === 'start' &&
@@ -152,7 +154,7 @@ const TooltipBubble = styled.div<{
         `;
       case 'bottom':
         return css`
-          bottom: calc(100% + ${TOOLTIP_ARROW_WIDTH}px);
+          bottom: calc(100% + ${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px);
           left: 50%;
           transform: translate(-50%, ${offset}px);
           ${props.position === 'start' &&
@@ -168,18 +170,21 @@ const TooltipBubble = styled.div<{
         return css`
           top: 50%;
           right: 100%;
-          transform: translate(calc(-${TOOLTIP_ARROW_WIDTH}px + ${offset}px), -50%);
+          transform: translate(
+            calc(-${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px + ${offset}px),
+            -50%
+          );
           ${props.position === 'start' &&
           css`
             transform: translate(
-              calc(-${TOOLTIP_ARROW_WIDTH}px + ${offset}px),
+              calc(-${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px + ${offset}px),
               -${HORI_ARROW_OFFSET}px
             );
           `}
           ${props.position === 'end' &&
           css`
             transform: translate(
-              calc(-${TOOLTIP_ARROW_WIDTH}px + ${offset}px),
+              calc(-${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px + ${offset}px),
               calc(-100% + ${HORI_ARROW_OFFSET}px)
             );
           `}
@@ -188,18 +193,21 @@ const TooltipBubble = styled.div<{
         return css`
           top: 50%;
           left: 100%;
-          transform: translate(calc(${TOOLTIP_ARROW_WIDTH}px - ${offset}px), -50%);
+          transform: translate(
+            calc(${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px - ${offset}px),
+            -50%
+          );
           ${props.position === 'start' &&
           css`
             transform: translate(
-              calc(${TOOLTIP_ARROW_WIDTH}px - ${offset}px),
+              calc(${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px - ${offset}px),
               calc(-${HORI_ARROW_OFFSET}px)
             );
           `}
           ${props.position === 'end' &&
           css`
             transform: translate(
-              calc(${TOOLTIP_ARROW_WIDTH}px - ${offset}px),
+              calc(${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px - ${offset}px),
               calc(-100% + ${HORI_ARROW_OFFSET}px)
             );
           `}
