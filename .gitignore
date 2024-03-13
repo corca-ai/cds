@@ -1,0 +1,22 @@
+# Logs
+logs
+*.log
+pnpm-debug.log*
+tsconfig.tsbuildinfo
+
+node_modules
+dist
+storybook-static
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
