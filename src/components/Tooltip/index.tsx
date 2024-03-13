@@ -6,7 +6,23 @@ import styled from '@emotion/styled';
 
 import { color, typography } from '../styles';
 
-type Direction = 'top' | 'bottom' | 'left' | 'right';
+type Direction =
+  | 'top'
+  | 'bottom'
+  | 'left'
+  | 'right'
+  | 'top-start'
+  | 'top-end'
+  | 'bottom-start'
+  | 'bottom-end'
+  | 'left-start'
+  | 'left-end'
+  | 'right-start'
+  | 'right-end';
+
+type Placement = 'top' | 'bottom' | 'left' | 'right';
+type Position = 'start' | 'end';
+
 export interface TooltipProps {
   direction?: Direction;
   withArrow?: boolean;
@@ -17,12 +33,15 @@ export interface TooltipProps {
 type TooltipStylesProps = Omit<TooltipProps, 'children' | 'content'>;
 
 export function Tooltip({ direction = 'top', withArrow = true, children, content }: TooltipProps) {
+  const [placement, position] = direction.split('-') as [Placement, Position];
   return (
     <TooltipContainer>
       <ContentsWrapper>{children}</ContentsWrapper>
       <TooltipWrapper className="tooltip-box">
-        <TooltipArrow />
-        <TooltipBubble>{content}</TooltipBubble>
+        <TooltipArrow placement={placement} />
+        <TooltipBubble placement={placement} position={position}>
+          {content}
+        </TooltipBubble>
       </TooltipWrapper>
     </TooltipContainer>
   );
@@ -52,23 +71,63 @@ const ContentsWrapper = styled.div`
 const TOOLTIP_ARROW_WIDTH = 10;
 const TOP_BOTTOM_ARROW_DISTANCE = 15;
 
-const TooltipArrow = styled.div`
+const TooltipArrow = styled.div<{
+  placement: Placement;
+}>`
   position: absolute;
-  bottom: calc(100% + 2px);
-  left: calc(50% - ${TOOLTIP_ARROW_WIDTH / 2}px);
   transform: translateX(-50%);
   background: ${color['main-black']};
   width: ${TOOLTIP_ARROW_WIDTH}px;
   height: ${TOOLTIP_ARROW_WIDTH}px;
-  border-bottom-right-radius: 2px;
   transform: rotate(45deg);
+
+  ${props => {
+    let additionalStyles = '';
+    if (props.placement === 'top') {
+      additionalStyles += `
+        border-bottom-right-radius: 2px;
+        bottom: calc(100% + ${TOOLTIP_ARROW_WIDTH / 2}px);
+        left: calc(50% - ${TOOLTIP_ARROW_WIDTH / 2}px);
+      `;
+    }
+
+    if (props.placement === 'bottom') {
+      additionalStyles += `
+        border-top-left-radius: 2px;  
+        left: calc(50% - ${TOOLTIP_ARROW_WIDTH / 2}px);
+        top: calc(100% + ${TOOLTIP_ARROW_WIDTH / 2}px);
+      `;
+    }
+
+    if (props.placement === 'left') {
+      additionalStyles += `
+        border-top-right-radius: 2px;
+        right: calc(100% + ${TOOLTIP_ARROW_WIDTH / 2}px);
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+      `;
+    }
+
+    if (props.placement === 'right') {
+      additionalStyles += `
+        border-bottom-left-radius: 2px;
+        left: calc(100% + ${TOOLTIP_ARROW_WIDTH / 2}px);
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+      `;
+    }
+
+    return css`
+      ${additionalStyles}
+    `;
+  }}
 `;
 
-const TooltipBubble = styled.div`
+const TooltipBubble = styled.div<{
+  placement: Placement;
+  position?: Position;
+}>`
   position: absolute;
-  bottom: calc(100% + ${TOOLTIP_ARROW_WIDTH / 2}px + 1px);
-  left: calc(50%);
-  transform: translateX(-${TOP_BOTTOM_ARROW_DISTANCE + TOOLTIP_ARROW_WIDTH}px);
   width: max-content;
   height: max-content;
   max-width: 200px;
@@ -79,6 +138,87 @@ const TooltipBubble = styled.div`
   font-weight: ${typography.weight.regular};
   padding: 7px 10px;
   border-radius: 7px;
+  white-space: pre-wrap;
+  word-break: break-all;
+
+  ${props => {
+    let additionalStyles = '';
+    if (props.placement === 'top') {
+      additionalStyles += `
+        bottom: calc(100% + ${TOOLTIP_ARROW_WIDTH}px);
+        left: 50%;
+        transform: translate(-50%);
+      `;
+
+      if (props.position === 'start') {
+        additionalStyles += `
+          transform: translate(-${TOOLTIP_ARROW_WIDTH + TOP_BOTTOM_ARROW_DISTANCE}px);
+        `;
+      } else if (props.position === 'end') {
+        additionalStyles += `
+          transform: translate(calc(${TOOLTIP_ARROW_WIDTH + TOP_BOTTOM_ARROW_DISTANCE}px - 100%));
+        `;
+      }
+    }
+
+    if (props.placement === 'bottom') {
+      additionalStyles += `
+        top: calc(100% + ${TOOLTIP_ARROW_WIDTH}px);
+        left: 50%;
+        transform: translate(-50%);
+      `;
+
+      if (props.position === 'start') {
+        additionalStyles += `
+          transform: translate(-${TOOLTIP_ARROW_WIDTH + TOP_BOTTOM_ARROW_DISTANCE}px);
+        `;
+      } else if (props.position === 'end') {
+        additionalStyles += `
+          transform: translate(calc(${TOOLTIP_ARROW_WIDTH + TOP_BOTTOM_ARROW_DISTANCE}px - 100%));
+        `;
+      }
+    }
+
+    if (props.placement === 'left') {
+      additionalStyles += `
+        right: 100%;
+        transform: translate(-${TOOLTIP_ARROW_WIDTH}px, -50%);
+      `;
+
+      if (props.position === 'start') {
+        additionalStyles += `
+          transform: translate(-${TOOLTIP_ARROW_WIDTH}px, -${TOOLTIP_ARROW_WIDTH + TOP_BOTTOM_ARROW_DISTANCE}px);
+        `;
+      }
+      if (props.position === 'end') {
+        additionalStyles += `
+          transform: translate(-${TOOLTIP_ARROW_WIDTH}px, calc(-100% + ${TOOLTIP_ARROW_WIDTH}px));
+        `;
+      }
+    }
+
+    if (props.placement === 'right') {
+      additionalStyles += `
+        left: 100%;
+        transform: translate(${TOOLTIP_ARROW_WIDTH}px, -50%);
+      `;
+
+      if (props.position === 'start') {
+        additionalStyles += `
+          transform: translate(${TOOLTIP_ARROW_WIDTH}px, calc(-100% + ${TOOLTIP_ARROW_WIDTH}px));
+        `;
+      }
+      if (props.position === 'end') {
+        additionalStyles += `
+          transform: translate(${TOOLTIP_ARROW_WIDTH}px, -${TOOLTIP_ARROW_WIDTH + TOP_BOTTOM_ARROW_DISTANCE}px);
+        `;
+      }
+    }
+
+    return css`
+      ${additionalStyles}
+    `;
+  }}
 `;
 
 // const TOOLTIP_ARROW_WIDTH = 9;

@@ -28,7 +28,7 @@ const Template: StoryFn<typeof Tooltip> = args => {
   return (
     <Tooltip {...args}>
       <Icon.QuestionCircle />
-      {/* <Badge label="디자인시스테미은 짜증나" variant="green" /> */}
+      {/* <Badge label="디자인시스템" variant="green" /> */}
     </Tooltip>
   );
 };
