@@ -34,7 +34,8 @@ const Template: StoryFn<typeof Tooltip> = args => {
   );
 };
 
-const TOOLTIP_CONTENT = 'Corca Design System Tooltip';
+const TOOLTIP_CONTENT =
+  'Corca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design System Tooltip';
 
 export const Basic = Template.bind({});
 Basic.args = {

@@ -57,9 +57,6 @@ const ContentsWrapper = styled.div`
 `;
 
 const TOOLTIP_ARROW_WIDTH = 10;
-const TOP_BOTTOM_ARROW_DISTANCE = 15;
-const ARROW_OFFSET = TOOLTIP_ARROW_WIDTH + TOP_BOTTOM_ARROW_DISTANCE;
-const DISTANCE_FROM_CONTENT_TO_ARROW = 2;
 
 const TooltipArrow = styled.div<{ placement: Placement }>`
   position: absolute;
@@ -105,6 +102,12 @@ const TooltipArrow = styled.div<{ placement: Placement }>`
   }}
 `;
 
+const TOP_BOTTOM_ARROW_DISTANCE = 15;
+const LEFT_RIGHT_ARROW_DISTANCE = 9;
+const DISTANCE_FROM_CONTENT_TO_ARROW = 2;
+const VERT_ARROW_OFFSET = TOOLTIP_ARROW_WIDTH + TOP_BOTTOM_ARROW_DISTANCE;
+const HORI_ARROW_OFFSET = TOOLTIP_ARROW_WIDTH + LEFT_RIGHT_ARROW_DISTANCE;
+
 const TooltipBubble = styled.div<{
   placement: Placement;
   position?: Position;
@@ -126,71 +129,69 @@ const TooltipBubble = styled.div<{
 
   ${props => {
     const DISTANCE_FROM_CONTENT = TOOLTIP_ARROW_WIDTH - DISTANCE_FROM_CONTENT_TO_ARROW;
-    const offsetX = props.withArrow ? 0 : DISTANCE_FROM_CONTENT;
-    const offsetY = props.withArrow ? 0 : DISTANCE_FROM_CONTENT;
+    const offset = props.withArrow ? 0 : DISTANCE_FROM_CONTENT;
 
     switch (props.placement) {
       case 'top':
         return css`
           top: calc(100% + ${TOOLTIP_ARROW_WIDTH}px);
           left: 50%;
-          transform: translate(-50%, ${-offsetY}px);
+          transform: translate(-50%, ${-offset}px);
           ${props.position === 'start' &&
           css`
-            transform: translate(-${ARROW_OFFSET}px, ${-offsetY}px);
+            transform: translate(-${VERT_ARROW_OFFSET}px, ${-offset}px);
           `}
           ${props.position === 'end' &&
           css`
-            transform: translate(calc(${ARROW_OFFSET}px - 100%), ${-offsetY}px);
+            transform: translate(calc(${VERT_ARROW_OFFSET}px - 100%), ${-offset}px);
           `}
         `;
       case 'bottom':
         return css`
           bottom: calc(100% + ${TOOLTIP_ARROW_WIDTH}px);
           left: 50%;
-          transform: translate(-50%, ${offsetY}px);
+          transform: translate(-50%, ${offset}px);
           ${props.position === 'start' &&
           css`
-            transform: translate(-${ARROW_OFFSET}px, ${offsetY}px);
+            transform: translate(-${VERT_ARROW_OFFSET}px, ${offset}px);
           `}
           ${props.position === 'end' &&
           css`
-            transform: translate(calc(${ARROW_OFFSET}px - 100%), ${offsetY}px);
+            transform: translate(calc(${VERT_ARROW_OFFSET}px - 100%), ${offset}px);
           `}
         `;
       case 'left':
         return css`
           top: 50%;
           right: 100%;
-          transform: translate(calc(-${TOOLTIP_ARROW_WIDTH}px + ${offsetX}px), -50%);
+          transform: translate(calc(-${TOOLTIP_ARROW_WIDTH}px + ${offset}px), -50%);
           ${props.position === 'start' &&
           css`
             transform: translate(
-              calc(-${TOOLTIP_ARROW_WIDTH}px + ${offsetX}px),
-              -${TOOLTIP_ARROW_WIDTH + TOP_BOTTOM_ARROW_DISTANCE}px
+              calc(-${TOOLTIP_ARROW_WIDTH}px + ${offset}px),
+              -${HORI_ARROW_OFFSET}px
             );
           `}
           ${props.position === 'end' &&
           css`
             transform: translate(
-              calc(-${TOOLTIP_ARROW_WIDTH}px + ${offsetX}px),
-              calc(-100% + ${TOOLTIP_ARROW_WIDTH}px)
+              calc(-${TOOLTIP_ARROW_WIDTH}px + ${offset}px),
+              calc(-100% + ${HORI_ARROW_OFFSET}px)
             );
-
-            /* transform: translate(-${TOOLTIP_ARROW_WIDTH}px, calc(-100% + ${TOOLTIP_ARROW_WIDTH}px)); */
           `}
         `;
       case 'right':
         return css`
           top: 50%;
           left: 100%;
-          transform: translate(
-            calc(${TOOLTIP_ARROW_WIDTH}px + ${offsetX}px),
-            calc(-50% + ${offsetY}px)
-          );
+          transform: translate(calc(-${TOOLTIP_ARROW_WIDTH}px + ${offset}px), -50%);
           ${props.position === 'start' &&
           css`
-            transform: translate(${TOOLTIP_ARROW_WIDTH}px, calc(-100% + ${TOOLTIP_ARROW_WIDTH}px));
+            transform: translate(${TOOLTIP_ARROW_WIDTH}px, calc(-${HORI_ARROW_OFFSET}px));
+          `}
+          ${props.position === 'end' &&
+          css`
+            transform: translate(${TOOLTIP_ARROW_WIDTH}px, calc(-100% + ${HORI_ARROW_OFFSET}px));
           `}
         `;
       default:
