@@ -79,13 +79,13 @@ const TooltipArrow = styled.div<{ placement: Placement }>`
         return css`
           border-bottom-right-radius: ${BORDER_ARROW_RADIUS}px;
           bottom: calc(100% + ${DISTANCE_ARROW_TO_ELEMENT}px);
-          left: calc(50% - ${DISTANCE_ARROW_TO_ELEMENT}px);
+          left: calc(50% - ${TOOLTIP_ARROW_WIDTH / 2}px);
         `;
       case 'top':
         return css`
           border-top-left-radius: ${BORDER_ARROW_RADIUS}px;
-          left: calc(50% - ${DISTANCE_ARROW_TO_ELEMENT}px);
           top: calc(100% + ${DISTANCE_ARROW_TO_ELEMENT}px);
+          left: calc(50% - ${TOOLTIP_ARROW_WIDTH / 2}px);
         `;
       case 'left':
         return css`

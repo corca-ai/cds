@@ -144,7 +144,8 @@ export const Direction = () => {
 
 const Container = styled.div`
   width: 100%;
-  min-height: 300px;
+  height: 100%;
+  min-height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
