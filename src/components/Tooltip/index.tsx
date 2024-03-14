@@ -59,7 +59,7 @@ const ContentsWrapper = styled.div`
   display: flex;
 `;
 
-const TOOLTIP_ARROW_WIDTH = 30;
+const TOOLTIP_ARROW_WIDTH = 10;
 const ARROW_DIAGONAL = Math.sqrt(TOOLTIP_ARROW_WIDTH ** 2 + TOOLTIP_ARROW_WIDTH ** 2);
 const DISTANCE_FROM_CONTENT_TO_ARROW = 2;
 
