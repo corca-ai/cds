@@ -26,6 +26,5 @@
     "importHelpers": true
   },
   "include": ["src"],
-  "exclude": ["**/dist/**, **/node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
