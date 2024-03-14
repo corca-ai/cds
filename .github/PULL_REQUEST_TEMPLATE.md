@@ -1,7 +1,7 @@
 ## 🔗 Jira Ticket Number
 
-ADCIO-
-VILL-
+- ADCIO-
+- VILL-
 
 ## :recycle: Current situation
 
