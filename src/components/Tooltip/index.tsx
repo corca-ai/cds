@@ -67,6 +67,7 @@ const TooltipArrow = styled.div<{ placement: Placement }>`
   width: ${TOOLTIP_ARROW_WIDTH}px;
   height: ${TOOLTIP_ARROW_WIDTH}px;
   transform: rotate(45deg);
+  z-index: 10;
 
   ${props => {
     const BORDER_ARROW_RADIUS = 2;
