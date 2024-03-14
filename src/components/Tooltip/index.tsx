@@ -8,10 +8,10 @@ import { color, typography } from '../styles';
 type Placement = 'top' | 'bottom' | 'left' | 'right';
 type Position = 'start' | 'end' | 'center';
 
-type Direction = `${Placement}-${Position}`;
+export type TooltipDirection = `${Placement}-${Position}`;
 
 export interface TooltipProps {
-  direction?: Direction;
+  direction?: TooltipDirection;
   withArrow?: boolean;
   children: ReactNode;
   content: string | ReactElement;
@@ -44,13 +44,11 @@ const TooltipContainer = styled.div`
     .tooltip-box {
       visibility: visible;
       opacity: 1;
-      transition: opacity 0.3s ease-in-out;
     }
   }
 `;
 
 const TooltipWrapper = styled.div`
-  z-index: 10;
   visibility: hidden;
   opacity: 0;
 `;
@@ -123,6 +121,7 @@ const TooltipBubble = styled.div<{
   withArrow?: boolean;
 }>`
   position: absolute;
+  z-index: 10;
   width: max-content;
   height: max-content;
   max-width: 200px;
