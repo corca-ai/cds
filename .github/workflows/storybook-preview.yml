@@ -34,7 +34,7 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: Build Storybook
-        run: pnpm run build:storybook
+        run: pnpm run build-storybook
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
