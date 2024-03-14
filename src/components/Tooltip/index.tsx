@@ -59,9 +59,9 @@ const ContentsWrapper = styled.div`
   display: flex;
 `;
 
-const TOOLTIP_ARROW_WIDTH = 10;
+const TOOLTIP_ARROW_WIDTH = 30;
 const ARROW_DIAGONAL = Math.sqrt(TOOLTIP_ARROW_WIDTH ** 2 + TOOLTIP_ARROW_WIDTH ** 2);
-const ARROW_CORNER_LENGTH = (ARROW_DIAGONAL * Math.sqrt(2)) / 2;
+const DISTANCE_FROM_CONTENT_TO_ARROW = 2;
 
 const TooltipArrow = styled.div<{ placement: Placement }>`
   position: absolute;
@@ -72,7 +72,11 @@ const TooltipArrow = styled.div<{ placement: Placement }>`
 
   ${props => {
     const BORDER_ARROW_RADIUS = 2;
-    const DISTANCE_ARROW_TO_ELEMENT = ARROW_DIAGONAL - ARROW_CORNER_LENGTH;
+
+    const DISTANCE_ARROW_DESCENDED_LENGTH =
+      ((TOOLTIP_ARROW_WIDTH ** 2 + TOOLTIP_ARROW_WIDTH ** 2) ** (1 / 2) - TOOLTIP_ARROW_WIDTH) / 2;
+    const DISTANCE_ARROW_TO_ELEMENT =
+      DISTANCE_ARROW_DESCENDED_LENGTH + DISTANCE_FROM_CONTENT_TO_ARROW;
 
     switch (props.placement) {
       case 'bottom':
@@ -109,7 +113,6 @@ const TooltipArrow = styled.div<{ placement: Placement }>`
 
 const TOP_BOTTOM_ARROW_DISTANCE = 15;
 const LEFT_RIGHT_ARROW_DISTANCE = 9;
-const DISTANCE_FROM_CONTENT_TO_ARROW = 2;
 
 const VERT_ARROW_OFFSET = ARROW_DIAGONAL + TOP_BOTTOM_ARROW_DISTANCE;
 const HORI_ARROW_OFFSET = ARROW_DIAGONAL + LEFT_RIGHT_ARROW_DISTANCE;
