@@ -125,7 +125,7 @@ const TooltipBubble = styled.div<{
   z-index: 10;
   width: max-content;
   height: max-content;
-  max-width: 200px;
+  max-width: 300px;
   cursor: help;
   background: ${color['main-black']};
   color: ${color.white};
