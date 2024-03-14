@@ -37,7 +37,7 @@ const Container = styled.div<{ bg: string }>`
   gap: 6px;
   justify-content: center;
   align-items: center;
-  height: 18px;
+  height: 22px;
   padding: 2px 8px;
   border-radius: 10px;
   background-color: ${({ bg }) => bg};
