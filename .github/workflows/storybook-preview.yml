@@ -2,20 +2,39 @@ name: Storybook Preview Deployment
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_STORYBOOK_PROJECT_ID }}
-  CACHE_PATH: /home/ubuntu/.cache/cds
 
 on:
-  workflow_dispatch:
+  # workflow_dispatch:
+  push:
 
 jobs:
   storybook-preview:
-    runs-on: [self-hosted, cds]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v3
         with:
           node-version: 18.x
+
+      - uses: pnpm/action-setup@v2.2.1
+        with:
+          version: 8
+
+      - uses: actions/cache@v3
+        id: pnpm-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+      - if: steps.pnpm-cache.outputs.cache-hit != 'true'
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Build Storybook
+        run: pnpm run build:storybook
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
