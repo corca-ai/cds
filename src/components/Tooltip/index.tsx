@@ -108,10 +108,7 @@ const TooltipArrow = styled.div<{ placement: Placement }>`
   height: ${TOOLTIP_ARROW_WIDTH}px;
   transform: rotate(45deg);
   z-index: 10;
-
-  ${props => {
-    return getArrowMixin(props.placement);
-  }}
+  ${props => getArrowMixin(props.placement)}
 `;
 
 const TOP_BOTTOM_ARROW_DISTANCE = 15;
