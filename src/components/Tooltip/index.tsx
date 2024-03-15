@@ -127,30 +127,37 @@ type BubbleProps = {
 };
 
 const getBubbleMixin = ({ withArrow, placement, position }: BubbleProps) => {
+  const ARROW_OFFSET = `calc(100% + ${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px)`;
+
+  const TOP_BOTTOM_STYLE = css`
+    left: 50%;
+    transform: ${calculateBubbleTranslate({ placement, position, withArrow })};
+  `;
+  const LEFT_RIGHT_STYLE = css`
+    top: 50%;
+    transform: ${calculateBubbleTranslate({ placement, position, withArrow })};
+  `;
+
   switch (placement) {
     case 'top':
       return css`
-        top: calc(100% + ${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px);
-        left: 50%;
-        transform: ${calculateBubbleTranslate({ placement, position, withArrow })};
+        top: ${ARROW_OFFSET};
+        ${TOP_BOTTOM_STYLE}
       `;
     case 'bottom':
       return css`
-        bottom: calc(100% + ${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px);
-        left: 50%;
-        transform: ${calculateBubbleTranslate({ placement, position, withArrow })};
+        bottom: ${ARROW_OFFSET};
+        ${TOP_BOTTOM_STYLE}
       `;
     case 'left':
       return css`
-        top: 50%;
         right: 100%;
-        transform: ${calculateBubbleTranslate({ placement, position, withArrow })};
+        ${LEFT_RIGHT_STYLE}
       `;
     case 'right':
       return css`
-        top: 50%;
         left: 100%;
-        transform: ${calculateBubbleTranslate({ placement, position, withArrow })};
+        ${LEFT_RIGHT_STYLE}
       `;
     default:
       return null;
