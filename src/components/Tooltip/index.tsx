@@ -216,7 +216,5 @@ const TooltipBubble = styled.div<BubbleProps>`
   white-space: pre-wrap;
   word-break: break-all;
 
-  ${props => {
-    return getBubbleMixin(props);
-  }}
+  ${props => getBubbleMixin(props)}
 `;
