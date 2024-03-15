@@ -127,87 +127,73 @@ type BubbleProps = {
 };
 
 const getBubbleMixin = ({ withArrow, placement, position }: BubbleProps) => {
-  const DISTANCE_FROM_CONTENT = TOOLTIP_ARROW_WIDTH - DISTANCE_FROM_CONTENT_TO_ARROW;
-  const offset = withArrow ? 0 : DISTANCE_FROM_CONTENT;
-
   switch (placement) {
     case 'top':
       return css`
         top: calc(100% + ${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px);
         left: 50%;
-        transform: translate(-50%, ${-offset}px);
-        ${position === 'start' &&
-        css`
-          transform: translate(-${VERT_ARROW_OFFSET}px, ${-offset}px);
-        `}
-        ${position === 'end' &&
-        css`
-          transform: translate(calc(${VERT_ARROW_OFFSET}px - 100%), ${-offset}px);
-        `}
+        transform: ${calculateBubbleTranslate({ placement, position, withArrow })};
       `;
     case 'bottom':
       return css`
         bottom: calc(100% + ${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px);
         left: 50%;
-        transform: translate(-50%, ${offset}px);
-        ${position === 'start' &&
-        css`
-          transform: translate(-${VERT_ARROW_OFFSET}px, ${offset}px);
-        `}
-        ${position === 'end' &&
-        css`
-          transform: translate(calc(${VERT_ARROW_OFFSET}px - 100%), ${offset}px);
-        `}
+        transform: ${calculateBubbleTranslate({ placement, position, withArrow })};
       `;
     case 'left':
       return css`
         top: 50%;
         right: 100%;
-        transform: translate(
-          calc(-${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px + ${offset}px),
-          -50%
-        );
-        ${position === 'start' &&
-        css`
-          transform: translate(
-            calc(-${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px + ${offset}px),
-            -${HORI_ARROW_OFFSET}px
-          );
-        `}
-        ${position === 'end' &&
-        css`
-          transform: translate(
-            calc(-${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px + ${offset}px),
-            calc(-100% + ${HORI_ARROW_OFFSET}px)
-          );
-        `}
+        transform: ${calculateBubbleTranslate({ placement, position, withArrow })};
       `;
     case 'right':
       return css`
         top: 50%;
         left: 100%;
-        transform: translate(
-          calc(${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px - ${offset}px),
-          -50%
-        );
-        ${position === 'start' &&
-        css`
-          transform: translate(
-            calc(${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px - ${offset}px),
-            -${HORI_ARROW_OFFSET}px
-          );
-        `}
-        ${position === 'end' &&
-        css`
-          transform: translate(
-            calc(${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px - ${offset}px),
-            calc(-100% + ${HORI_ARROW_OFFSET}px)
-          );
-        `}
+        transform: ${calculateBubbleTranslate({ placement, position, withArrow })};
       `;
     default:
       return null;
   }
+};
+
+const calculateBubbleTranslate = ({ placement, position, withArrow }: BubbleProps) => {
+  const DISTANCE_FROM_CONTENT = TOOLTIP_ARROW_WIDTH - DISTANCE_FROM_CONTENT_TO_ARROW;
+  const offset = withArrow ? 0 : DISTANCE_FROM_CONTENT;
+  let translateX = '0%',
+    translateY = '0%';
+
+  switch (placement) {
+    case 'top':
+    case 'bottom':
+      translateY = placement === 'top' ? `-${offset}px` : `${offset}px`;
+      translateX =
+        position === 'center'
+          ? '-50%'
+          : position === 'start'
+            ? `-${VERT_ARROW_OFFSET}px`
+            : position === 'end'
+              ? `calc(${VERT_ARROW_OFFSET}px - 100%)`
+              : '0%';
+      break;
+    case 'left':
+    case 'right':
+      translateX =
+        placement === 'left'
+          ? `calc(-${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px + ${offset}px)`
+          : `calc(${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px - ${offset}px)`;
+      translateY =
+        position === 'center'
+          ? '-50%'
+          : position === 'start'
+            ? `-${HORI_ARROW_OFFSET}px`
+            : position === 'end'
+              ? `calc(-100% + ${HORI_ARROW_OFFSET}px)`
+              : '0%';
+      break;
+  }
+
+  return `translate(${translateX}, ${translateY})`;
 };
 
 const TooltipBubble = styled.div<BubbleProps>`
