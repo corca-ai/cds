@@ -5,7 +5,7 @@ import { Text } from '../Text';
 import { color, fontStyle } from '../styles';
 
 export const badgeVariants = ['green', 'grey', 'yellow', 'red'] as const;
-type BadgeVariant = (typeof badgeVariants)[number];
+export type BadgeVariant = (typeof badgeVariants)[number];
 
 const variantColors: {
   [v in BadgeVariant]: { bg: string; font: string; dot: string };
