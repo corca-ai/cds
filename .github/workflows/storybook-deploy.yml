@@ -10,4 +10,4 @@ jobs:
     steps:
       - name: Deploy Preview
         run: |
-          curl -X POST ${{ secrets.VERCEL_DEPLOY_HOOK_STORYBOOK_DEVELOP }}
+          curl -X POST ${{ secrets.VERCEL_DEPLOY_HOOK_STORYBOOK_MAIN }}
