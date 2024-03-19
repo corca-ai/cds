@@ -5,7 +5,7 @@ import { Text } from '../Text';
 import { color, fontStyle } from '../styles';
 
 export const badgeVariants = ['green', 'grey', 'yellow', 'red'] as const;
-type BadgeVariant = (typeof badgeVariants)[number];
+export type BadgeVariant = (typeof badgeVariants)[number];
 
 const variantColors: {
   [v in BadgeVariant]: { bg: string; font: string; dot: string };
@@ -37,7 +37,7 @@ const Container = styled.div<{ bg: string }>`
   gap: 6px;
   justify-content: center;
   align-items: center;
-  height: 18px;
+  height: 22px;
   padding: 2px 8px;
   border-radius: 10px;
   background-color: ${({ bg }) => bg};
