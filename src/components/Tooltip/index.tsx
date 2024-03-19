@@ -155,14 +155,14 @@ const getBubbleMixin = ({ withArrow, placement, position }: BubbleProps) => {
   }
 };
 
-const mainAxis = (forward: boolean, threshold: number, offset) => {
+const mainAxis = (forward: boolean, threshold: number, offset: number) => {
   if (forward) {
     return `${offset - threshold}px`;
   }
   return `${threshold - offset}px`;
 };
 
-const crossAxis = (position: Position, diff: number) => {
+const crossAxis = (position?: Position, diff?: number) => {
   switch (position) {
     case 'center':
       return '-50%';
