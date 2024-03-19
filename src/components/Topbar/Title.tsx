@@ -22,7 +22,7 @@ export function Title({ title, description }: { title: string; description?: str
     <TitleSection>
       <H1>{title}</H1>
       {description && (
-        <Tooltip content={description} direction="bottom">
+        <Tooltip content={description} direction="top-center">
           <QuestionIconWrapper>
             <Icon.InformationCircleLarge />
           </QuestionIconWrapper>

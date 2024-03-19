@@ -72,9 +72,8 @@ export function RadioItem<T extends string | number>({
   );
   return (
     <Container>
-      {/* TODO: direction top-left로 수정되어야함 ADCIO-2034, ADCIO-2081 */}
       {tooltip ? (
-        <Tooltip withArrow direction="bottom" content={tooltip}>
+        <Tooltip withArrow direction="top-start" content={tooltip}>
           {RadioCircle}
         </Tooltip>
       ) : (
