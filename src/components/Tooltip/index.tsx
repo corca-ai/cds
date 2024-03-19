@@ -1,28 +1,40 @@
-import { ReactNode } from 'react';
 import { css } from '@emotion/react';
-import { type ReactElement } from 'react';
+import { PropsWithChildren, ReactElement } from 'react';
 
 import styled from '@emotion/styled';
 
 import { color, typography } from '../styles';
 
-type Direction = 'top' | 'bottom' | 'left' | 'right';
+type Placement = 'top' | 'bottom' | 'left' | 'right';
+type Position = 'start' | 'end' | 'center';
+
+export type TooltipDirection = `${Placement}-${Position}`;
+
 export interface TooltipProps {
-  direction?: Direction;
+  direction?: TooltipDirection;
   withArrow?: boolean;
-  children: ReactNode;
   content: string | ReactElement;
 }
 
-type TooltipStylesProps = Omit<TooltipProps, 'children' | 'content'>;
+type Split<S extends string> = S extends `${infer T}-${infer U}` ? [T, U] : [S];
 
-export function Tooltip({ direction = 'top', withArrow = true, children, content }: TooltipProps) {
+export function Tooltip({
+  direction = 'top-center',
+  withArrow = true,
+  children,
+  content,
+}: PropsWithChildren<TooltipProps>) {
+  const [placement, position] = direction.split('-') as Split<typeof direction>;
+
   return (
     <TooltipContainer>
-      {children}
-      <TooltipBox className="tooltip-box" withArrow={withArrow} direction={direction}>
-        {content}
-      </TooltipBox>
+      <ContentsWrapper>{children}</ContentsWrapper>
+      <TooltipWrapper className="tooltip-box">
+        {withArrow && <TooltipArrow placement={placement} />}
+        <TooltipBubble withArrow={withArrow} placement={placement} position={position}>
+          {content}
+        </TooltipBubble>
+      </TooltipWrapper>
     </TooltipContainer>
   );
 }
@@ -33,117 +45,186 @@ const TooltipContainer = styled.div`
     .tooltip-box {
       visibility: visible;
       opacity: 1;
-      transition: opacity 0.3s ease-in-out;
     }
   }
 `;
 
-const TOOLTIP_ARROW_WIDTH = 9;
-const TOOLTIP_ARROW_HEIGHT = 5;
-const DISTANCE_OF_ARROW_ELEMENT = 4;
+const TooltipWrapper = styled.div`
+  visibility: hidden;
+  opacity: 0;
+`;
 
-const directionStylesheet = ({
-  direction,
-  withArrow,
-}: {
-  direction?: Direction;
-  withArrow?: boolean;
-}) => {
-  const directionStyle = {
-    bubblePosition: `calc(100% + ${
-      withArrow ? TOOLTIP_ARROW_HEIGHT + DISTANCE_OF_ARROW_ELEMENT : DISTANCE_OF_ARROW_ELEMENT
-    }px)`,
-    arrowPosition: `calc(100% - ${DISTANCE_OF_ARROW_ELEMENT}px)`,
-    arrowRadius: '2px',
-  } as const;
+const ContentsWrapper = styled.div`
+  display: flex;
+`;
 
-  switch (direction) {
-    case 'top':
-      return css`
-        bottom: ${directionStyle.bubblePosition};
-        left: 50%;
-        transform: translate(-50%, 1px);
+const TOOLTIP_ARROW_WIDTH = 10;
+const ARROW_DIAGONAL = Math.sqrt(TOOLTIP_ARROW_WIDTH ** 2 + TOOLTIP_ARROW_WIDTH ** 2);
+const DISTANCE_FROM_CONTENT_TO_ARROW = 2;
 
-        &::after {
-          top: ${directionStyle.arrowPosition};
-          left: 50%;
-          transform: translate(-50%, -1px) rotate(45deg);
-          border-bottom-right-radius: ${directionStyle.arrowRadius};
-        }
-      `;
+const getArrowMixin = (placement: Placement) => {
+  const BORDER_ARROW_RADIUS = 2;
+
+  const DISTANCE_ARROW_DESCENDED_LENGTH = (ARROW_DIAGONAL - TOOLTIP_ARROW_WIDTH) / 2;
+  const DISTANCE_ARROW_TO_ELEMENT =
+    DISTANCE_ARROW_DESCENDED_LENGTH + DISTANCE_FROM_CONTENT_TO_ARROW;
+
+  switch (placement) {
     case 'bottom':
       return css`
-        top: ${directionStyle.bubblePosition};
-        left: 50%;
-        transform: translate(-50%, 1px);
-
-        &::after {
-          bottom: ${directionStyle.arrowPosition};
-          left: 50%;
-          transform: translate(-50%, 1px) rotate(45deg);
-          border-top-left-radius: ${directionStyle.arrowRadius};
-        }
+        border-bottom-right-radius: ${BORDER_ARROW_RADIUS}px;
+        bottom: calc(100% + ${DISTANCE_ARROW_TO_ELEMENT}px);
+        left: calc(50% - ${TOOLTIP_ARROW_WIDTH / 2}px);
+      `;
+    case 'top':
+      return css`
+        border-top-left-radius: ${BORDER_ARROW_RADIUS}px;
+        top: calc(100% + ${DISTANCE_ARROW_TO_ELEMENT}px);
+        left: calc(50% - ${TOOLTIP_ARROW_WIDTH / 2}px);
       `;
     case 'left':
       return css`
+        border-top-right-radius: ${BORDER_ARROW_RADIUS}px;
+        right: calc(100% + ${DISTANCE_ARROW_TO_ELEMENT}px);
         top: 50%;
-        right: ${directionStyle.bubblePosition};
-        transform: translate(1px, -50%);
-
-        &::after {
-          top: 40%;
-          left: ${directionStyle.arrowPosition};
-          transform: translateX(-1px) rotate(45deg);
-          border-top-right-radius: ${directionStyle.arrowRadius};
-        }
+        transform: translateY(-50%) rotate(45deg);
       `;
     case 'right':
       return css`
+        border-bottom-left-radius: ${BORDER_ARROW_RADIUS}px;
+        left: calc(100% + ${DISTANCE_ARROW_TO_ELEMENT}px);
         top: 50%;
-        left: ${directionStyle.bubblePosition};
-        transform: translate(1px, -50%);
-
-        &::after {
-          top: 40%;
-          right: ${directionStyle.arrowPosition};
-          transform: translateX(1px) rotate(45deg);
-          border-bottom-left-radius: ${directionStyle.arrowRadius};
-        }
+        transform: translateY(-50%) rotate(45deg);
       `;
     default:
-      return css``;
+      return null;
   }
 };
 
-const TooltipBox = styled.div<TooltipStylesProps>`
-  position: relative;
-  cursor: help;
-  z-index: 10000;
-  opacity: 0;
-
-  ${({ direction, withArrow }) => directionStylesheet({ direction, withArrow })}
-
+const TooltipArrow = styled.div<{ placement: Placement }>`
   position: absolute;
-  visibility: hidden;
+  background: ${color['main-black']};
+  width: ${TOOLTIP_ARROW_WIDTH}px;
+  height: ${TOOLTIP_ARROW_WIDTH}px;
+  transform: rotate(45deg);
+  z-index: 10;
+  ${props => getArrowMixin(props.placement)}
+`;
+
+type BubbleProps = {
+  placement: Placement;
+  position?: Position;
+  withArrow?: boolean;
+};
+
+const getBubbleMixin = ({ withArrow, placement, position }: BubbleProps) => {
+  const ARROW_OFFSET = `calc(100% + ${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px)`;
+
+  const TOP_BOTTOM_STYLE = css`
+    left: 50%;
+    transform: ${calculateBubbleTranslate({ placement, position, withArrow })};
+  `;
+  const LEFT_RIGHT_STYLE = css`
+    top: 50%;
+    transform: ${calculateBubbleTranslate({ placement, position, withArrow })};
+  `;
+
+  switch (placement) {
+    case 'top':
+      return css`
+        top: ${ARROW_OFFSET};
+        ${TOP_BOTTOM_STYLE}
+      `;
+    case 'bottom':
+      return css`
+        bottom: ${ARROW_OFFSET};
+        ${TOP_BOTTOM_STYLE}
+      `;
+    case 'left':
+      return css`
+        right: 100%;
+        ${LEFT_RIGHT_STYLE}
+      `;
+    case 'right':
+      return css`
+        left: 100%;
+        ${LEFT_RIGHT_STYLE}
+      `;
+    default:
+      return null;
+  }
+};
+
+const mainAxis = (forward: boolean, threshold: number, offset: number) => {
+  if (forward) {
+    return `${offset - threshold}px`;
+  }
+  return `${threshold - offset}px`;
+};
+
+const crossAxis = (position?: Position, diff?: number) => {
+  switch (position) {
+    case 'center':
+      return '-50%';
+    case 'start':
+      return `-${diff}px`;
+    case 'end':
+      return `calc(${diff}px - 100%)`;
+    default:
+      return '0%';
+  }
+};
+
+const calculateBubbleTranslate = ({ placement, position, withArrow }: BubbleProps): string => {
+  const TOP_BOTTOM_ARROW_DISTANCE = 15;
+  const LEFT_RIGHT_ARROW_DISTANCE = 9;
+
+  const VERT_ARROW_OFFSET = ARROW_DIAGONAL + TOP_BOTTOM_ARROW_DISTANCE;
+  const HORI_ARROW_OFFSET = ARROW_DIAGONAL + LEFT_RIGHT_ARROW_DISTANCE;
+
+  const DISTANCE_FROM_CONTENT = TOOLTIP_ARROW_WIDTH - DISTANCE_FROM_CONTENT_TO_ARROW;
+  const offset = withArrow ? 0 : DISTANCE_FROM_CONTENT;
+
+  function TopOrBottom() {
+    const translateY = mainAxis(placement === 'bottom', 0, offset);
+    const translateX = crossAxis(position, VERT_ARROW_OFFSET);
+    return `translate(${translateX}, ${translateY})`;
+  }
+
+  function LeftOrRight() {
+    const threshold = ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW;
+    const translateX = mainAxis(placement === 'left', threshold, offset);
+    const translateY = crossAxis(position, HORI_ARROW_OFFSET);
+    return `translate(${translateX}, ${translateY})`;
+  }
+
+  switch (placement) {
+    case 'top':
+    case 'bottom':
+      return TopOrBottom();
+    case 'left':
+    case 'right':
+      return LeftOrRight();
+    default:
+      return '';
+  }
+};
+
+const TooltipBubble = styled.div<BubbleProps>`
+  position: absolute;
+  z-index: 10;
   width: max-content;
   height: max-content;
-
+  max-width: 300px;
+  cursor: help;
   background: ${color['main-black']};
   color: ${color.white};
   font-size: ${typography.size.xxs}px;
   font-weight: ${typography.weight.regular};
   padding: 7px 10px;
-  border-radius: 7px;
+  border-radius: 8px;
+  white-space: pre-wrap;
+  word-break: break-all;
 
-  ${({ withArrow }) =>
-    withArrow &&
-    css`
-      &::after {
-        content: '';
-        position: absolute;
-        width: ${TOOLTIP_ARROW_WIDTH}px;
-        height: ${TOOLTIP_ARROW_WIDTH}px; // arrow의 base인 정사각형 세로 height
-        background: ${color['main-black']};
-      }
-    `}
+  ${props => getBubbleMixin(props)}
 `;
