@@ -111,12 +111,6 @@ const TooltipArrow = styled.div<{ placement: Placement }>`
   ${props => getArrowMixin(props.placement)}
 `;
 
-const TOP_BOTTOM_ARROW_DISTANCE = 15;
-const LEFT_RIGHT_ARROW_DISTANCE = 9;
-
-const VERT_ARROW_OFFSET = ARROW_DIAGONAL + TOP_BOTTOM_ARROW_DISTANCE;
-const HORI_ARROW_OFFSET = ARROW_DIAGONAL + LEFT_RIGHT_ARROW_DISTANCE;
-
 type BubbleProps = {
   placement: Placement;
   position?: Position;
@@ -161,43 +155,59 @@ const getBubbleMixin = ({ withArrow, placement, position }: BubbleProps) => {
   }
 };
 
-const calculateBubbleTranslate = ({ placement, position, withArrow }: BubbleProps) => {
+const mainAxis = (forward: boolean, threshold: number, offset) => {
+  if (forward) {
+    return `${offset - threshold}px`;
+  }
+  return `${threshold - offset}px`;
+};
+
+const crossAxis = (position: Position, diff: number) => {
+  switch (position) {
+    case 'center':
+      return '-50%';
+    case 'start':
+      return `-${diff}px`;
+    case 'end':
+      return `calc(${diff}px - 100%)`;
+    default:
+      return '0%';
+  }
+};
+
+const calculateBubbleTranslate = ({ placement, position, withArrow }: BubbleProps): string => {
+  const TOP_BOTTOM_ARROW_DISTANCE = 15;
+  const LEFT_RIGHT_ARROW_DISTANCE = 9;
+
+  const VERT_ARROW_OFFSET = ARROW_DIAGONAL + TOP_BOTTOM_ARROW_DISTANCE;
+  const HORI_ARROW_OFFSET = ARROW_DIAGONAL + LEFT_RIGHT_ARROW_DISTANCE;
+
   const DISTANCE_FROM_CONTENT = TOOLTIP_ARROW_WIDTH - DISTANCE_FROM_CONTENT_TO_ARROW;
   const offset = withArrow ? 0 : DISTANCE_FROM_CONTENT;
-  let translateX = '0%',
-    translateY = '0%';
+
+  function TopOrBottom() {
+    const translateY = mainAxis(placement === 'bottom', 0, offset);
+    const translateX = crossAxis(position, VERT_ARROW_OFFSET);
+    return `translate(${translateX}, ${translateY})`;
+  }
+
+  function LeftOrRight() {
+    const threshold = ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW;
+    const translateX = mainAxis(placement === 'left', threshold, offset);
+    const translateY = crossAxis(position, HORI_ARROW_OFFSET);
+    return `translate(${translateX}, ${translateY})`;
+  }
 
   switch (placement) {
     case 'top':
     case 'bottom':
-      translateY = placement === 'top' ? `-${offset}px` : `${offset}px`;
-      translateX =
-        position === 'center'
-          ? '-50%'
-          : position === 'start'
-            ? `-${VERT_ARROW_OFFSET}px`
-            : position === 'end'
-              ? `calc(${VERT_ARROW_OFFSET}px - 100%)`
-              : '0%';
-      break;
+      return TopOrBottom();
     case 'left':
     case 'right':
-      translateX =
-        placement === 'left'
-          ? `calc(-${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px + ${offset}px)`
-          : `calc(${ARROW_DIAGONAL / 2 + DISTANCE_FROM_CONTENT_TO_ARROW}px - ${offset}px)`;
-      translateY =
-        position === 'center'
-          ? '-50%'
-          : position === 'start'
-            ? `-${HORI_ARROW_OFFSET}px`
-            : position === 'end'
-              ? `calc(-100% + ${HORI_ARROW_OFFSET}px)`
-              : '0%';
-      break;
+      return LeftOrRight();
+    default:
+      return '';
   }
-
-  return `translate(${translateX}, ${translateY})`;
 };
 
 const TooltipBubble = styled.div<BubbleProps>`
