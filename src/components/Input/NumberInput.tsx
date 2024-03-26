@@ -19,7 +19,7 @@ export function NumberInput({
     <TextInput
       placeholder={placeholder}
       type="number"
-      value={value}
+      value={value ?? ''}
       error={error}
       onChange={e => onChange(getIntegerOrNull(e.currentTarget.value))}
       min={1}
