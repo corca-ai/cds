@@ -20,7 +20,7 @@ export interface NavbarGroup {
 
 const Container = styled.nav`
   display: inline-flex;
-  overflow-y: hidden;
+  overflow-y: scroll;
   height: 100vh;
   padding: 25px 14px 18px 14px;
   flex-direction: column;
