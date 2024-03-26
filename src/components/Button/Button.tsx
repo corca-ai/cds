@@ -1,4 +1,4 @@
-import { type ButtonHTMLAttributes, cloneElement, ReactElement } from 'react';
+import { ButtonHTMLAttributes, cloneElement, ReactElement } from 'react';
 
 import styled from '@emotion/styled';
 
@@ -8,13 +8,20 @@ import { color } from '../styles';
 type ButtonVariant = 'filled' | 'outline' | 'text';
 type ButtonSize = 'small' | 'large';
 
-type ColorKey = keyof typeof color | null;
-interface ColorStylesheet {
-  bg: ColorKey;
-  border: ColorKey;
+interface CommonButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant: ButtonVariant;
+  size: ButtonSize;
+  icon?: ReactElement;
 }
 
-const defaultStylesheet = (variant: ButtonVariant, disabled: boolean) => {
+interface OutlineButtonProps extends CommonButtonProps {
+  variant: 'outline';
+  focused?: boolean;
+}
+
+export type ButtonProps = CommonButtonProps | OutlineButtonProps;
+
+const defaultStylesheet = (variant: ButtonVariant, disabled: boolean, focused?: boolean) => {
   const styles = {
     filled: {
       disabled: { bg: 'grey-30', border: null },
@@ -23,12 +30,13 @@ const defaultStylesheet = (variant: ButtonVariant, disabled: boolean) => {
     outline: {
       disabled: { bg: 'grey-30', border: null },
       enabled: { bg: 'white', border: 'grey-40' },
+      focused: { bg: 'grey-20', border: 'grey-60' },
     },
     text: {
       disabled: { bg: null, border: null },
       enabled: { bg: null, border: null },
     },
-  }[variant][disabled ? 'disabled' : 'enabled'] as ColorStylesheet;
+  }[variant][focused ? 'focused' : disabled ? 'disabled' : 'enabled'];
 
   return `
     background-color: ${styles.bg ? color[styles.bg] : 'transparent'};
@@ -41,13 +49,13 @@ const activeStylesheet = (variant: ButtonVariant) => {
     filled: { bg: 'grey-60', border: null },
     outline: { bg: 'white', border: 'grey-50' },
     text: { bg: null, border: null },
-  }[variant] as ColorStylesheet;
+  }[variant];
 
   const onPressed = {
     filled: { bg: 'grey-50', border: null },
     outline: { bg: 'white', border: 'grey-60' },
     text: { bg: 'grey-20', border: null },
-  }[variant] as ColorStylesheet;
+  }[variant];
 
   return `&:hover {
     background-color: ${onHover.bg ? color[onHover.bg] : 'transparent'};
@@ -75,9 +83,8 @@ const determineFontColor = (variant: ButtonVariant, disabled: boolean): keyof ty
 
 const Base = styled.button<{
   variant: ButtonVariant;
-
-  disabled: boolean;
   size: ButtonSize;
+  focused?: boolean;
 }>`
   padding: 7px 16px;
   display: flex;
@@ -98,12 +105,14 @@ const Base = styled.button<{
       height: 34px;
     `;
   }}
-  ${({ variant, disabled }) => {
-    return defaultStylesheet(variant, disabled) + (disabled ? '' : activeStylesheet(variant));
+
+  ${({ variant, disabled, focused }) => {
+    return (
+      defaultStylesheet(variant, disabled, focused) + (disabled ? '' : activeStylesheet(variant))
+    );
   }}
 
   cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
-
   ${({ variant }) =>
     variant === 'text' ? '' : 'box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);'}
 `;
@@ -119,13 +128,6 @@ const IconContainer = styled.div<{ size: number }>`
 const LabelContainer = styled.div`
   line-height: 17px;
 `;
-
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: ButtonVariant;
-  size: ButtonSize;
-  icon?: ReactElement;
-}
-
 export function Button({
   variant,
   size,
@@ -134,11 +136,11 @@ export function Button({
   onClick,
   icon,
   ...props
-}: Props) {
+}: ButtonProps) {
   const c = determineFontColor(variant, disabled);
   return (
     <Base variant={variant} size={size} disabled={disabled} onClick={onClick} {...props}>
-      {icon != null && (
+      {icon && (
         <IconContainer size={variant === 'text' ? 18 : 20}>
           {cloneElement(icon, { color: color[c] })}
         </IconContainer>
