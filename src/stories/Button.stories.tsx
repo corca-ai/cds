@@ -97,6 +97,12 @@ export function Outline() {
           <Button size="small" variant="outline" icon={<Icon.Add />}>
             small outline
           </Button>
+          <Button size="small" variant="outline" focused>
+            focused outline
+          </Button>
+          <Button size="small" variant="outline" icon={<Icon.Add />} focused>
+            focused outline
+          </Button>
         </ButtonWrapper>
 
         <ButtonWrapper>
@@ -105,6 +111,12 @@ export function Outline() {
           </Button>
           <Button size="large" variant="outline" icon={<Icon.Add />}>
             large outline
+          </Button>
+          <Button size="large" variant="outline" icon={<Icon.Add />} focused>
+            focused outline
+          </Button>
+          <Button size="large" variant="outline" icon={<Icon.Add />} focused>
+            focused outline
           </Button>
         </ButtonWrapper>
       </ButtonContainer>
