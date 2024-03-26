@@ -13,6 +13,8 @@ import {
 } from '../components';
 import Icon from '../components/Icon';
 import { BaseInput, type InputTooltipProps } from '../components/Input/InputContainer';
+import { NumberInput } from '../components/Input/NumberInput';
+import { useState } from 'react';
 
 export default {
   title: 'Components/Input',
@@ -41,7 +43,7 @@ const baseArgs = {
 
 const tooltipArgs: InputTooltipProps = {
   content: 'Tooltip',
-  direction: 'bottom',
+  direction: 'bottom-start',
   withArrow: true,
 };
 
@@ -67,6 +69,12 @@ const PasswordInputTemplate: StoryFn<typeof PasswordInput> = args => <PasswordIn
 export const PasswordInputDefault = PasswordInputTemplate.bind({});
 PasswordInputDefault.args = baseArgs;
 PasswordInputDefault.argTypes = argsType;
+
+export function NumberInputTemplate() {
+  const [count, setCount] = useState<number | null>(null);
+
+  return <NumberInput value={count ?? ''} onChange={setCount} />;
+}
 
 export function WithIcon() {
   return (
