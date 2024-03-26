@@ -77,6 +77,8 @@ export function NumberInputTemplate() {
     <NumberInput
       value={count ?? ''}
       onChange={setCount}
+      min={1}
+      max={20}
       {...(isError && { error: 'Number Input은 1 이상 20 이하여야 합니다.' })}
     />
   );

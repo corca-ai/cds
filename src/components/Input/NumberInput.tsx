@@ -13,7 +13,15 @@ export type NumberInputProps = Omit<TextInputProps, 'onChange'> & {
   onChange: (value: number | null) => void;
 };
 
-export function NumberInput({ placeholder, value, error, onChange, onBlur }: NumberInputProps) {
+export function NumberInput({
+  placeholder,
+  value,
+  error,
+  onChange,
+  onBlur,
+  min,
+  max,
+}: NumberInputProps) {
   return (
     <TextInput
       placeholder={placeholder}
@@ -21,8 +29,8 @@ export function NumberInput({ placeholder, value, error, onChange, onBlur }: Num
       value={value ?? ''}
       error={error}
       onChange={e => onChange(getIntegerOrNull(e.currentTarget.value))}
-      min={1}
-      max={20}
+      min={min}
+      max={max}
       onWheel={e => {
         e.currentTarget.blur();
         e.stopPropagation();
