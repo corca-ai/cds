@@ -72,8 +72,14 @@ PasswordInputDefault.argTypes = argsType;
 
 export function NumberInputTemplate() {
   const [count, setCount] = useState<number | null>(null);
-
-  return <NumberInput value={count ?? ''} onChange={setCount} />;
+  const isError = count && (count < 1 || count > 20);
+  return (
+    <NumberInput
+      value={count ?? ''}
+      onChange={setCount}
+      {...(isError && { error: 'Number Input은 1 이상 20 이하여야 합니다.' })}
+    />
+  );
 }
 
 export function WithIcon() {
