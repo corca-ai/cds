@@ -1,4 +1,5 @@
 import _ from 'lodash';
+
 import { TextInput, TextInputProps } from './TextInput';
 
 export const getIntegerOrNull = (value: number | string) => {
@@ -8,13 +9,11 @@ export const getIntegerOrNull = (value: number | string) => {
   return null;
 };
 
-export function NumberInput({
-  placeholder,
-  value,
-  error,
-  onChange,
-  onBlur,
-}: Omit<TextInputProps, 'onChange'> & { onChange: (value: number | null) => void }) {
+export type NumberInputProps = Omit<TextInputProps, 'onChange'> & {
+  onChange: (value: number | null) => void;
+};
+
+export function NumberInput({ placeholder, value, error, onChange, onBlur }: NumberInputProps) {
   return (
     <TextInput
       placeholder={placeholder}

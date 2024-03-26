@@ -1,6 +1,7 @@
-import { type InputBaseProps, InputContainer } from './InputContainer';
-import { PasswordInput, type PasswordInputProps } from './PasswordInput';
-import { TextInput, type TextInputProps } from './TextInput';
+import { InputBaseProps, InputContainer } from './InputContainer';
+import { NumberInput, NumberInputProps } from './NumberInput';
+import { PasswordInput, PasswordInputProps } from './PasswordInput';
+import { TextInput, TextInputProps } from './TextInput';
 
-export { InputContainer, TextInput, PasswordInput };
-export type { InputBaseProps, TextInputProps, PasswordInputProps };
+export { InputContainer, TextInput, PasswordInput, NumberInput };
+export type { InputBaseProps, TextInputProps, PasswordInputProps, NumberInputProps };
