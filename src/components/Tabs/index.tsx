@@ -5,13 +5,13 @@ import { color } from '../styles';
 
 const TAB_WIDTH = 74;
 
-const Index = styled.div`
+const Container = styled.div`
   display: inline-block;
   width: ${TAB_WIDTH * 5}px;
   overflow-x: auto;
 `;
 
-const Container = styled.div`
+const Contents = styled.div`
   width: fit-content;
   min-width: ${TAB_WIDTH * 5}px;
   display: flex;
@@ -54,8 +54,8 @@ interface Props {
 
 export function Tabs({ items, onChange, selectedTab }: Props) {
   return (
-    <Index>
-      <Container>
+    <Container>
+      <Contents>
         {items.map((tab, i) => {
           const selected = tab.value === selectedTab;
           const Component = selected ? SelectedTab : NotSelectedTab;
@@ -74,7 +74,7 @@ export function Tabs({ items, onChange, selectedTab }: Props) {
             </Component>
           );
         })}
-      </Container>
-    </Index>
+      </Contents>
+    </Container>
   );
 }
