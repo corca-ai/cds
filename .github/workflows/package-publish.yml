@@ -2,7 +2,7 @@ name: CDS Package Publish
 
 on:
   release:
-  types: [created]
+    types: [created]
 
 jobs:
   publish:
@@ -11,9 +11,11 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
         with:
           registry-url: 'https://npm.pkg.github.com'
+          node-version: '18'
       - run: pnpm install
       - run: pnpm run build
       - run: pnpm publish
