@@ -6,9 +6,16 @@ import { color } from '../styles';
 const TAB_WIDTH = 74;
 
 const Container = styled.div`
+  display: inline-block;
+  width: ${TAB_WIDTH * 5}px;
+  overflow-x: auto;
+`;
+
+const Contents = styled.div`
+  width: fit-content;
+  min-width: ${TAB_WIDTH * 5}px;
   display: flex;
   align-items: flex-end;
-  width: ${TAB_WIDTH * 5}px;
   border-bottom: 2px solid ${color['grey-50']};
 `;
 
@@ -48,24 +55,26 @@ interface Props {
 export function Tabs({ items, onChange, selectedTab }: Props) {
   return (
     <Container>
-      {items.map((tab, i) => {
-        const selected = tab.value === selectedTab;
-        const Component = selected ? SelectedTab : NotSelectedTab;
-        const color = selected ? 'main-black' : 'grey-60';
-        return (
-          <Component
-            onClick={() => {
-              onChange(tab.value);
-            }}
-            key={i}
-            aria-selected={selected ? 'true' : 'false'}
-          >
-            <B3 ellipsis={true} c={color}>
-              {tab.label}
-            </B3>
-          </Component>
-        );
-      })}
+      <Contents>
+        {items.map((tab, i) => {
+          const selected = tab.value === selectedTab;
+          const Component = selected ? SelectedTab : NotSelectedTab;
+          const color = selected ? 'main-black' : 'grey-60';
+          return (
+            <Component
+              onClick={() => {
+                onChange(tab.value);
+              }}
+              key={i}
+              aria-selected={selected ? 'true' : 'false'}
+            >
+              <B3 ellipsis={true} c={color}>
+                {tab.label}
+              </B3>
+            </Component>
+          );
+        })}
+      </Contents>
     </Container>
   );
 }

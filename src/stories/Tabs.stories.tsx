@@ -56,6 +56,24 @@ export function Default() {
   );
 }
 
+export const Scroll = () => {
+  const [selected, setSelected] = React.useState('1');
+
+  const tabItems = [
+    { label: 'Label 1', value: '1' },
+    { label: 'Label 2', value: '2' },
+    { label: 'Label 3', value: '3' },
+    { label: 'Label 4', value: '4' },
+    { label: 'Label 5', value: '5' },
+    { label: 'Label 6', value: '6' },
+    { label: 'Label 7', value: '7' },
+    { label: 'Label 8', value: '8' },
+    { label: 'Label 9', value: '9' },
+  ];
+
+  return <Tabs items={tabItems} selectedTab={selected} onChange={setSelected} />;
+};
+
 const Container = styled.div`
   display: flex;
   align-items: center;

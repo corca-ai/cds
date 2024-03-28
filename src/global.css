@@ -29,5 +29,11 @@ button {
   outline: none;
   box-sizing: border-box;
   text-decoration: none;
-  scrollbar-width: none;
+  scrollbar-width: none; /* Firefox 스크롤 제거 */
+  -ms-overflow-style: none; /* IE, Edge 스크롤 제거 */
+}
+
+/* 웹킷 기반 브라우저 스크롤 제거 */
+::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
