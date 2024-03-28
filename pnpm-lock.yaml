@@ -17,6 +17,9 @@ dependencies:
   date-fns:
     specifier: ^3.3.1
     version: 3.3.1
+  lodash:
+    specifier: ^4.17.21
+    version: 4.17.21
   react:
     specifier: 18.2.0
     version: 18.2.0
@@ -61,6 +64,9 @@ devDependencies:
   '@storybook/react-vite':
     specifier: ^7.6.17
     version: 7.6.17(react-dom@18.2.0)(react@18.2.0)(typescript@4.8.4)(vite@5.1.4)
+  '@types/lodash':
+    specifier: ^4.14.200
+    version: 4.14.202
   '@types/react':
     specifier: ^18.2.33
     version: 18.2.60
@@ -7287,7 +7293,6 @@ packages:
 
   /lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
-    dev: true
 
   /log-symbols@4.1.0:
     resolution: {integrity: sha512-8XPvpAA8uyhfteu8pIvQxpJZ7SYYdpUivZpGy6sFsBuKRY/7rQGavedeB8aK+Zkyq6upMFVL/9AW6vOYzfRyLg==}

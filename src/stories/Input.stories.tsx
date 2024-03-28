@@ -13,6 +13,8 @@ import {
 } from '../components';
 import Icon from '../components/Icon';
 import { BaseInput, type InputTooltipProps } from '../components/Input/InputContainer';
+import { NumberInput } from '../components/Input/NumberInput';
+import { useState } from 'react';
 
 export default {
   title: 'Components/Input',
@@ -41,7 +43,7 @@ const baseArgs = {
 
 const tooltipArgs: InputTooltipProps = {
   content: 'Tooltip',
-  direction: 'bottom',
+  direction: 'bottom-start',
   withArrow: true,
 };
 
@@ -67,6 +69,20 @@ const PasswordInputTemplate: StoryFn<typeof PasswordInput> = args => <PasswordIn
 export const PasswordInputDefault = PasswordInputTemplate.bind({});
 PasswordInputDefault.args = baseArgs;
 PasswordInputDefault.argTypes = argsType;
+
+export function NumberInputTemplate() {
+  const [count, setCount] = useState<number | null>(null);
+  const isError = count && (count < 1 || count > 20);
+  return (
+    <NumberInput
+      value={count ?? ''}
+      onChange={setCount}
+      min={1}
+      max={20}
+      {...(isError && { error: 'Number Input은 1 이상 20 이하여야 합니다.' })}
+    />
+  );
+}
 
 export function WithIcon() {
   return (
