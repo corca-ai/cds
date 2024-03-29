@@ -1,8 +1,11 @@
 name: CDS Package Publish
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
 
 jobs:
   publish:
