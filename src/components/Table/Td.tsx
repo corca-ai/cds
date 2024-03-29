@@ -43,7 +43,7 @@ const TableDefaultTd = styled.td<{ width?: number; height: number }>`
   width: ${({ width }) => (width ? `${width}px` : 'auto')};
   height: ${({ height }) => height}px;
   & > * {
-    vertical-align: middle;
+    vertical-align: bottom;
   }
 `;
 
@@ -197,13 +197,20 @@ const TableRadio = styled(TableDefaultTd)`
   width: 46px;
 `;
 
+const TABLE_KEBAB_TD_WIDTH: Record<TdSizeType, number> = {
+  l: 48,
+  m: 46,
+  s: 44,
+  xs: 44,
+};
+
 /**
  * @description
  * @property {ReactNode} children - use CDS Kebab component as children
  */
 export const KebabTd = ({ size, children }: { size: TdSizeType; children: ReactNode }) => {
   return (
-    <TableKebob valign="middle" height={TABLE_TD_HEIGHT[size]}>
+    <TableKebob valign="middle" height={TABLE_TD_HEIGHT[size]} width={TABLE_KEBAB_TD_WIDTH[size]}>
       {children}
     </TableKebob>
   );
