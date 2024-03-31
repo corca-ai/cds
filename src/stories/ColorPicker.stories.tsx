@@ -33,6 +33,13 @@ Basic.args = {
   width: 232,
 };
 
+Basic.argTypes = {
+  color: {
+    name: 'color',
+    control: { type: 'select' },
+  },
+};
+
 const Container = styled.div`
   width: 100%;
   height: 200px;
