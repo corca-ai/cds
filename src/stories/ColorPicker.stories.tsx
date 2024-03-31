@@ -24,9 +24,13 @@ export default {
   },
 };
 
-export const Basic = () => {
+export const Basic: StoryFn<typeof ColorPicker> = args => {
   const [color, setColor] = useState('#00a4ff');
-  return <ColorPicker color={color} onChangeColor={setColor} />;
+  return <ColorPicker {...args} color={color} onChangeColor={setColor} />;
+};
+
+Basic.args = {
+  width: 232,
 };
 
 const Container = styled.div`
