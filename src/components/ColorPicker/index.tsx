@@ -3,10 +3,11 @@ import { HexAlphaColorPicker } from 'react-colorful';
 
 import styled from '@emotion/styled';
 
-import { TextInput } from '../Input';
+import { InputContainer, TextInput } from '../Input';
 import useClickOutside from '../Input/hook';
 import { B3 } from '../Text';
 import { color } from '../styles';
+import { BaseInput, InputBaseProps } from '../Input/InputContainer';
 
 const Base = styled.div`
   position: absolute;
@@ -89,12 +90,25 @@ const ColorPickerContainer = styled.div`
   position: relative;
 `;
 
-interface Props {
+interface Props extends Omit<InputBaseProps, 'children'> {
   color: string;
   onChangeColor: (color: string) => void;
 }
 
-export function ColorPicker({ color, onChangeColor }: Props) {
+export function ColorPicker({
+  color,
+  onChangeColor,
+  label,
+  description,
+  required,
+  width,
+  name,
+  error,
+  placeholder,
+  defaultValue,
+  disabled,
+  ...props
+}: Props) {
   const [openPicker, setOpenPicker] = useState(false);
   const colorPickerRef = useRef(null);
 
@@ -104,14 +118,41 @@ export function ColorPicker({ color, onChangeColor }: Props) {
       setOpenPicker(false);
     }, []),
   );
+
   return (
     <div>
-      <Clickable
-        onClick={() => {
-          setOpenPicker(!openPicker);
+      <InputContainer
+        cursorPointer
+        label={label}
+        description={description}
+        required={required}
+        width={width}
+        onChange={v => {
+          onChangeColor(v.target.value);
         }}
-        color={color}
-      />
+        rightSection={
+          <Clickable
+            onClick={() => {
+              setOpenPicker(!openPicker);
+            }}
+            color={color}
+          />
+        }
+        {...props}
+      >
+        <BaseInput
+          cursorPointer
+          name={name}
+          value={color}
+          placeholder={placeholder}
+          onChange={v => {
+            onChangeColor(v.target.value);
+          }}
+          defaultValue={defaultValue}
+          disabled={disabled}
+          error={error}
+        />
+      </InputContainer>
       {openPicker && (
         <ColorPickerContainer ref={colorPickerRef}>
           <Base>
