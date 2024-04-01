@@ -120,6 +120,7 @@ const TableHeader = styled.th<{ width: string; height: number }>`
   width: ${({ width }) => width};
   height: ${({ height }) => height}px;
   vertical-align: middle;
+  text-wrap: nowrap;
 `;
 
 const TableDefaultHeader = styled(TableHeader)`
