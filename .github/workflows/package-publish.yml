@@ -19,6 +19,9 @@ jobs:
         with:
           registry-url: 'https://npm.pkg.github.com'
           node-version: '18'
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
       - run: pnpm install
       - run: pnpm run build
       - run: pnpm publish
