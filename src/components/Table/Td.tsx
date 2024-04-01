@@ -42,6 +42,7 @@ const TableDefaultTd = styled.td<{ width?: number; height: number }>`
   flex-shrink: 0;
   width: ${({ width }) => (width ? `${width}px` : 'auto')};
   height: ${({ height }) => height}px;
+  vertical-align: middle;
   & > * {
     vertical-align: bottom;
   }
