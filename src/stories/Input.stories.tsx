@@ -10,6 +10,7 @@ import {
   TextInput,
   type TextInputProps,
   color,
+  ColorPickerInput,
 } from '../components';
 import Icon from '../components/Icon';
 import { BaseInput, type InputTooltipProps } from '../components/Input/InputContainer';
@@ -70,7 +71,15 @@ export const PasswordInputDefault = PasswordInputTemplate.bind({});
 PasswordInputDefault.args = baseArgs;
 PasswordInputDefault.argTypes = argsType;
 
-export function NumberInputTemplate() {
+export const ColorPickerInputDefault: StoryFn<typeof ColorPickerInput> = args => {
+  const [color, setColor] = useState('#00a4ff');
+  return <ColorPickerInput {...args} color={color} onChangeColor={setColor} />;
+};
+
+ColorPickerInputDefault.args = baseArgs;
+ColorPickerInputDefault.argTypes = argsType;
+
+export function NumberInputDefault() {
   const [count, setCount] = useState<number | null>(null);
   const isError = count && (count < 1 || count > 20);
   return (
