@@ -217,8 +217,7 @@ export const KebabTd = ({ size, children }: { size: TdSizeType; children: ReactN
 };
 
 const TableKebob = styled(TableDefaultTd)`
-  padding: 5px 14px;
-  width: 48px;
+  text-align: center;
 `;
 
 const Td = {
