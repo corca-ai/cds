@@ -19,7 +19,21 @@ jobs:
         with:
           registry-url: 'https://npm.pkg.github.com'
           node-version: '18'
-      - run: pnpm install
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
+      - uses: actions/cache@v3
+        id: pnpm-cache
+        with:
+          path: |
+            */node_modules
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+      - if: steps.pnpm-cache.outputs.cache-hit != 'true'
+        run: pnpm install --no-frozen-lockfile
+
       - run: pnpm run build
       - run: pnpm publish
         env:
