@@ -29,12 +29,11 @@ export function ColorPickerInput({
       label={label}
       description={description}
       required={required}
+      error={error}
       width={width}
       rightSection={<ColorPicker color={color} onChangeColor={onChangeColor} />}
-      {...props}
     >
       <BaseInput
-        cursorPointer
         name={name}
         value={value}
         placeholder={placeholder}
@@ -42,6 +41,7 @@ export function ColorPickerInput({
         defaultValue={defaultValue}
         disabled={disabled}
         error={error}
+        {...props}
       />
     </InputContainer>
   );
