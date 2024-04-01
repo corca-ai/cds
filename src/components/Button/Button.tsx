@@ -21,7 +21,12 @@ interface OutlineButtonProps extends CommonButtonProps {
 
 export type ButtonProps = CommonButtonProps | OutlineButtonProps;
 
-const defaultStylesheet = (variant: ButtonVariant, disabled: boolean, focused?: boolean) => {
+type DefaultStyleSheet = {
+  bg: keyof typeof color | null;
+  border: keyof typeof color | null;
+};
+
+const defaultStylesheet = (variant: ButtonVariant, disabled?: boolean, focused?: boolean) => {
   const styles = {
     filled: {
       disabled: { bg: 'grey-30', border: null },
@@ -36,11 +41,11 @@ const defaultStylesheet = (variant: ButtonVariant, disabled: boolean, focused?: 
       disabled: { bg: null, border: null },
       enabled: { bg: null, border: null },
     },
-  }[variant][focused ? 'focused' : disabled ? 'disabled' : 'enabled'];
+  }[variant][focused ? 'focused' : disabled ? 'disabled' : 'enabled'] as DefaultStyleSheet;
 
   return `
-    background-color: ${styles.bg ? color[styles.bg] : 'transparent'};
-    border: 1px solid ${styles.border ? color[styles.border] : 'transparent'};
+    background-color: ${styles!.bg ? color[styles!.bg] : 'transparent'};
+    border: 1px solid ${styles!.border ? color[styles!.border] : 'transparent'};
   `;
 };
 
@@ -49,13 +54,13 @@ const activeStylesheet = (variant: ButtonVariant) => {
     filled: { bg: 'grey-60', border: null },
     outline: { bg: 'white', border: 'grey-50' },
     text: { bg: null, border: null },
-  }[variant];
+  }[variant] as DefaultStyleSheet;
 
   const onPressed = {
     filled: { bg: 'grey-50', border: null },
     outline: { bg: 'white', border: 'grey-60' },
     text: { bg: 'grey-20', border: null },
-  }[variant];
+  }[variant] as DefaultStyleSheet;
 
   return `&:hover {
     background-color: ${onHover.bg ? color[onHover.bg] : 'transparent'};
@@ -85,6 +90,7 @@ const Base = styled.button<{
   variant: ButtonVariant;
   size: ButtonSize;
   focused?: boolean;
+  disabled?: boolean;
 }>`
   padding: 7px 16px;
   display: flex;
