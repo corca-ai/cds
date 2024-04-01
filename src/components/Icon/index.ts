@@ -32,6 +32,7 @@ import { Layout } from './Layout';
 import { List } from './List';
 import { Logout } from './Logout';
 import { Minus } from './Minus';
+import { PictureSearch } from './PictureSearch';
 import { QuestionCircle } from './QuestionCircle';
 import { Search } from './Search';
 import { Setting } from './Setting';
@@ -98,6 +99,7 @@ const Icon = {
   Dot,
   ToastError,
   ToastSuccess,
+  PictureSearch,
 };
 
 export default Icon;
