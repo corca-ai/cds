@@ -20,8 +20,9 @@ const ButtonContainer = styled.div`
   width: 100px;
 `;
 
-interface ButtonAction extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonAction extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
+  disabled?: boolean;
 }
 
 export interface BottomBarProps {

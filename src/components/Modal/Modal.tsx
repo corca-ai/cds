@@ -3,7 +3,7 @@ import { type ReactElement } from 'react';
 import styled from '@emotion/styled';
 
 import { ModalContainer } from './ModalContainer';
-import { BottomBar } from '../BottomBar';
+import { BottomBar, ButtonAction } from '../BottomBar';
 import Icon from '../Icon';
 import { B1, H1 } from '../Text';
 import { color } from '../styles';
@@ -39,20 +39,18 @@ const CloseIconContainer = styled.div`
 
 const Body = styled.div``;
 
+interface ModalButtonProps extends ButtonAction {
+  onClick: () => void;
+}
+
 interface Props {
   title: string;
   subtitle: string;
   children: ReactElement;
   opened: boolean;
   closeOnBackdropClick?: boolean;
-  cancel: {
-    label: string;
-    onClick: () => void;
-  };
-  confirm: {
-    label: string;
-    onClick: () => void;
-  };
+  cancel: ModalButtonProps;
+  confirm: ModalButtonProps;
 }
 
 export function Modal({
