@@ -176,8 +176,8 @@ export const Basic = () => {
           <Table.Th.Default width="100px" text="Badge" size={size} />
           <Table.Th.Default width="120px" text="Select" size={size} />
           <Table.Th.Default width="50px" text="Switch" size={size} />
-          <Table.Th.Default width="50px" text=" " size={size} />
-          <Table.Th.Default width="50px" text=" " size={size} />
+          <Table.Th.Default width={FIXED_TH_WIDTH.RADIO_ITEM[size]} text=" " size={size} />
+          <Table.Th.Default width={FIXED_TH_WIDTH.KEBAB_MENU[size]} text=" " size={size} />
           <Table.Th.Checkbox
             checkboxType={{
               selected: true,
@@ -264,8 +264,8 @@ export const ThWithIcon = () => {
                 <Table.Th.Default width="100px" text="Badge" size={size} />
                 <Table.Th.Default width="120px" text="Select" size={size} />
                 <Table.Th.Default width="50px" text="Switch" size={size} />
-                <Table.Th.Default width="50px" text=" " size={size} />
-                <Table.Th.Default width="50px" text=" " size={size} />
+                <Table.Th.Default width={FIXED_TH_WIDTH.RADIO_ITEM[size]} text=" " size={size} />
+                <Table.Th.Default width={FIXED_TH_WIDTH.KEBAB_MENU[size]} text=" " size={size} />
                 <Table.Th.Checkbox
                   checkboxType={{
                     selected: true,
@@ -362,8 +362,8 @@ export function Size() {
                 <Table.Th.Default width="100px" text="Label" size={th} />
                 <Table.Th.Default width="100px" text="Badge" size={th} />
                 <Table.Th.Default width="50px" text="Switch" size={th} />
-                <Table.Th.Default width="50px" text=" " size={th} />
-                <Table.Th.Default width="50px" text=" " size={th} />
+                <Table.Th.Default width={FIXED_TH_WIDTH.RADIO_ITEM[th]} text=" " size={th} />
+                <Table.Th.Default width={FIXED_TH_WIDTH.KEBAB_MENU[th]} text=" " size={th} />
                 <Table.Th.Checkbox
                   checkboxType={{
                     selected: true,
@@ -424,8 +424,8 @@ export function WithEllipsis() {
           <Table.Th.Default width="100px" text="Badge" size={thSize} />
           <Table.Th.Default width="120px" text="Select" size={thSize} />
           <Table.Th.Default width="50px" text="Switch" size={thSize} />
-          <Table.Th.Default width="50px" text=" " size={thSize} />
-          <Table.Th.Default width="50px" text=" " size={thSize} />
+          <Table.Th.Default width={FIXED_TH_WIDTH.RADIO_ITEM[thSize]} text=" " size={thSize} />
+          <Table.Th.Default width={FIXED_TH_WIDTH.KEBAB_MENU[thSize]} text=" " size={thSize} />
           <Table.Th.Checkbox
             checkboxType={{
               selected: checkedCheckboxList.length === MOCK_DATA.length,
