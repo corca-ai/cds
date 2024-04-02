@@ -89,12 +89,12 @@ const ColorPickerContainer = styled.div`
   position: relative;
 `;
 
-interface Props {
+export interface ColorPickerProps {
   color: string;
   onChangeColor: (color: string) => void;
 }
 
-export function ColorPicker({ color, onChangeColor }: Props) {
+export function ColorPicker({ color, onChangeColor }: ColorPickerProps) {
   const [openPicker, setOpenPicker] = useState(false);
   const colorPickerRef = useRef(null);
 

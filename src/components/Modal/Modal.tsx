@@ -1,4 +1,4 @@
-import { type ReactElement } from 'react';
+import { CSSProperties, type ReactElement } from 'react';
 
 import styled from '@emotion/styled';
 
@@ -8,10 +8,10 @@ import Icon from '../Icon';
 import { B1, H1 } from '../Text';
 import { color } from '../styles';
 
-const Container = styled.div`
+const Container = styled.div<{ width?: CSSProperties['width'] }>`
   background-color: ${color.white};
   display: inline-flex;
-  width: 600px;
+  width: ${({ width }) => width ?? '669px'};
   padding: 0;
   flex-direction: column;
 `;
@@ -49,6 +49,7 @@ interface Props {
   children: ReactElement;
   opened: boolean;
   closeOnBackdropClick?: boolean;
+  width?: CSSProperties['width'];
   cancel: ModalButtonProps;
   confirm: ModalButtonProps;
 }
@@ -61,6 +62,7 @@ export function Modal({
   confirm,
   children,
   closeOnBackdropClick,
+  width,
 }: Props) {
   return (
     <ModalContainer
@@ -69,7 +71,7 @@ export function Modal({
       onClose={cancel.onClick}
       closeOnBackdropClick={closeOnBackdropClick}
     >
-      <Container>
+      <Container width={width}>
         <HeaderAndBody>
           <Header>
             <TitleAndDescription>
