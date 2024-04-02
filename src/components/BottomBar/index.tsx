@@ -22,7 +22,6 @@ const ButtonContainer = styled.div`
 
 export interface ButtonAction extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
-  disabled?: boolean;
 }
 
 export interface BottomBarProps {
