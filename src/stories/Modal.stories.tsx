@@ -30,6 +30,24 @@ Basic.args = {
   children: <>Body</>,
 };
 
+export const BasicDisabled = Template.bind({});
+BasicDisabled.args = {
+  title: 'Title',
+  subtitle: 'Description',
+  opened: true,
+  cancel: {
+    label: '취소',
+    onClick: () => {},
+    disabled: true,
+  },
+  confirm: {
+    label: '다음',
+    onClick: () => {},
+    disabled: true,
+  },
+  children: <>Body</>,
+};
+
 const AlertTemplate: StoryFn<typeof CdsAlert> = args => <CdsAlert {...args} />;
 
 export const Alert = AlertTemplate.bind({});
