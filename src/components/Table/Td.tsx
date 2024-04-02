@@ -195,6 +195,7 @@ export const RadioTd = ({ size, children }: { size: TdSizeType; children: ReactN
 const TableRadio = styled(TableDefaultTd)`
   padding: 5px 14px 5px 16px;
   width: 46px;
+  vertical-align: middle;
 `;
 
 const TABLE_KEBAB_TD_WIDTH: Record<TdSizeType, number> = {
