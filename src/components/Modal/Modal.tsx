@@ -11,7 +11,7 @@ import { color } from '../styles';
 const Container = styled.div`
   background-color: ${color.white};
   display: inline-flex;
-  width: 600px;
+  width: 669px;
   padding: 0;
   flex-direction: column;
 `;
