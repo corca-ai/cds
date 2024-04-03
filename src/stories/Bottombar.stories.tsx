@@ -62,40 +62,25 @@ export function Default() {
           },
         }}
       />
-    </>
-  );
-}
-
-export function Disabled() {
-  return (
-    <>
       <BottomBar
         dismiss={{
           label: 'Dismiss',
-          onClick: () => {},
-          disabled: true,
+          onClick: () => {
+            alert('Dismiss. ' + NOTE);
+          },
         }}
         confirm={{
           label: 'Confirm',
-          onClick: () => {},
-          disabled: true,
-        }}
-      />
-      <BottomBar
-        dismiss={{
-          label: 'Dismiss',
-          onClick: () => {},
-          disabled: true,
-        }}
-        confirm={{
-          label: 'Confirm',
-          onClick: () => {},
+          onClick: () => {
+            alert('Confirm. ' + NOTE);
+          },
           disabled: true,
         }}
         destroy={{
           label: 'Destroy',
-          onClick: () => {},
-          disabled: true,
+          onClick: () => {
+            alert('Destroy. ' + NOTE);
+          },
         }}
       />
     </>
