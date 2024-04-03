@@ -87,6 +87,42 @@ export function Default() {
   );
 }
 
+export function Disabled() {
+  return (
+    <>
+      <BottomBar
+        dismiss={{
+          label: 'Dismiss',
+          onClick: () => {},
+          disabled: true,
+        }}
+        confirm={{
+          label: 'Confirm',
+          onClick: () => {},
+          disabled: true,
+        }}
+      />
+      <BottomBar
+        dismiss={{
+          label: 'Dismiss',
+          onClick: () => {},
+          disabled: true,
+        }}
+        confirm={{
+          label: 'Confirm',
+          onClick: () => {},
+          disabled: true,
+        }}
+        destroy={{
+          label: 'Destroy',
+          onClick: () => {},
+          disabled: true,
+        }}
+      />
+    </>
+  );
+}
+
 const Container = styled.div`
   width: '100%';
   min-height: 250px;
