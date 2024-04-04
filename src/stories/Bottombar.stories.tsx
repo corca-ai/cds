@@ -62,6 +62,27 @@ export function Default() {
           },
         }}
       />
+      <BottomBar
+        dismiss={{
+          label: 'Dismiss',
+          onClick: () => {
+            alert('Dismiss. ' + NOTE);
+          },
+        }}
+        confirm={{
+          label: 'Confirm',
+          onClick: () => {
+            alert('Confirm. ' + NOTE);
+          },
+          disabled: true,
+        }}
+        destroy={{
+          label: 'Destroy',
+          onClick: () => {
+            alert('Destroy. ' + NOTE);
+          },
+        }}
+      />
     </>
   );
 }
