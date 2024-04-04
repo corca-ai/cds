@@ -15,7 +15,8 @@ import {
 import Icon from '../components/Icon';
 import { BaseInput, type InputTooltipProps } from '../components/Input/InputContainer';
 import { NumberInput } from '../components/Input/NumberInput';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
+import { FileInput } from '../components/Input/FileInput';
 
 export default {
   title: 'Components/Input',
@@ -92,6 +93,30 @@ export function NumberInputDefault() {
     />
   );
 }
+
+export const FileUploaderDefault = () => {
+  const [file, setFile] = useState<File | null>(null);
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setFile(event.target.files[0]);
+    }
+  };
+
+  return (
+    <FileInput
+      label="Label"
+      placeholder="JPG, JPEG, PNG, SVG 파일 추가 (30MB 이하)"
+      description="Description"
+      disabled={false}
+      required={false}
+      width={400}
+      tooltip={tooltipArgs}
+      onChange={handleFileChange}
+      uploadType="image"
+    />
+  );
+};
 
 export function WithIcon() {
   return (
