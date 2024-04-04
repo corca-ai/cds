@@ -7,9 +7,11 @@ import {
 import Icon from '../Icon';
 import { color } from '../styles';
 import styled from '@emotion/styled';
+import { ChangeEvent } from 'react';
 
 export type FileInputProps = Omit<InputBaseProps, 'children'> & {
   uploadType: 'audio' | 'image' | 'video';
+  onUpload: (file: File) => void;
 };
 
 export function FileInput({
@@ -20,7 +22,7 @@ export function FileInput({
   value,
   error,
   disabled,
-  onChange,
+  onUpload,
   defaultValue,
   required = false,
   width,
@@ -45,7 +47,11 @@ export function FileInput({
     >
       <>
         <FileUploadInput
-          onChange={onChange}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => {
+            if (event.target.files) {
+              onUpload(event.target.files[0]);
+            }
+          }}
           type="file"
           accept={`${uploadType}/*`}
           id="file-input"

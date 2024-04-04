@@ -97,24 +97,25 @@ export function NumberInputDefault() {
 export const FileUploaderDefault = () => {
   const [file, setFile] = useState<File | null>(null);
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      setFile(event.target.files[0]);
-    }
+  const handleFileChange = (file: File) => {
+    setFile(file);
   };
 
   return (
-    <FileInput
-      label="Label"
-      placeholder="JPG, JPEG, PNG, SVG 파일 추가 (30MB 이하)"
-      description="Description"
-      disabled={false}
-      required={false}
-      width={400}
-      tooltip={tooltipArgs}
-      onChange={handleFileChange}
-      uploadType="image"
-    />
+    <>
+      <FileInput
+        label="Label"
+        placeholder="JPG, JPEG, PNG, SVG 파일 추가 (30MB 이하)"
+        description="Description"
+        disabled={false}
+        required={false}
+        width={400}
+        tooltip={tooltipArgs}
+        onUpload={handleFileChange}
+        uploadType="image"
+      />
+      {file && <p>파일 이름: {file.name}</p>}
+    </>
   );
 };
 
