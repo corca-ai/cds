@@ -104,29 +104,14 @@ export const FileUploaderDefault = () => {
   return (
     <>
       <FileInput
-        label="Label"
+        label="이미지 파일 예시"
         placeholder="JPG, JPEG, PNG, SVG 파일 추가"
-        description="Description"
-        disabled={false}
-        required={false}
+        description="이미지 파일만 입력 가능한 입력창입니다."
         width={400}
-        tooltip={tooltipArgs}
         onUpload={handleFileChange}
         uploadType="image"
       />
       {file && <p>파일 이름: {file.name}</p>}
-
-      <FileInput
-        label="Label"
-        placeholder="비디오 파일 추가 (30MB 이하)"
-        description="Description"
-        disabled={false}
-        required={false}
-        width={400}
-        tooltip={tooltipArgs}
-        onUpload={handleFileChange}
-        uploadType="image"
-      />
     </>
   );
 };
