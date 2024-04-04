@@ -105,7 +105,7 @@ export const FileUploaderDefault = () => {
     <>
       <FileInput
         label="Label"
-        placeholder="JPG, JPEG, PNG, SVG 파일 추가 (30MB 이하)"
+        placeholder="JPG, JPEG, PNG, SVG 파일 추가"
         description="Description"
         disabled={false}
         required={false}
@@ -115,6 +115,18 @@ export const FileUploaderDefault = () => {
         uploadType="image"
       />
       {file && <p>파일 이름: {file.name}</p>}
+
+      <FileInput
+        label="Label"
+        placeholder="비디오 파일 추가 (30MB 이하)"
+        description="Description"
+        disabled={false}
+        required={false}
+        width={400}
+        tooltip={tooltipArgs}
+        onUpload={handleFileChange}
+        uploadType="image"
+      />
     </>
   );
 };

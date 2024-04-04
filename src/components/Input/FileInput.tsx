@@ -10,8 +10,25 @@ import styled from '@emotion/styled';
 import { ChangeEvent } from 'react';
 
 export type FileInputProps = Omit<InputBaseProps, 'children'> & {
-  uploadType: 'audio' | 'image' | 'video';
+  uploadType?: 'audio' | 'image' | 'video' | 'csv' | 'txt' | 'pdf';
   onUpload: (file: File) => void;
+};
+
+const getMimeType = (uploadType?: FileInputProps['uploadType']) => {
+  switch (uploadType) {
+    case 'audio':
+    case 'image':
+    case 'video':
+      return `${uploadType}/*`;
+    case 'csv':
+      return 'text/csv';
+    case 'txt':
+      return 'text/plain';
+    case 'pdf':
+      return '.pdf';
+    default:
+      return '*/*';
+  }
 };
 
 export function FileInput({
@@ -53,7 +70,7 @@ export function FileInput({
             }
           }}
           type="file"
-          accept={`${uploadType}/*`}
+          accept={getMimeType(uploadType)}
           id="file-input"
         />
         <UploadButton
