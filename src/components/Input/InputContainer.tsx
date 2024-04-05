@@ -122,12 +122,6 @@ export const ErrorContainer = styled.div`
   gap: 4px;
 `;
 
-export const INPUT_PADDING = {
-  left: '6px 12px 6px 34px',
-  right: '6px 36px 6px 12px',
-  default: '6px 12px',
-};
-
 export type BaseInputType = {
   error?: string;
   isRightSection?: boolean;
@@ -145,10 +139,10 @@ export const baseInputStyles = ({
 }: BaseInputType) => css`
   width: 100%;
   padding: ${isLeftSection
-    ? INPUT_PADDING.left
+    ? '6px 12px 6px 34px'
     : isRightSection
-      ? INPUT_PADDING.right
-      : INPUT_PADDING.default};
+      ? '6px 36px 6px 12px'
+      : '6px 12px'};
   outline: none;
   border: 1px solid ${color['grey-50']};
   font-style: normal;
