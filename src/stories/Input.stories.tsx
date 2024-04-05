@@ -16,7 +16,7 @@ import Icon from '../components/Icon';
 import { BaseInput, type InputTooltipProps } from '../components/Input/InputContainer';
 import { NumberInput } from '../components/Input/NumberInput';
 import { ChangeEvent, useState } from 'react';
-import { FileInput } from '../components/Input/FileInput';
+import { FileInput, FileInputProps } from '../components/Input/FileInput';
 
 export default {
   title: 'Components/Input',
@@ -94,26 +94,96 @@ export function NumberInputDefault() {
   );
 }
 
-export const FileUploaderDefault = () => {
-  const [file, setFile] = useState<File | null>(null);
+export const FileInputDefault = () => {
+  const [files, setFiles] = useState<{
+    [key in FileInputProps['uploadType']]: File | null;
+  }>({
+    audio: null,
+    image: null,
+    video: null,
+    csv: null,
+    txt: null,
+    pdf: null,
+    default: null,
+  });
 
-  const handleFileChange = (file: File) => {
-    setFile(file);
+  const handleFileChange = (type: FileInputProps['uploadType'], file: File | null) => {
+    setFiles(prevFiles => ({
+      ...prevFiles,
+      [type]: file,
+    }));
   };
+
+  const fileTypes: FileInputProps['uploadType'][] = [
+    'audio',
+    'image',
+    'video',
+    'csv',
+    'txt',
+    'pdf',
+    'default',
+  ];
 
   return (
     <>
-      <FileInput
-        label="이미지 파일 예시"
-        placeholder="JPG, JPEG, PNG, SVG 파일 추가"
-        description="이미지 파일만 입력 가능한 입력창입니다."
-        width={400}
-        onUpload={handleFileChange}
-        uploadType="image"
-      />
-      {file && <p>파일 이름: {file.name}</p>}
+      {fileTypes.map(type => (
+        <FileInput
+          key={type}
+          label={getFileInputExplain(type)}
+          placeholder={getFileInputExplain(type)}
+          description={getFileInputDescription(type)}
+          width={400}
+          onUpload={file => handleFileChange(type, file)}
+          file={files[type as FileInputProps['uploadType'] | 'default']}
+          uploadType={type as FileInputProps['uploadType']}
+        />
+      ))}
     </>
   );
+};
+
+const FILE_TYPE_CONFIGS: {
+  [key in FileInputProps['uploadType']]: {
+    explain: string;
+    description: string;
+  };
+} = {
+  audio: {
+    explain: 'MP3, WAV, FLAC 파일 추가',
+    description: '오디오 파일만 입력 가능한 입력창입니다.',
+  },
+  image: {
+    explain: 'JPG, JPEG, PNG, SVG 파일 추가',
+    description: '이미지 파일만 입력 가능한 입력창입니다.',
+  },
+  video: {
+    explain: 'MP4, AVI, MOV 파일 추가',
+    description: '비디오 파일만 입력 가능한 입력창입니다.',
+  },
+  csv: {
+    explain: 'CSV 파일 추가',
+    description: 'CSV 파일만 입력 가능한 입력창입니다.',
+  },
+  txt: {
+    explain: 'TXT 파일 추가',
+    description: 'TXT 파일만 입력 가능한 입력창입니다.',
+  },
+  pdf: {
+    explain: 'PDF 파일 추가',
+    description: 'PDF 파일만 입력 가능한 입력창입니다.',
+  },
+  default: {
+    explain: '전체 유형의 파일 추가',
+    description: '전체 유형의 파일을 입력할 수 있는 입력창입니다.',
+  },
+};
+
+const getFileInputExplain = (uploadType?: FileInputProps['uploadType']) => {
+  return (FILE_TYPE_CONFIGS[uploadType || 'default'] || FILE_TYPE_CONFIGS.default).explain;
+};
+
+const getFileInputDescription = (uploadType?: FileInputProps['uploadType']) => {
+  return (FILE_TYPE_CONFIGS[uploadType || 'default'] || FILE_TYPE_CONFIGS.default).description;
 };
 
 export function WithIcon() {

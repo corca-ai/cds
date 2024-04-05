@@ -1,16 +1,19 @@
+import { ChangeEvent, useId } from 'react';
+
+import styled from '@emotion/styled';
+
+import Icon from '../Icon';
+import { B3 } from '../Text';
 import {
+  BaseInputType,
   type InputBaseProps,
   InputContainer,
   baseInputStyles,
-  BaseInputType,
 } from './InputContainer';
-import Icon from '../Icon';
-import { color } from '../styles';
-import styled from '@emotion/styled';
-import { ChangeEvent } from 'react';
 
-export type FileInputProps = Omit<InputBaseProps, 'children'> & {
-  uploadType?: 'audio' | 'image' | 'video' | 'csv' | 'txt' | 'pdf';
+export type FileInputProps = Omit<InputBaseProps, 'children' | 'value'> & {
+  uploadType: 'audio' | 'image' | 'video' | 'csv' | 'txt' | 'pdf' | 'default';
+  file: File | null;
   onUpload: (file: File) => void;
 };
 
@@ -36,7 +39,7 @@ export function FileInput({
   placeholder,
   description,
   name,
-  value,
+  file,
   error,
   disabled,
   onUpload,
@@ -46,9 +49,10 @@ export function FileInput({
   tooltip,
   onClick,
   height,
-  uploadType,
+  uploadType = 'default',
   ...props
 }: FileInputProps) {
+  const id = useId();
   return (
     <InputContainer
       cursorPointer
@@ -71,16 +75,16 @@ export function FileInput({
           }}
           type="file"
           accept={getMimeType(uploadType)}
-          id="file-input"
+          id={`file-input-${id}`}
         />
         <UploadButton
           isLeftSection
           error={error}
           height={height}
           cursorPointer
-          htmlFor="file-input"
+          htmlFor={`file-input-${id}`}
         >
-          {placeholder}
+          {file ? <B3>{file.name}</B3> : <B3 c="grey-50">{placeholder}</B3>}
         </UploadButton>
       </>
     </InputContainer>
@@ -95,5 +99,4 @@ export const UploadButton = styled.label<BaseInputType>`
   ${props => baseInputStyles(props)}
   display: flex;
   align-items: center;
-  color: ${color['grey-50']};
 `;
