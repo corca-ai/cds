@@ -6,6 +6,7 @@ import Icon from '../Icon';
 import { B3, B5, B7 } from '../Text';
 import { Tooltip, type TooltipProps } from '../Tooltip';
 import { color, typography } from '../styles';
+import { css } from '@emotion/react';
 
 export type InputTooltipProps = Omit<TooltipProps, 'children'>;
 
@@ -121,18 +122,27 @@ export const ErrorContainer = styled.div`
   gap: 4px;
 `;
 
-export const BaseInput = styled.input<{
+export type BaseInputType = {
   error?: string;
   isRightSection?: boolean;
   isLeftSection?: boolean;
   height?: string | number;
   cursorPointer?: boolean;
-}>`
+};
+
+export const baseInputStyles = ({
+  error,
+  isRightSection,
+  isLeftSection,
+  height,
+  cursorPointer,
+}: BaseInputType) => css`
   width: 100%;
-  padding: ${({ isRightSection, isLeftSection }) => {
-    if (isLeftSection) return '6px 12px 6px 34px';
-    return isRightSection ? '6px 36px 6px 12px' : '6px 12px';
-  }};
+  padding: ${isLeftSection
+    ? '6px 12px 6px 34px'
+    : isRightSection
+      ? '6px 36px 6px 12px'
+      : '6px 12px'};
   outline: none;
   border: 1px solid ${color['grey-50']};
   font-style: normal;
@@ -141,7 +151,7 @@ export const BaseInput = styled.input<{
   color: ${color['grey-80']};
   background: ${color.white};
   border-radius: 8px;
-  height: ${p => (typeof p.height === 'number' ? `${p.height}px` : p.height || '34px')};
+  height: ${typeof height === 'number' ? `${height}px` : height || '34px'};
 
   &:disabled {
     border: none;
@@ -155,19 +165,22 @@ export const BaseInput = styled.input<{
     font-size: ${typography.size.xs}px;
   }
 
-  ${({ error }) =>
-    error
-      ? `
+  ${error
+    ? `
     border: 1px solid ${color['error-30']};
     background: ${color['error-10']};
   `
-      : `
+    : `
     &:focus-visible,
     &:focus {
       border: 1px solid ${color['grey-80']};
     }
   `}
-  cursor: ${({ cursorPointer }) => (cursorPointer ? 'pointer' : 'default')};
+  cursor: ${cursorPointer ? 'pointer' : 'default'};
+`;
+
+export const BaseInput = styled.input<BaseInputType>`
+  ${props => baseInputStyles(props)}
 `;
 
 const QuestionIconWrapper = styled.i`
