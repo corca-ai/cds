@@ -63,13 +63,21 @@ const argsType = {
 const TextInputTemplate: StoryFn<typeof TextInput> = args => <TextInput {...args} />;
 
 export const TextInputDefault = TextInputTemplate.bind({});
-TextInputDefault.args = baseArgs;
+TextInputDefault.args = {
+  ...baseArgs,
+  label: '텍스트를 입력받을 수 있는 입력창',
+  placeholder: '텍스트를 입력해주세요.',
+};
 TextInputDefault.argTypes = argsType;
 
 const PasswordInputTemplate: StoryFn<typeof PasswordInput> = args => <PasswordInput {...args} />;
 
 export const PasswordInputDefault = PasswordInputTemplate.bind({});
-PasswordInputDefault.args = baseArgs;
+PasswordInputDefault.args = {
+  ...baseArgs,
+  label: '비밀번호를 입력받을 수 있는 입력창',
+  placeholder: '비밀번호를 입력해주세요.',
+};
 PasswordInputDefault.argTypes = argsType;
 
 export const ColorPickerInputDefault: StoryFn<typeof ColorPickerInput> = args => {
@@ -89,6 +97,9 @@ export function NumberInputDefault() {
       onChange={setCount}
       min={1}
       max={20}
+      {...baseArgs}
+      label="숫자를 입력받을 수 있는 입력창"
+      placeholder="숫자를 입력해주세요."
       {...(isError && { error: 'Number Input은 1 이상 20 이하여야 합니다.' })}
     />
   );
