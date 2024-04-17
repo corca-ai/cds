@@ -82,15 +82,24 @@ export function InputContainer({
       )}
       {error && (
         <ErrorContainer>
-          <div>
+          <ErrorMessageIcon>
             <Icon.AlertCircle color={color['error-30']} />
-          </div>
-          <B3 c="error-30">{error}</B3>
+          </ErrorMessageIcon>
+          <ErrorMessage>
+            <B3 c="error-30">{error}</B3>
+          </ErrorMessage>
         </ErrorContainer>
       )}
     </InputWrapper>
   );
 }
+
+const ErrorMessageIcon = styled.div`
+  display: flex;
+`;
+const ErrorMessage = styled.div`
+  min-height: 20px;
+`;
 
 const InputWrapper = styled.div<{ width?: number; cursorPointer?: boolean }>`
   width: ${({ width }) => (width ? `${width}px` : '100%')};
