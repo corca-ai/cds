@@ -82,7 +82,9 @@ export function InputContainer({
       )}
       {error && (
         <ErrorContainer>
-          <Icon.AlertCircle color={color['error-30']} />
+          <div>
+            <Icon.AlertCircle color={color['error-30']} />
+          </div>
           <B3 c="error-30">{error}</B3>
         </ErrorContainer>
       )}
@@ -117,7 +119,7 @@ const LabelContainer = styled.div`
 
 export const ErrorContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 4px;
   gap: 4px;
 `;
