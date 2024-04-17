@@ -15,7 +15,7 @@ import {
 import Icon from '../components/Icon';
 import { BaseInput, type InputTooltipProps } from '../components/Input/InputContainer';
 import { NumberInput } from '../components/Input/NumberInput';
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { FileInput, FileInputProps } from '../components/Input/FileInput';
 
 export default {

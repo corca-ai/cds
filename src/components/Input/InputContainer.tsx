@@ -82,13 +82,24 @@ export function InputContainer({
       )}
       {error && (
         <ErrorContainer>
-          <Icon.AlertCircle color={color['error-30']} />
-          <B3 c="error-30">{error}</B3>
+          <ErrorMessageIcon>
+            <Icon.AlertCircle color={color['error-30']} />
+          </ErrorMessageIcon>
+          <ErrorMessage>
+            <B3 c="error-30">{error}</B3>
+          </ErrorMessage>
         </ErrorContainer>
       )}
     </InputWrapper>
   );
 }
+
+const ErrorMessageIcon = styled.div`
+  display: flex;
+`;
+const ErrorMessage = styled.div`
+  min-height: 20px;
+`;
 
 const InputWrapper = styled.div<{ width?: number; cursorPointer?: boolean }>`
   width: ${({ width }) => (width ? `${width}px` : '100%')};
@@ -117,7 +128,7 @@ const LabelContainer = styled.div`
 
 export const ErrorContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 4px;
   gap: 4px;
 `;
