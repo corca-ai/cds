@@ -38,6 +38,7 @@ export function DateTime({
         customInput={
           <CustomInput
             {...inputProps}
+            isRequired={inputProps?.required}
             onClick={() => datePickerRef.current?.setOpen(true)}
             date={
               dateFormatter
