@@ -21,7 +21,7 @@ interface StyleProps extends HTMLAttributes<HTMLSpanElement> {
 export function Text(props: TypographyProps) {
   return (
     <span
-      css={{
+      style={{
         ...fontStyle.b3, // default
         ...(props.fw && { fontWeight: typography.weight[props.fw] }),
         ...(props.size && { fontSize: typography.size[props.size] }),
@@ -45,7 +45,7 @@ export function Text(props: TypographyProps) {
 export function H1({ children, c = 'grey-80' }: StyleProps) {
   return (
     <h1
-      css={{
+      style={{
         ...fontStyle.h1,
         color: color[c],
       }}
@@ -58,7 +58,7 @@ export function H1({ children, c = 'grey-80' }: StyleProps) {
 export function H2({ children, c = 'grey-80' }: StyleProps) {
   return (
     <h2
-      css={{
+      style={{
         ...fontStyle.h2,
         color: color[c],
       }}
