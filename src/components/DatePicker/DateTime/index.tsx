@@ -35,10 +35,10 @@ export function DateTime({
         locale={LOCALE[language]}
         selected={newDate}
         onChange={date => setNewDate(date)}
+        required={inputProps?.required}
         customInput={
           <CustomInput
             {...inputProps}
-            isRequired={inputProps?.required}
             onClick={() => datePickerRef.current?.setOpen(true)}
             date={
               dateFormatter

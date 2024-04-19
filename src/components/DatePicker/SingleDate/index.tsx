@@ -35,13 +35,13 @@ export function SingleDate({
         ref={datePickerRef}
         locale={LOCALE[language]}
         selected={selected}
+        required={inputProps?.required}
         onChange={date => {
           onChange(date!);
         }}
         customInput={
           <CustomInput
             {...inputProps}
-            isRequired={inputProps?.required}
             onClick={() => datePickerRef.current?.setOpen(true)}
             date={
               dateFormatter != null
@@ -77,13 +77,12 @@ export function SingleDate({
 interface CustomInputProps extends DateInputProps {
   onClick: MouseEventHandler<HTMLInputElement>;
   date?: string;
-  isRequired?: boolean;
 }
 
 export const CustomInput = forwardRef(
-  ({ onClick, date, isRequired, ...props }: CustomInputProps, ref: LegacyRef<HTMLDivElement>) => (
+  ({ onClick, date, ...props }: CustomInputProps, ref: LegacyRef<HTMLDivElement>) => (
     <div ref={ref}>
-      <DateInput {...props} required={isRequired} onClick={onClick} value={date ?? ''} />
+      <DateInput {...props} onClick={onClick} value={date ?? ''} />
     </div>
   ),
 );
