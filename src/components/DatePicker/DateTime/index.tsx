@@ -35,6 +35,7 @@ export function DateTime({
         locale={LOCALE[language]}
         selected={newDate}
         onChange={date => setNewDate(date)}
+        required={inputProps?.required}
         customInput={
           <CustomInput
             {...inputProps}

@@ -106,6 +106,38 @@ export function DateTime() {
   );
 }
 
+export function InputStyle() {
+  const [singleDate, setSingleDate] = useState<Date | null>(null);
+  const [dateTime, setDateTime] = useState<Date | null>(null);
+
+  return (
+    <Container>
+      <DatePicker.Date
+        selected={singleDate}
+        onChange={setSingleDate}
+        language={'ko'}
+        inputProps={{
+          width: 400,
+          label: 'Single Date',
+          required: true,
+          description: '날짜만 입력할 수 있는 입력창 입니다.',
+        }}
+      />
+      <DatePicker.DateTime
+        selected={dateTime}
+        onChange={setDateTime}
+        language={'ko'}
+        inputProps={{
+          width: 400,
+          label: 'Date Time',
+          required: true,
+          description: '날짜와 시간을 모두 입력할 수 있는 입력창 입니다.',
+        }}
+      />
+    </Container>
+  );
+}
+
 const Container = styled.div`
   width: 100%;
   height: 100%;

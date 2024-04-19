@@ -35,6 +35,7 @@ export function SingleDate({
         ref={datePickerRef}
         locale={LOCALE[language]}
         selected={selected}
+        required={inputProps?.required}
         onChange={date => {
           onChange(date!);
         }}
