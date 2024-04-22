@@ -64,7 +64,11 @@
       "eslint --fix"
     ]
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/corca-ai/cds"
+  },
   "publishConfig": {
-    "@corca-ai:registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com"
   }
 }
