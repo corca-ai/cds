@@ -204,18 +204,18 @@ const InputChildrenWrapper = styled.div`
   position: relative;
 `;
 
-const RightSectionWrapper = styled.div`
+const SectionWrapper = styled.div`
   position: absolute;
-  display: flex;
-  top: 50%;
-  transform: translateY(-50%);
+  height: fit-content;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+`;
+
+const RightSectionWrapper = styled(SectionWrapper)`
   right: 8px;
 `;
 
-const LeftSectionWrapper = styled.div`
-  position: absolute;
-  display: flex;
-  top: 50%;
-  transform: translateY(-50%);
+const LeftSectionWrapper = styled(SectionWrapper)`
   padding-left: 10px;
 `;
