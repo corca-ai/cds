@@ -14,9 +14,22 @@ export interface CheckboxProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const CHECKBOX_SIZE = 16;
 
-export function Checkbox({ selected, onSelect, disabled, label, ...props }: CheckboxProps) {
+export function Checkbox({
+  selected,
+  onSelect,
+  disabled,
+  label,
+  type = 'button',
+  ...props
+}: CheckboxProps) {
   return (
-    <Container onClick={onSelect} aria-selected={selected} disabled={disabled} {...props}>
+    <Container
+      onClick={onSelect}
+      aria-selected={selected}
+      disabled={disabled}
+      type={type}
+      {...props}
+    >
       <IconContainer
         tabIndex={!label && !disabled ? 0 : -1}
         disabled={disabled}
