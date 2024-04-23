@@ -24,6 +24,7 @@ const Base = styled.div`
   box-shadow:
     0px 0px 1px 0px rgba(132, 132, 132, 0.31),
     0px 2px 5px 0px rgba(70, 70, 70, 0.2);
+  z-index: 1;
 
   .react-colorful {
     width: 100%;
