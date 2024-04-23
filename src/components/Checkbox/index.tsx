@@ -1,21 +1,35 @@
+import { ButtonHTMLAttributes } from 'react';
+
 import styled from '@emotion/styled';
 
 import Icon from '../Icon';
 import { B3 } from '../Text';
 import { color } from '../styles';
 
-export interface CheckboxProps {
+export interface CheckboxProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   selected: boolean;
   onSelect: () => void;
-  disabled?: boolean;
   label?: string;
 }
 
 const CHECKBOX_SIZE = 16;
 
-export function Checkbox({ selected, onSelect, disabled, label }: CheckboxProps) {
+export function Checkbox({
+  selected,
+  onSelect,
+  disabled,
+  label,
+  type = 'button',
+  ...props
+}: CheckboxProps) {
   return (
-    <Container onClick={onSelect} aria-selected={selected} disabled={disabled}>
+    <Container
+      onClick={onSelect}
+      aria-selected={selected}
+      disabled={disabled}
+      type={type}
+      {...props}
+    >
       <IconContainer
         tabIndex={!label && !disabled ? 0 : -1}
         disabled={disabled}
