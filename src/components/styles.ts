@@ -20,7 +20,7 @@ export const typography = {
     regular: 400,
   },
   fontFamily:
-    '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, \'Noto Sans KR\', sans-serif;',
+    '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, \'Noto Sans KR\', sans-serif',
 };
 
 export const color = {
