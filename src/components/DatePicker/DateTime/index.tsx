@@ -69,14 +69,14 @@ export function DateTime({
           // https://reactdatepicker.com/#example-custom-header
         }) => (
           <HeaderWrapper>
-            <HeaderButton onClick={decreaseMonth}>
+            <HeaderButton type="button" onClick={decreaseMonth}>
               <Icon.ChevronLeftSmall color={color['main-black']} />
             </HeaderButton>
             <HeaderText>
               <span>{MONTHS[date.getMonth()]}</span>
               <span> {date.getFullYear()}</span>
             </HeaderText>
-            <HeaderButton onClick={increaseMonth}>
+            <HeaderButton type="button" onClick={increaseMonth}>
               <Icon.ChevronRightSmall color={color['main-black']} />
             </HeaderButton>
           </HeaderWrapper>
