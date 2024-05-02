@@ -29,6 +29,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         required={required}
         error={error}
         width={width}
+        {...props}
       >
         <BaseInput
           name={name}
