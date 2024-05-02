@@ -48,6 +48,7 @@ import { ToastSuccess } from './ToastSuccess';
 import { Trash } from './Trash';
 import { Upload } from './Upload';
 import { UserCircle } from './UserCircle';
+import { CurrencyWon } from './CurrencyWon';
 
 const Icon = {
   Add,
@@ -100,6 +101,7 @@ const Icon = {
   ToastError,
   ToastSuccess,
   PictureSearch,
+  CurrencyWon,
 };
 
 export default Icon;
