@@ -210,6 +210,7 @@ const SectionWrapper = styled.div`
   top: 0;
   bottom: 0;
   margin: auto;
+  display: flex;
 `;
 
 const RightSectionWrapper = styled(SectionWrapper)`
