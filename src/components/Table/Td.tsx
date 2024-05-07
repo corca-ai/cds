@@ -182,6 +182,7 @@ export const CheckboxTd = ({ size, children }: { size: TdSizeType; children: Rea
 const TableCheckbox = styled(TableDefaultTd)`
   padding: 5px 12px 5px 18px;
   width: 46px;
+  vertical-align: middle;
 `;
 
 /**
