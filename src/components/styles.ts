@@ -39,6 +39,7 @@ export const color = {
   'grey-10': '#F8F9FB',
 
   // ETC
+  black: '#000000',
   white: '#FFFFFF',
   focus: '#3B79D7',
   'error-30': '#B10E1C',

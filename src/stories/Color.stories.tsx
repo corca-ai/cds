@@ -35,9 +35,10 @@ export function Color() {
 
       <H1>ETC color</H1>
       <EtcColorWrapper>
-        <div>
+        <EtcColorContentsWrapper>
+          <Palette name="black" />
           <Palette name="white" />
-        </div>
+        </EtcColorContentsWrapper>
         <div>
           <Palette name="focus" />
         </div>
