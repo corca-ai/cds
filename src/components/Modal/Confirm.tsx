@@ -6,24 +6,16 @@ export interface ConfirmProps {
   contents?: string;
   opened: boolean;
   cancel: {
-    label?: string;
+    label: string;
     onClick: () => void;
   };
   confirm: {
     label: string;
     onClick: () => void;
   };
-  language?: 'ko' | 'en';
 }
 
-export function Confirm({
-  title,
-  contents,
-  opened,
-  cancel,
-  confirm,
-  language = 'ko',
-}: ConfirmProps) {
+export function Confirm({ title, contents, opened, cancel, confirm }: ConfirmProps) {
   return (
     <MessageModal
       title={title}
@@ -31,7 +23,7 @@ export function Confirm({
       bottom={
         <>
           <Button onClick={cancel.onClick} variant="text" size="small">
-            {cancel.label || language === 'en' ? 'cancel' : '취소'}
+            {cancel.label}
           </Button>
           <Button onClick={confirm.onClick} variant="filled" size="small">
             {confirm.label}
