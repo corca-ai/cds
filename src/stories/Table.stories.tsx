@@ -216,9 +216,9 @@ export const Basic = () => {
             <Table.Td.Radio size={size}>
               <Radio.Item value={index} selected onSelect={() => {}} />
             </Table.Td.Radio>
-            <Table.Td.Kebob size={size}>
+            <Table.Td.Icon size={size}>
               <Icon.DotsHori />
-            </Table.Td.Kebob>
+            </Table.Td.Icon>
             <Table.Td.Checkbox size={size}>
               <Checkbox selected onSelect={() => {}} />
             </Table.Td.Checkbox>
@@ -304,9 +304,9 @@ export const ThWithIcon = () => {
                   <Table.Td.Radio size={size}>
                     <Radio.Item value={index} selected onSelect={() => {}} />
                   </Table.Td.Radio>
-                  <Table.Td.Kebob size={size}>
+                  <Table.Td.Icon size={size}>
                     <Icon.DotsHori />
-                  </Table.Td.Kebob>
+                  </Table.Td.Icon>
                   <Table.Td.Checkbox size={size}>
                     <Checkbox selected onSelect={() => {}} />
                   </Table.Td.Checkbox>
@@ -391,9 +391,9 @@ export function Size() {
                   <Table.Td.Radio size={td}>
                     <Radio.Item value={index} selected onSelect={() => {}} />
                   </Table.Td.Radio>
-                  <Table.Td.Kebob size={td}>
+                  <Table.Td.Icon size={td}>
                     <Icon.DotsHori />
-                  </Table.Td.Kebob>
+                  </Table.Td.Icon>
                   <Table.Td.Checkbox size={td}>
                     <Checkbox selected onSelect={() => {}} />
                   </Table.Td.Checkbox>
@@ -478,9 +478,9 @@ export function WithEllipsis() {
             <Table.Td.Radio size={thSize}>
               <Radio.Item value={index} selected onSelect={() => {}} />
             </Table.Td.Radio>
-            <Table.Td.Kebob size={thSize}>
+            <Table.Td.Icon size={thSize}>
               <Icon.DotsHori />
-            </Table.Td.Kebob>
+            </Table.Td.Icon>
             <Table.Td.Checkbox size={thSize}>
               <Checkbox
                 selected={checkedCheckboxList.includes(index)}
