@@ -1,5 +1,3 @@
-import { useTranslation } from 'react-i18next';
-
 import { MessageModal } from './MessageModal';
 import { Button } from '..';
 
@@ -8,7 +6,7 @@ export interface ConfirmProps {
   contents?: string;
   opened: boolean;
   cancel: {
-    label?: string;
+    label: string;
     onClick: () => void;
   };
   confirm: {
@@ -18,7 +16,6 @@ export interface ConfirmProps {
 }
 
 export function Confirm({ title, contents, opened, cancel, confirm }: ConfirmProps) {
-  const { t } = useTranslation(['common']);
   return (
     <MessageModal
       title={title}
@@ -26,7 +23,7 @@ export function Confirm({ title, contents, opened, cancel, confirm }: ConfirmPro
       bottom={
         <>
           <Button onClick={cancel.onClick} variant="text" size="small">
-            {cancel.label || t('cancel')}
+            {cancel.label}
           </Button>
           <Button onClick={confirm.onClick} variant="filled" size="small">
             {confirm.label}
