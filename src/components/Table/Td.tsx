@@ -210,16 +210,17 @@ const TABLE_KEBAB_TD_WIDTH: Record<TdSizeType, number> = {
  * @description
  * @property {ReactNode} children - use CDS Kebab component as children
  */
-export const KebabTd = ({ size, children }: { size: TdSizeType; children: ReactNode }) => {
+export const IconTd = ({ size, children }: { size: TdSizeType; children: ReactNode }) => {
   return (
-    <TableKebob valign="middle" height={TABLE_TD_HEIGHT[size]} width={TABLE_KEBAB_TD_WIDTH[size]}>
+    <TableIcon valign="middle" height={TABLE_TD_HEIGHT[size]} width={TABLE_KEBAB_TD_WIDTH[size]}>
       {children}
-    </TableKebob>
+    </TableIcon>
   );
 };
 
-const TableKebob = styled(TableDefaultTd)`
+const TableIcon = styled(TableDefaultTd)`
   text-align: center;
+  vertical-align: middle;
 `;
 
 const Td = {
@@ -230,7 +231,7 @@ const Td = {
   Select: SelectTd,
   Checkbox: CheckboxTd,
   Radio: RadioTd,
-  Kebob: KebabTd,
+  Icon: IconTd,
 };
 
 export default Td;
