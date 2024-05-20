@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 
-import { BaseInput, type InputBaseProps, InputContainer } from './InputContainer';
+import { BaseInput, InputBaseProps, InputContainer } from './InputContainer';
 
 export type TextInputProps = Omit<InputBaseProps, 'children'>;
 
@@ -18,6 +18,8 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       defaultValue,
       required = false,
       width,
+      leftSection,
+      rightSection,
       ...props
     },
     ref,
@@ -29,6 +31,8 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         required={required}
         error={error}
         width={width}
+        leftSection={leftSection}
+        rightSection={rightSection}
         {...props}
       >
         <BaseInput
@@ -39,8 +43,8 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           defaultValue={defaultValue}
           disabled={disabled}
           error={error}
-          {...props}
           ref={ref}
+          {...props}
         />
       </InputContainer>
     );
