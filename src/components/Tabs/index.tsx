@@ -3,17 +3,13 @@ import styled from '@emotion/styled';
 import { B3 } from '../Text';
 import { color } from '../styles';
 
-const TAB_WIDTH = 74;
-
 const Container = styled.div`
   display: inline-block;
-  width: ${TAB_WIDTH * 5}px;
   overflow-x: auto;
 `;
 
 const Contents = styled.div`
   width: fit-content;
-  min-width: ${TAB_WIDTH * 5}px;
   display: flex;
   align-items: flex-end;
   border-bottom: 2px solid ${color['grey-50']};
@@ -22,7 +18,6 @@ const Contents = styled.div`
 const Item = styled.div`
   display: flex;
   border-radius: 4px 4px 0px 0px;
-  width: ${TAB_WIDTH}px;
   padding: 11px 12px;
   justify-content: center;
   align-items: center;
@@ -50,12 +45,14 @@ interface Props {
   onChange: (v: string) => void;
   selectedTab: string;
   items: TabItem[];
+  tabWidth?: number;
+  tabFullWidth?: boolean;
 }
 
-export function Tabs({ items, onChange, selectedTab }: Props) {
+export function Tabs({ items, onChange, selectedTab, tabWidth = 74, tabFullWidth }: Props) {
   return (
-    <Container>
-      <Contents>
+    <Container style={{ width: '100%' }}>
+      <Contents style={{ minWidth: '100%' }}>
         {items.map((tab, i) => {
           const selected = tab.value === selectedTab;
           const Component = selected ? SelectedTab : NotSelectedTab;
@@ -67,6 +64,9 @@ export function Tabs({ items, onChange, selectedTab }: Props) {
               }}
               key={i}
               aria-selected={selected ? 'true' : 'false'}
+              style={{
+                width: tabFullWidth ? `${100 / items.length}%` : tabWidth,
+              }}
             >
               <B3 ellipsis={true} c={color}>
                 {tab.label}
