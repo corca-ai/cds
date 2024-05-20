@@ -157,6 +157,7 @@ export const SwitchTd = ({
 const TableSwitch = styled(TableDefaultTd)<{ direction: SwitchTdDirection }>`
   padding: 5px 14px;
   text-align: ${({ direction }) => direction};
+  vertical-align: middle;
 `;
 
 /**
