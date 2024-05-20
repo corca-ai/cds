@@ -1,10 +1,10 @@
-import { type InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes } from 'react';
 
 import styled from '@emotion/styled';
 
 import Icon from '../Icon';
-import { B1, B3, B5 } from '../Text';
-import { Tooltip, type TooltipProps } from '../Tooltip';
+import { B3, B5, B7 } from '../Text';
+import { Tooltip, TooltipProps } from '../Tooltip';
 import { color, typography } from '../styles';
 
 type SelectInputTooltipProps = Omit<TooltipProps, 'children'>;
@@ -39,10 +39,10 @@ export function SelectInput({
     <SelectInputWrapper width={width} onClick={onClick}>
       {label && (
         <LabelContainer>
-          <B1>
+          <B7>
             {label} {required && <Star> *</Star>}
-          </B1>
-          {tooltip != null && (
+          </B7>
+          {tooltip && (
             <Tooltip
               content={tooltip.content}
               direction={tooltip.direction}
@@ -129,7 +129,7 @@ const BaseSelectInput = styled.input<{
   font-weight: 500;
   font-size: ${typography.size.xs}px;
   color: ${color['grey-80']};
-  background: ${color.white};
+  background: ${color['white']};
   border-radius: 8px;
   height: 34px;
   cursor: ${({ cursor }) => cursor ?? 'auto'};
