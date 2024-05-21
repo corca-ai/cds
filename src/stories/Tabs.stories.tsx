@@ -1,9 +1,9 @@
+import { ComponentMeta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import styled from '@emotion/styled';
 
 import { Tabs } from '../components';
-import type { Meta, StoryFn } from '@storybook/react';
 
 export default {
   title: 'Components/Tabs',
@@ -27,7 +27,7 @@ export default {
       },
     },
   },
-} as Meta<typeof Tabs>;
+} as ComponentMeta<typeof Tabs>;
 
 export function Default() {
   const [selected, setSelected] = React.useState('1');
@@ -49,9 +49,7 @@ export function Default() {
         },
       ]}
       selectedTab={selected}
-      onChange={value => {
-        setSelected(value);
-      }}
+      onChange={value => setSelected(value)}
     />
   );
 }
@@ -73,6 +71,32 @@ export const Scroll = () => {
 
   return <Tabs items={tabItems} selectedTab={selected} onChange={setSelected} />;
 };
+
+export function FullWidth() {
+  const [selected, setSelected] = React.useState('1');
+
+  return (
+    <Tabs
+      items={[
+        {
+          label: 'Label 1',
+          value: '1',
+        },
+        {
+          label: 'Label 2',
+          value: '2',
+        },
+        {
+          label: 'Very long Label',
+          value: '3',
+        },
+      ]}
+      selectedTab={selected}
+      onChange={value => setSelected(value)}
+      tabFullWidth
+    />
+  );
+}
 
 const Container = styled.div`
   display: flex;
