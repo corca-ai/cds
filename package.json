@@ -1,9 +1,12 @@
 {
   "name": "@corca-ai/cds",
+  "author": "Corca <contact@corca.ai>",
+  "description": "Corca Design System",
   "private": false,
   "version": "0.0.3",
   "type": "module",
   "packageManager": "pnpm@8.15.4",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
