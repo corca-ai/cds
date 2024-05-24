@@ -10,6 +10,9 @@ export default defineConfig({
       name: 'cds',
       fileName: 'index',
     },
+    rollupOptions: {
+      external: ['react', 'react-dom'],
+    },
   },
   plugins: [dts()],
 });
