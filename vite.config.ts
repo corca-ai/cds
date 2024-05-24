@@ -1,6 +1,7 @@
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   build: {
@@ -12,7 +13,21 @@ export default defineConfig({
     },
     rollupOptions: {
       external: ['react', 'react-dom'],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+        },
+      },
     },
   },
-  plugins: [dts()],
+  plugins: [
+    react({
+      jsxImportSource: '@emotion/react',
+      babel: {
+        plugins: ['@emotion/babel-plugin'],
+      },
+    }),
+    dts(),
+  ],
 });

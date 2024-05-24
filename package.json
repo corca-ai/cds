@@ -3,7 +3,7 @@
   "author": "Corca <contact@corca.ai>",
   "description": "Corca Design System",
   "private": false,
-  "version": "0.0.5",
+  "version": "0.0.6",
   "type": "module",
   "packageManager": "pnpm@8.15.4",
   "main": "dist/index.js",
@@ -27,6 +27,7 @@
     "react-hot-toast": "^2.4.1"
   },
   "devDependencies": {
+    "@emotion/babel-plugin": "^11.11.0",
     "@storybook/addon-designs": "^7.0.9",
     "@storybook/addon-essentials": "^7.6.17",
     "@storybook/addon-interactions": "^7.6.17",
@@ -41,6 +42,7 @@
     "@types/react-dom": "^18.2.14",
     "@typescript-eslint/eslint-plugin": "^2.5.0",
     "@typescript-eslint/parser": "^2.5.0",
+    "@vitejs/plugin-react": "^4.3.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^8.10.0",
     "eslint-plugin-import": "^2.29.1",
