@@ -3,7 +3,7 @@
   "author": "Corca <contact@corca.ai>",
   "description": "Corca Design System",
   "private": false,
-  "version": "0.0.9",
+  "version": "0.0.10",
   "type": "module",
   "packageManager": "pnpm@8.15.4",
   "main": "dist/index.js",
