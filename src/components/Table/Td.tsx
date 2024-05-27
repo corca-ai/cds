@@ -72,10 +72,11 @@ const TableText = styled(TableDefaultTd)<{
   ${props =>
     props.ellipsis &&
     `max-width: ${props.width ? `${props.width}px` : 'fit-content'};
-overflow: hidden;
-text-overflow: ellipsis;
-word-break: break-all;
-white-space: nowrap;`}
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: nowrap;
+  `}
   line-height:normal;
 `;
 
