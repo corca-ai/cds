@@ -42,9 +42,6 @@ const TableDefaultTd = styled.td<{ width?: number; height: number }>`
   flex-shrink: 0;
   width: ${({ width }) => (width ? `${width}px` : 'auto')};
   height: ${({ height }) => height}px;
-  & > * {
-    vertical-align: bottom;
-  }
 `;
 
 export const TextTd = ({
@@ -75,10 +72,11 @@ const TableText = styled(TableDefaultTd)<{
   ${props =>
     props.ellipsis &&
     `max-width: ${props.width ? `${props.width}px` : 'fit-content'};
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: break-all;
-  white-space: nowrap;`}
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: nowrap;
+  `}
   line-height:normal;
 `;
 
@@ -130,6 +128,7 @@ export const BadgeTd = ({ size, children }: { size: TdSizeType; children: ReactN
 
 const TableBadge = styled(TableDefaultTd)`
   padding: 5px 10px;
+  vertical-align: middle;
 `;
 
 type SwitchTdDirection = 'left' | 'center';
@@ -170,6 +169,7 @@ export const SelectTd = ({ size, children }: { size: TdSizeType; children: React
 
 const TableSelect = styled(TableDefaultTd)`
   padding: 5px 10px;
+  vertical-align: middle;
 `;
 
 /**
