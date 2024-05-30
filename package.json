@@ -7,6 +7,7 @@
   "type": "module",
   "packageManager": "pnpm@8.15.4",
   "main": "dist/index.js",
+  "repository": "https://github.com/corca-ai/cds",
   "scripts": {
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
@@ -66,9 +67,5 @@
       "prettier --parser=typescript --write",
       "eslint --fix"
     ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/corca-ai/cds"
   }
 }
