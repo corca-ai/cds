@@ -1,9 +1,9 @@
 {
-  "name": "@corca/cds",
+  "name": "@corca-ai/cds",
   "author": "Corca <contact@corca.ai>",
   "description": "Corca Design System",
   "private": false,
-  "version": "0.0.1",
+  "version": "0.0.11",
   "type": "module",
   "packageManager": "pnpm@8.15.4",
   "main": "dist/index.js",
@@ -70,8 +70,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/corca-ai/cds"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
   }
 }
