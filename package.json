@@ -1,5 +1,5 @@
 {
-  "name": "corca-design-system",
+  "name": "@corca-ai/design-system",
   "author": "Corca <contact@corca.ai>",
   "description": "Design System for Corca, Inc.",
   "private": false,
