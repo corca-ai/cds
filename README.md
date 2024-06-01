@@ -6,6 +6,10 @@
 
 This package is a design system used in the service provided by Corca.
 
+## Docs
+
+Detailed specifications of design system components can be found in the [Storybook document](https://cds-corca.vercel.app/).
+
 ## Commands
 
 ### Install dependencies
@@ -15,16 +19,16 @@ corepack enable
 pnpm install
 ```
 
-### Build package
-
-```
-pnpm build
-```
-
 ### Run Storybook
 
 ```
 pnpm storybook
+```
+
+### Build package
+
+```
+pnpm build
 ```
 
 ## Maintainers
