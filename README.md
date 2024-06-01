@@ -15,7 +15,7 @@ corepack enable
 pnpm install
 ```
 
-### Build workspaces
+### Build package
 
 ```
 pnpm build
