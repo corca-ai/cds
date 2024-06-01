@@ -1,6 +1,6 @@
 # CDS (Corca Design System)
 
-![NPM Version](https://img.shields.io/npm/v/:packageName)
+![NPM Version](https://img.shields.io/npm/v/:@corca-ai/design-system)
 
 >
 
