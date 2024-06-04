@@ -1,10 +1,12 @@
+export { default as Icon } from './Icon';
+export { default as Table } from './Table';
+export { default as DatePicker } from './DatePicker';
 export * from './Badge';
 export * from './BottomBar';
 export * from './Button';
 export * from './Checkbox';
 export * from './ColorPicker';
 export * from './EmptyState';
-export * from './Icon';
 export * from './Input';
 export * from './Modal';
 export * from './Navigation';
