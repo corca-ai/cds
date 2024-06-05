@@ -95,8 +95,8 @@ devDependencies:
     specifier: ^6.8.0
     version: 6.8.0(eslint@8.57.0)
   eslint-plugin-prettier:
-    specifier: ^4.0.0
-    version: 4.2.1(eslint-config-prettier@8.10.0)(eslint@8.57.0)(prettier@2.8.8)
+    specifier: ^3.4.0
+    version: 3.4.0(eslint-config-prettier@8.10.0)(eslint@8.57.0)(prettier@2.8.8)
   eslint-plugin-react:
     specifier: ^7.33.2
     version: 7.33.2(eslint@8.57.0)
@@ -5879,13 +5879,13 @@ packages:
       object.fromentries: 2.0.7
     dev: true
 
-  /eslint-plugin-prettier@4.2.1(eslint-config-prettier@8.10.0)(eslint@8.57.0)(prettier@2.8.8):
-    resolution: {integrity: sha512-f/0rXLXUt0oFYs8ra4w49wYZBG5GKZpAYsJSm6rnYL5uVDjd+zowwMwVZHnAjf4edNrKpCDYfXDgmRE/Ak7QyQ==}
-    engines: {node: '>=12.0.0'}
+  /eslint-plugin-prettier@3.4.0(eslint-config-prettier@8.10.0)(eslint@8.57.0)(prettier@2.8.8):
+    resolution: {integrity: sha512-UDK6rJT6INSfcOo545jiaOwB701uAIt2/dR7WnFQoGCVl1/EMqdANBmwUaqqQ45aXprsTGzSa39LI1PyuRBxxw==}
+    engines: {node: '>=6.0.0'}
     peerDependencies:
-      eslint: '>=7.28.0'
+      eslint: '>=5.0.0'
       eslint-config-prettier: '*'
-      prettier: '>=2.0.0'
+      prettier: '>=1.13.0'
     peerDependenciesMeta:
       eslint-config-prettier:
         optional: true
