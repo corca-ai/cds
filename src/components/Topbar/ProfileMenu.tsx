@@ -15,7 +15,7 @@ interface ProfileProps {
 export interface ProfileOption {
   label: string;
   onClick: () => void;
-  icon: ReactElement;
+  icon: () => ReactElement;
 }
 
 interface ProfileOptionListProps {
@@ -177,7 +177,7 @@ function ProfileOptionList({ title, name, email, options }: ProfileOptionListPro
           return (
             <MenuButton key={menu.label} onClick={menu.onClick}>
               <MenuItem>
-                {Icon}
+                <Icon />
                 <B3>{menu.label}</B3>
               </MenuItem>
             </MenuButton>

@@ -32,14 +32,14 @@ const profileOptions: ProfileOption[] = [
     onClick: () => {
       alert('로그아웃');
     },
-    icon: <Icon.Logout />,
+    icon: () => <Icon.Logout />,
   },
   {
     label: '셀러 전환',
     onClick: () => {
       alert('셀러 전환');
     },
-    icon: <Icon.Switch />,
+    icon: () => <Icon.Switch />,
   },
 ];
 
