@@ -133,6 +133,9 @@ devDependencies:
   vite-plugin-dts:
     specifier: ^3.7.3
     version: 3.7.3(typescript@4.8.4)(vite@5.1.4)
+  vite-plugin-static-copy:
+    specifier: ^1.0.5
+    version: 1.0.5(vite@5.1.4)
   vite-tsconfig-paths:
     specifier: ^4.3.1
     version: 4.3.1(typescript@4.8.4)(vite@5.1.4)
@@ -9713,6 +9716,19 @@ packages:
       - '@types/node'
       - rollup
       - supports-color
+    dev: true
+
+  /vite-plugin-static-copy@1.0.5(vite@5.1.4):
+    resolution: {integrity: sha512-02k0Rox+buYdEOfeilKZSgs1gXfPf9RjVztZEIYZgVIxjsVZi6AXssjzdi+qW6zYt00d3bq+tpP2voVXN2fKLw==}
+    engines: {node: ^18.0.0 || >=20.0.0}
+    peerDependencies:
+      vite: ^5.0.0
+    dependencies:
+      chokidar: 3.6.0
+      fast-glob: 3.3.2
+      fs-extra: 11.2.0
+      picocolors: 1.0.0
+      vite: 5.1.4
     dev: true
 
   /vite-tsconfig-paths@4.3.1(typescript@4.8.4)(vite@5.1.4):

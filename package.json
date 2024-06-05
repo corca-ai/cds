@@ -7,6 +7,7 @@
   "type": "module",
   "packageManager": "pnpm@8.15.4",
   "main": "dist/index.js",
+  "css": "src/global.css",
   "repository": "https://github.com/corca-ai/cds",
   "scripts": {
     "build": "tsc && vite build",
@@ -60,6 +61,7 @@
     "vite": "^5.1.4",
     "vite-plugin-banner": "^0.7.1",
     "vite-plugin-dts": "^3.7.3",
+    "vite-plugin-static-copy": "^1.0.5",
     "vite-tsconfig-paths": "^4.3.1"
   },
   "lint-staged": {
