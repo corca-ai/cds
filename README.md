@@ -10,6 +10,10 @@ This package is a design system used in the service provided by Corca.
 
 Detailed specifications of design system components can be found in the [Storybook document](https://cds-corca.vercel.app/).
 
+## Caution
+
+In order to apply the global.css file in your root file or Next.js \_app file, you must import the `@corca-ai/design-system/dist/global.css` file.
+
 ## Commands
 
 ### Install dependencies
