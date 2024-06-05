@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 
 import dts from 'vite-plugin-dts';
 import react from '@vitejs/plugin-react';
-// import { libInjectCss } from 'vite-plugin-lib-inject-css';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
   build: {
@@ -23,7 +23,17 @@ export default defineConfig({
         },
       },
     },
-    minify: false,
   },
-  plugins: [react(), dts()],
+  plugins: [
+    react(),
+    dts(),
+    viteStaticCopy({
+      targets: [
+        {
+          src: ['src/*.css'],
+          dest: resolve(__dirname, 'dist'),
+        },
+      ],
+    }),
+  ],
 });
