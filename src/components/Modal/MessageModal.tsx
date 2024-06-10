@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 
-import { ModalContainer } from './ModalContainer';
-import { B2, H2 } from '../Text';
-import { color } from '../styles';
 import { ReactNode } from 'react';
+import { H2 } from '../Text';
+import { color, fontStyle } from '../styles';
+import { ModalContainer } from './ModalContainer';
 
 const Base = styled.div`
   background-color: ${color.white};
@@ -51,7 +51,16 @@ export function MessageModal({
     >
       <Base>
         <H2>{title}</H2>
-        {contents && <B2>{contents}</B2>}
+        {contents && (
+          <span
+            style={{
+              ...fontStyle.b2,
+              lineHeight: 'normal',
+            }}
+          >
+            {contents}
+          </span>
+        )}
         <ActionsContainer>{bottom}</ActionsContainer>
       </Base>
     </ModalContainer>
