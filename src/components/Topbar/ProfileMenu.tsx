@@ -5,8 +5,9 @@ import styled from '@emotion/styled';
 import Icon from '../Icon';
 import { B1, B2, B3, B4, B5 } from '../Text';
 import { color } from '../styles';
+import { IconProps } from '../Icon/type';
 
-interface ProfileProps {
+export interface ProfileProps {
   avatar?: string;
   name: string;
   description?: string;
@@ -15,10 +16,10 @@ interface ProfileProps {
 export interface ProfileOption {
   label: string;
   onClick: () => void;
-  icon: () => ReactElement;
+  icon: (icon: IconProps) => ReactElement;
 }
 
-interface ProfileOptionListProps {
+export interface ProfileOptionListProps {
   title: ReactNode;
   name: string;
   email: string;
