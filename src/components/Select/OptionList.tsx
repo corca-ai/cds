@@ -40,6 +40,7 @@ interface OptionListProps<T = string> {
 
 const LIST_ITEM_HEIGHT = 32;
 
+const MINUS_ICON_CLASS_NAME = 'minus-icon';
 const ListContainer = styled.ul<{
   width?: number;
   maxDropdownItemsToShow: number;
@@ -90,6 +91,9 @@ const ItemButton = styled.button<{
   &:hover {
     background-color: ${({ disabled, selected }) =>
       disabled ? 'none' : selected ? color['grey-40'] : color['grey-20']};
+    .${MINUS_ICON_CLASS_NAME} {
+      opacity: 1;
+    }
   }
   svg {
     display: list-item;
@@ -104,6 +108,10 @@ const ItemButton = styled.button<{
     `background: none;
     cursor: not-allowed;
 `}
+  .${MINUS_ICON_CLASS_NAME} {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
 `;
 
 function OptionItems<T>({
@@ -236,10 +244,8 @@ function MultipleOptionItems<T>({
                 <ItemIcon size={20} {...(item.disabled && { color: color['grey-40'] })} />
               )}
               <B3 c={item.disabled ? 'grey-40' : 'grey-80'}>{item.label}</B3>
-              홍홍
-              <Icon.Minus size={20} color="grey-80" />
               {alreadySelected && (
-                <MinusIconWrapper>
+                <MinusIconWrapper className={MINUS_ICON_CLASS_NAME}>
                   <Icon.Minus size={20} />
                 </MinusIconWrapper>
               )}
@@ -304,9 +310,4 @@ export function MultipleOptionList<T = string>({
   );
 }
 
-const MinusIconWrapper = styled.div`
-  visibility: hidden;
-  &:hover {
-    visibility: visible;
-  }
-`;
+const MinusIconWrapper = styled.div``;
