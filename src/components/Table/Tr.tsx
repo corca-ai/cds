@@ -25,7 +25,15 @@ const TableRow = styled.tr<Props>`
   border-color: inherit;
   max-height: 66px !important;
   padding: 0;
-  border-top: 1px solid ${color['grey-50']};
-  border-bottom: 1px solid ${color['grey-50']};
+  border-top: 1px solid ${color['grey-30']};
+  border-bottom: 1px solid ${color['grey-30']};
   border-color: inherit;
+
+  &:hover {
+    background-color: ${color['grey-20']};
+  }
+
+  &:active {
+    background-color: ${color['grey-30']};
+  }
 `;
