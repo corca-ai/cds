@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import { type IconProps } from '../Icon/type';
 import { B3, B4 } from '../Text';
 import { color } from '../styles';
+import Icon from '../Icon';
 
 export interface BasicOptionItem<T = string> {
   label: string;
@@ -54,9 +55,7 @@ const ListContainer = styled.ul<{
   gap: 4px;
   border-radius: 8px;
   background: ${color.white};
-  box-shadow:
-    0px 0px 1px 0px rgba(132, 132, 132, 0.31),
-    0px 2px 5px 0px rgba(70, 70, 70, 0.2);
+  box-shadow: 0px 0px 1px 0px rgba(132, 132, 132, 0.31), 0px 2px 5px 0px rgba(70, 70, 70, 0.2);
   overflow: auto;
   list-style: none;
 `;
@@ -199,3 +198,115 @@ export function OptionList<T = string>({
     </ListContainer>
   );
 }
+
+interface MultipleOptionListProps<T = string> extends Omit<OptionListProps<T>, 'value'> {
+  values: T[];
+}
+
+function MultipleOptionItems<T>({
+  values,
+  items,
+  onChange,
+  focusedItemIdx,
+}: {
+  values: T[];
+  items: Array<BasicOptionItem<T>>;
+  onChange: (value: T) => void;
+  focusedItemIdx: number;
+}) {
+  return (
+    <>
+      {items.map((item, i) => {
+        const ItemIcon = item.icon;
+        const alreadySelected = values?.includes(item.value);
+        return (
+          <ItemList key={i} role="option">
+            <ItemButton
+              focused={focusedItemIdx === i}
+              disabled={item.disabled}
+              aria-selected={alreadySelected}
+              selected={alreadySelected}
+              onClick={() => {
+                if (!item.disabled) {
+                  onChange(item.value);
+                }
+              }}
+            >
+              {ItemIcon != null && (
+                <ItemIcon size={20} {...(item.disabled && { color: color['grey-40'] })} />
+              )}
+              <B3 c={item.disabled ? 'grey-40' : 'grey-80'}>{item.label}</B3>
+              홍홍
+              <Icon.Minus size={20} color="grey-80" />
+              {alreadySelected && (
+                <MinusIconWrapper>
+                  <Icon.Minus size={20} />
+                </MinusIconWrapper>
+              )}
+            </ItemButton>
+          </ItemList>
+        );
+      })}
+    </>
+  );
+}
+
+export function MultipleOptionList<T = string>({
+  onChange,
+  option,
+  values,
+  width,
+  maxDropdownItemsToShow = 6,
+  focusedItemIdx = -1,
+}: MultipleOptionListProps<T>) {
+  const scrollRef = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    if (option.items.length === 0) {
+      return;
+    }
+    if (focusedItemIdx === -1) {
+      scrollRef.current!.children[0]?.scrollIntoView({
+        block: 'nearest',
+      });
+      return;
+    }
+    scrollRef.current!.children[focusedItemIdx]?.scrollIntoView({
+      block: 'nearest',
+    });
+  }, [focusedItemIdx, option.items.length]);
+
+  return (
+    <ListContainer width={width} maxDropdownItemsToShow={maxDropdownItemsToShow} ref={scrollRef}>
+      {option.type === 'section' ? (
+        option.items.map((section, i) => (
+          <Fragment key={i}>
+            <SectionTitleWrapper>
+              <B4>{section.sectionTitle}</B4>
+            </SectionTitleWrapper>
+            <MultipleOptionItems<T>
+              values={values}
+              items={section.sectionItems}
+              onChange={onChange}
+              focusedItemIdx={focusedItemIdx}
+            />
+          </Fragment>
+        ))
+      ) : (
+        <MultipleOptionItems<T>
+          values={values}
+          items={option.items}
+          onChange={onChange}
+          focusedItemIdx={focusedItemIdx}
+        />
+      )}
+    </ListContainer>
+  );
+}
+
+const MinusIconWrapper = styled.div`
+  visibility: hidden;
+  &:hover {
+    visibility: visible;
+  }
+`;
