@@ -20,6 +20,7 @@ export interface SelectInputBaseProps extends Omit<InputHTMLAttributes<HTMLInput
   dropdownOpened?: boolean;
   searchable?: boolean;
   showIcon?: boolean;
+  leftIcon?: React.ReactNode;
 }
 
 export function SelectInput({
@@ -33,6 +34,7 @@ export function SelectInput({
   searchable,
   onClick,
   showIcon = true,
+  leftIcon,
   ...props
 }: SelectInputBaseProps) {
   return (
@@ -61,8 +63,12 @@ export function SelectInput({
         </Description>
       )}
       <SelectInputChildrenWrapper>
+        {!!leftIcon && (
+          <LeftSectionWrapper cursor={!searchable ? 'text' : 'auto'}>{leftIcon}</LeftSectionWrapper>
+        )}
         <BaseSelectInput
           {...props}
+          leftIconExist={!!leftIcon}
           cursor={!searchable ? 'pointer' : 'auto'}
           isRightSection={true}
           readOnly={!searchable}
@@ -120,9 +126,13 @@ const BaseSelectInput = styled.input<{
   error?: string;
   isRightSection?: boolean;
   cursor?: string;
+  leftIconExist?: boolean;
 }>`
   width: 100%;
-  padding: ${({ isRightSection }) => (isRightSection ? '6px 36px 6px 12px' : '6px 12px')};
+  padding: ${({ isRightSection, leftIconExist }) => {
+    const leftPadding = leftIconExist ? 34 : 12;
+    return isRightSection ? `6px 36px 6px ${leftPadding}px` : `6px ${leftPadding}px`;
+  }};
   outline: none;
   border: 1px solid ${color['grey-50']};
   font-style: normal;
@@ -183,4 +193,21 @@ const RightSectionWrapper = styled.button<{ cursor?: string; rotate: string }>`
   height: 100%;
   cursor: ${({ cursor }) => cursor ?? 'pointer'};
   transform: ${({ rotate }) => rotate ?? 'none'};
+`;
+
+const LeftSectionWrapper = styled.div<{ cursor?: string }>`
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  left: 0;
+  padding: 0px 8px 0px 12px;
+
+  background: inherit;
+  overflow: visible;
+  cursor: ${({ cursor }) => cursor ?? 'pointer'};
 `;
