@@ -2,7 +2,7 @@ import { type KeyboardEvent, useCallback, useEffect, useMemo, useRef, useState }
 
 import styled from '@emotion/styled';
 
-import { type BasicOptionItem, OptionList } from './OptionList';
+import { type BasicOptionItem, OptionList } from '../OptionList';
 import { SelectInput, type SelectInputBaseProps } from './SelectInput';
 import Icon from '../Icon';
 

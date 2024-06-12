@@ -4,7 +4,7 @@ import { HexAlphaColorPicker } from 'react-colorful';
 import styled from '@emotion/styled';
 
 import { TextInput } from '../Input';
-import useClickOutside from '../Input/hook';
+import useClickOutside from '../../utils/hooks/useClickOutside';
 import { B3 } from '../Text';
 import { color } from '../styles';
 
