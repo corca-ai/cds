@@ -3,7 +3,7 @@
   "author": "Corca <contact@corca.ai>",
   "description": "Design System for Corca, Inc.",
   "private": false,
-  "version": "0.0.15",
+  "version": "0.0.17",
   "type": "module",
   "packageManager": "pnpm@8.15.4",
   "main": "dist/index.js",
@@ -17,18 +17,17 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/server": "^11.11.0",
-    "@emotion/styled": "^11.11.0",
     "date-fns": "^3.3.1",
     "lodash": "^4.17.21",
-    "react": "18.2.0",
     "react-colorful": "^5.6.1",
     "react-datepicker": "^4.25.0",
-    "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1"
   },
   "devDependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
+    "react": "18.2.0",
+    "react-dom": "^18.2.0",
     "@storybook/addon-designs": "^7.0.9",
     "@storybook/addon-essentials": "^7.6.17",
     "@storybook/addon-interactions": "^7.6.17",

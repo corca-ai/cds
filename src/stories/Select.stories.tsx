@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import styled from '@emotion/styled';
 
-import { type BasicOptionItem, Select } from '../components';
+import { Select, type BasicOptionItem } from '../components';
 import Icon from '../components/Icon';
 import { MultiSelect } from '../components/Select/MultiSelect';
 
@@ -54,6 +54,7 @@ export function Default() {
   const [withoutIconValue, setWithoutIcon] = useState('');
   const [selectItems, setSelectItems] = useState(BASIC);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  const [selectItemWithIcon, setSelectItemWithIcon] = useState('');
 
   return (
     <>
@@ -128,9 +129,24 @@ export function Default() {
         width={150}
         selectedValue={null}
         onSelect={() => {}}
+        options={[{ label: '공백이없이라벨이긴예시', value: 'long' }, ...BASIC]}
+      />
+      <Select
+        leftIcon={<Icon.Dot size={13} />}
+        label="Left Icon 있는 input 창"
+        width={150}
+        selectedValue={selectItemWithIcon}
+        onSelect={value => setSelectItemWithIcon(value)}
+        options={[{ label: '공백이없이라벨이긴예시', value: 'long' }, ...BASIC]}
+      />
+      <MultiSelect
+        label="Multi Select"
+        width={700}
+        selectedValues={selectedItems}
+        onSelect={value => setSelectedItems(prev => [...prev, value])}
+        onDisSelect={value => setSelectedItems(prev => prev.filter(v => v !== value))}
         options={[{ label: '공백이없이라벨이긴예시', value: '' }, ...BASIC]}
       />
-
       <MultiSelect
         label="Multi Select"
         width={700}
