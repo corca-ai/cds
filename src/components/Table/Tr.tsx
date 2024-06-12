@@ -5,13 +5,13 @@ import { ReactNode } from 'react';
 
 export interface Props {
   children: ReactNode;
-  cursorPointer?: boolean;
+  readOnly?: boolean;
   onClick?: () => void;
 }
 
-export const Tr = ({ children, cursorPointer = false, onClick }: Props) => {
+export const Tr = ({ children, readOnly = false, onClick }: Props) => {
   return (
-    <TableRow onClick={onClick} cursorPointer={cursorPointer}>
+    <TableRow onClick={onClick} readOnly={readOnly}>
       {children}
     </TableRow>
   );
@@ -19,7 +19,7 @@ export const Tr = ({ children, cursorPointer = false, onClick }: Props) => {
 
 const TableRow = styled.tr<Props>`
   display: table-row;
-  cursor: ${props => (props.cursorPointer ? 'pointer' : 'default')};
+  cursor: ${props => (props.readOnly ? 'pointer' : 'default')};
   border-width: 1px 0 1px 0;
   border-style: inherit;
   border-color: inherit;
@@ -29,11 +29,15 @@ const TableRow = styled.tr<Props>`
   border-bottom: 1px solid ${color['grey-30']};
   border-color: inherit;
 
-  &:hover {
-    background-color: ${color['grey-20']};
-  }
+  ${props =>
+    props.readOnly &&
+    `
+    &:hover {
+      background-color: ${color['grey-20']};
+    }
 
-  &:active {
-    background-color: ${color['grey-30']};
-  }
+    &:active {
+      background-color: ${color['grey-30']};
+    }
+  `}
 `;

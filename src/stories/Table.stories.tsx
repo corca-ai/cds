@@ -189,7 +189,7 @@ export const Basic = () => {
       </Table.Thead>
       <Table.Tbody>
         {MOCK_DATA.map((d, index) => (
-          <Table.Tr cursorPointer key={index.toString() + 'Items'} onClick={() => {}}>
+          <Table.Tr readOnly key={index.toString() + 'Items'} onClick={() => {}}>
             <Table.Td.Img src={d.img} size={size} />
             <Table.Td.Text size={size}>{d.Label1}</Table.Td.Text>
             <Table.Td.Text size={size}>{d.Label1}</Table.Td.Text>
@@ -277,7 +277,7 @@ export const ThWithIcon = () => {
             </Table.Thead>
             <Table.Tbody>
               {MOCK_DATA.map((d, index) => (
-                <Table.Tr cursorPointer key={index.toString() + 'Items'} onClick={() => {}}>
+                <Table.Tr readOnly key={index.toString() + 'Items'} onClick={() => {}}>
                   <Table.Td.Img src={d.img} size={size} />
                   <Table.Td.Text size={size}>{d.Label1}</Table.Td.Text>
                   <Table.Td.Text size={size}>{d.Label1}</Table.Td.Text>
@@ -375,7 +375,7 @@ export function Size() {
             </Table.Thead>
             <Table.Tbody>
               {MOCK_DATA.map((d, index) => (
-                <Table.Tr cursorPointer key={index.toString() + 'Items'} onClick={() => {}}>
+                <Table.Tr readOnly key={index.toString() + 'Items'} onClick={() => {}}>
                   <Table.Td.Img src={d.img} size={td} />
                   <Table.Td.Text size={td}>{d.Label1}</Table.Td.Text>
                   <Table.Td.Text size={td}>{d.Label1}</Table.Td.Text>
@@ -444,7 +444,7 @@ export function WithEllipsis() {
       <Table.Tbody>
         {MOCK_WITH_ELLIPSIS.map((d, index) => (
           <Table.Tr
-            cursorPointer
+            readOnly
             key={index.toString() + 'Items'}
             onClick={() => {
               alert(`clicked - ${index} st row`);
