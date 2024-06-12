@@ -245,9 +245,9 @@ function MultipleOptionItems<T>({
               )}
               <B3 c={item.disabled ? 'grey-40' : 'grey-80'}>{item.label}</B3>
               {alreadySelected && (
-                <MinusIconWrapper className={MINUS_ICON_CLASS_NAME}>
+                <div className={MINUS_ICON_CLASS_NAME}>
                   <Icon.Minus size={20} />
-                </MinusIconWrapper>
+                </div>
               )}
             </ItemButton>
           </ItemList>
@@ -310,4 +310,8 @@ export function MultipleOptionList<T = string>({
   );
 }
 
-const MinusIconWrapper = styled.div``;
+const ItemContentsWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
