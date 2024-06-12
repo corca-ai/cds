@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import styled from '@emotion/styled';
 
-import { type BasicOptionItem, Select } from '../components';
+import { Select, type BasicOptionItem } from '../components';
 import Icon from '../components/Icon';
 
 export default {
@@ -44,6 +44,7 @@ export function Default() {
   const [searchableValue, setSearchableValue] = useState('');
   const [withoutIconValue, setWithoutIcon] = useState('');
   const [selectItems, setSelectItems] = useState(BASIC);
+  const [selectItemWithIcon, setSelectItemWithIcon] = useState('');
 
   return (
     <>
@@ -118,7 +119,15 @@ export function Default() {
         width={150}
         selectedValue={null}
         onSelect={() => {}}
-        options={[{ label: '공백이없이라벨이긴예시', value: '' }, ...BASIC]}
+        options={[{ label: '공백이없이라벨이긴예시', value: 'long' }, ...BASIC]}
+      />
+      <Select
+        leftIcon={<Icon.Dot size={13} />}
+        label="Left Icon 있는 input 창"
+        width={150}
+        selectedValue={selectItemWithIcon}
+        onSelect={value => setSelectItemWithIcon(value)}
+        options={[{ label: '공백이없이라벨이긴예시', value: 'long' }, ...BASIC]}
       />
     </>
   );
