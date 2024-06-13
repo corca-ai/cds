@@ -55,13 +55,13 @@ export function MultiSelectInput<T extends string>({
       {label && <SelectInputLabel label={label} required={required} tooltip={tooltip} />}
       {description && <SelectInputDescription description={description} />}
       <SelectInputChildrenWrapper>
-        <BaseInput {...props} cursor={'pointer'} isRightSection={true}>
+        <MainInputSection {...props} cursor={'pointer'} isRightSection={true}>
           {optionItems.length > 0 && (
             <MultiSelectInputChildContents<T>
               {...{ width, onDeleteSingle, optionItems, onDeleteAll, itemMaxWidth }}
             />
           )}
-        </BaseInput>
+        </MainInputSection>
         {showIcon && (
           <SelectInputRightIconSection dropdownOpened={dropdownOpened} searchable={false} />
         )}
@@ -86,10 +86,10 @@ export function SearchInput({ width, tooltip, showIcon = true, ...props }: Searc
         </LeftSectionWrapper>
       )}
       <BaseSearchInput
-        {...props}
         cursor={'text'}
         isRightSection={false}
         isLeftSection={true}
+        {...props}
         readOnly={false}
       />
     </SearchInputChildWrapper>
@@ -189,7 +189,7 @@ const SelectInputWrapper = styled.div<{ width?: number; cursor?: string }>`
   cursor: ${({ cursor }) => cursor ?? 'auto'};
 `;
 
-const BaseInput = styled.div<{
+const MainInputSection = styled.div<{
   error?: string;
   isRightSection?: boolean;
   isLeftSection?: boolean;

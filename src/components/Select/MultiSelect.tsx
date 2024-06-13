@@ -26,6 +26,7 @@ interface MultiSelectProps<T extends string>
   width?: number;
 }
 
+/** min-width is 320px */
 export function MultiSelect<T extends string>({
   search = {
     searchable: false,
@@ -100,16 +101,8 @@ export function MultiSelect<T extends string>({
       } else {
         onHandleSelect(item as BasicOptionItem<T>);
       }
-      clearDropdownAndSearch();
     },
-    [
-      onCreate,
-      searchInputValue,
-      onHandleSelect,
-      selectedValues,
-      onHandleDelete,
-      clearDropdownAndSearch,
-    ],
+    [onCreate, searchInputValue, onHandleSelect, selectedValues, onHandleDelete],
   );
 
   const handleKeyUpEvent = useCallback(
