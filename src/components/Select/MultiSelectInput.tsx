@@ -30,7 +30,7 @@ export function MultiSelectInput<T extends string>({
   description,
   required = false,
   error,
-  width,
+  width = 310,
   tooltip,
   dropdownOpened,
   onDeleteSingle,
@@ -39,7 +39,7 @@ export function MultiSelectInput<T extends string>({
   showIcon = true,
   ...props
 }: SelectInputBaseProps<T>) {
-  const itemMaxWidth = useMemo(() => getItemMaxWidth(optionItems.length), [optionItems]);
+  const itemMaxWidth = useMemo(() => getItemButtonMaxWidth(optionItems.length), [optionItems]);
 
   return (
     <SelectInputWrapper width={width} onClick={onClick}>
@@ -70,27 +70,28 @@ export function MultiSelectInput<T extends string>({
         <BaseInput {...props} cursor={'pointer'} isRightSection={true}>
           {optionItems.length > 0 && (
             <>
-              {optionItems.map(item => {
-                return (
-                  <SelectedItemButton
-                    key={item.value + item?.label}
-                    maxWidth={itemMaxWidth}
-                    onDelete={() => onDeleteSingle(item.value)}
-                  >
-                    {item.label}
-                  </SelectedItemButton>
-                );
-              })}
+              <ItemsWrapper maxWidth={width - 100}>
+                {optionItems.map(item => {
+                  return (
+                    <SelectedItemButton
+                      key={item.value + item?.label}
+                      maxWidth={itemMaxWidth}
+                      onDelete={() => onDeleteSingle(item.value)}
+                    >
+                      {item.label}
+                    </SelectedItemButton>
+                  );
+                })}
+              </ItemsWrapper>
               {optionItems.length > 1 && (
-                <>
-                  <B5 color={color['grey-10']}>{optionItems.length}</B5>
-                  <button
-                    onClickCapture={onDeleteAll}
-                    style={{ cursor: 'pointer', backgroundColor: 'white' }}
-                  >
+                <PluralDataWrapper>
+                  <CountItemWrapper>
+                    <B5 c="grey-10">{optionItems.length}</B5>
+                  </CountItemWrapper>
+                  <CancelButtonWrapper onClickCapture={onDeleteAll}>
                     <Icon.CancelSmall />
-                  </button>
-                </>
+                  </CancelButtonWrapper>
+                </PluralDataWrapper>
               )}
             </>
           )}
@@ -152,14 +153,26 @@ function SelectedItemButton({
   return (
     <SelectedItemWrapper width={maxWidth}>
       <SelectedItemTextWrapper width={maxWidth - 5}>
-        <B5 color={color['grey-10']}>{children}</B5>
+        <B5 color={color['grey-80']}>{children}</B5>
       </SelectedItemTextWrapper>
-      <button onClickCapture={onDelete} style={{ cursor: 'pointer' }}>
+      <CancelButtonWrapper onClickCapture={onDelete}>
         <Icon.CancelSmall size={13} />
-      </button>
+      </CancelButtonWrapper>
     </SelectedItemWrapper>
   );
 }
+
+const CancelButtonWrapper = styled.button`
+  height: 100%;
+
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 const SelectInputWrapper = styled.div<{ width?: number; cursor?: string }>`
   width: ${({ width }) => `${width}px` ?? '100%'};
@@ -313,7 +326,7 @@ const IconSectionWrapper = styled.button<{
   position: absolute;
   top: 0%;
   padding: 6px 8px;
-  background: inherit;
+  background: transparent;
   border: none;
   box-shadow: none;
   border-radius: 0;
@@ -348,7 +361,7 @@ const SelectedItemWrapper = styled.button<{ width: number }>`
   padding: 3px 2px 3px 4px;
 
   text-align: center;
-  background: ${color['grey-20']};
+  background-color: ${color['grey-20']};
   border-radius: 4px;
 
   display: flex;
@@ -357,7 +370,7 @@ const SelectedItemWrapper = styled.button<{ width: number }>`
   gap: 2px;
 `;
 
-const SelectedItemTextWrapper = styled.button<{ width?: CSSProperties['width'] }>`
+const SelectedItemTextWrapper = styled.div<{ width?: CSSProperties['width'] }>`
   width: ${({ width }) => width};
   height: 100%;
   min-width: 20px;
@@ -368,6 +381,44 @@ const SelectedItemTextWrapper = styled.button<{ width?: CSSProperties['width'] }
   white-space: nowrap;
 `;
 
-const getItemMaxWidth = (itemLen: number) => {
+const getItemButtonMaxWidth = (itemLen: number) => {
   return itemLen <= 1 ? 266 : 214;
 };
+
+const ItemsWrapper = styled.div<{ maxWidth: number }>`
+  width: ${({ maxWidth }) => {
+    return maxWidth < 214 ? 214 : maxWidth;
+  }}px;
+
+  overflow: hidden;
+  word-break: break-all;
+  white-space: nowrap;
+
+  display: flex;
+  gap: 3px;
+  flex-wrap: nowrap;
+`;
+
+const CountItemWrapper = styled.div`
+  width: 20px;
+  height: 20px;
+  display: flex;
+  padding: 2px;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 4px;
+  background-color: ${color['grey-60']};
+  color: ${color['grey-10']};
+`;
+
+const PluralDataWrapper = styled.div`
+  width: fit-content;
+  height: 20px;
+
+  position: absolute;
+  right: 30px;
+
+  display: flex;
+`;
