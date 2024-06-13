@@ -3,14 +3,12 @@ import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent }
 import styled from '@emotion/styled';
 
 import Icon from '../Icon';
-import { color } from '../styles';
 import { MultiSelectInput, SearchInput } from './MultiSelectInput';
 import { MultipleOptionList, type BasicOptionItem } from './OptionList';
 import { type SelectInputBaseProps } from './SelectInput';
 
 import { SearchInputProps } from './MultiSelectInput';
-
-const CREATE_VALUE = 'CREATE_NEW_VALUE';
+import { CREATE_VALUE } from './Select';
 
 interface MultiSelectSearchType extends SearchInputProps {
   searchable?: boolean;
@@ -39,7 +37,6 @@ export function MultiSelect<T extends string>({
   onDeleteSingle,
   onDeleteAll,
   width,
-
   ...input
 }: MultiSelectProps<T>) {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -169,6 +166,7 @@ export function MultiSelect<T extends string>({
   return (
     <SelectContainer width={width} ref={wrapperRef}>
       <MultiSelectInput<T>
+        {...input}
         optionItems={selectedOptionItem}
         onDeleteSingle={val => onHandleDelete(true, val)}
         onDeleteAll={() => onHandleDelete(false)}
@@ -180,7 +178,6 @@ export function MultiSelect<T extends string>({
           setShowDropdown(!showDropdown);
         }}
         readOnly={!search.searchable}
-        {...input}
       />
       {showDropdown && (
         <OptionListWrapper ref={dropdownRef}>

@@ -3,17 +3,27 @@ import { CSSProperties, InputHTMLAttributes, useMemo } from 'react';
 import styled from '@emotion/styled';
 
 import Icon from '../Icon';
-import { B3, B5, B7 } from '../Text';
-import { Tooltip, TooltipProps } from '../Tooltip';
+import { B5 } from '../Text';
+import { TooltipProps } from '../Tooltip';
 import { color, typography } from '../styles';
 import { BasicOptionItem } from './OptionList';
-import { SelectInputLabel } from './SelectInput';
+import {
+  SelectInputDescription,
+  SelectInputErrorSection,
+  SelectInputLabel,
+  SelectInputRightIconSection,
+} from './SelectInput';
 
+const getItemButtonMaxWidth = (itemLen: number) => {
+  return itemLen <= 1 ? 266 : 214;
+};
 type SelectInputTooltipProps = Omit<TooltipProps, 'children'>;
 
 export interface SelectInputBaseProps<T extends string>
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'width' | 'value'> {
   optionItems: BasicOptionItem<T>[];
+  onDeleteSingle: (value: T) => void;
+  onDeleteAll: () => void;
   label?: string;
   description?: string;
   error?: string;
@@ -21,8 +31,6 @@ export interface SelectInputBaseProps<T extends string>
   tooltip?: SelectInputTooltipProps;
   dropdownOpened?: boolean;
   showIcon?: boolean;
-  onDeleteSingle: (value: T) => void;
-  onDeleteAll: () => void;
 }
 
 export function MultiSelectInput<T extends string>({
@@ -31,7 +39,7 @@ export function MultiSelectInput<T extends string>({
   description,
   required = false,
   error,
-  width = 310,
+  width,
   tooltip,
   dropdownOpened,
   onDeleteSingle,
@@ -45,57 +53,20 @@ export function MultiSelectInput<T extends string>({
   return (
     <SelectInputWrapper width={width} onClick={onClick}>
       {label && <SelectInputLabel label={label} required={required} tooltip={tooltip} />}
-      {description && (
-        <Description>
-          <B5 c="grey-60">{description}</B5>
-        </Description>
-      )}
+      {description && <SelectInputDescription description={description} />}
       <SelectInputChildrenWrapper>
         <BaseInput {...props} cursor={'pointer'} isRightSection={true}>
           {optionItems.length > 0 && (
-            <>
-              <ItemsWrapper maxWidth={width - 100}>
-                {optionItems.map(item => {
-                  return (
-                    <SelectedItemButton
-                      key={item.value + item?.label}
-                      maxWidth={itemMaxWidth}
-                      onDelete={() => onDeleteSingle(item.value)}
-                    >
-                      {item.label}
-                    </SelectedItemButton>
-                  );
-                })}
-              </ItemsWrapper>
-              {optionItems.length > 1 && (
-                <PluralDataWrapper>
-                  <CountItemWrapper>
-                    <B5 c="grey-10">{optionItems.length}</B5>
-                  </CountItemWrapper>
-                  <CancelButtonWrapper onClickCapture={onDeleteAll}>
-                    <Icon.CancelSmall />
-                  </CancelButtonWrapper>
-                </PluralDataWrapper>
-              )}
-            </>
+            <MultiSelectInputChildContents<T>
+              {...{ width, onDeleteSingle, optionItems, onDeleteAll, itemMaxWidth }}
+            />
           )}
         </BaseInput>
         {showIcon && (
-          <RightSectionWrapper
-            cursor={'pointer'}
-            rotate={dropdownOpened ? 'rotate(180deg)' : 'none'}
-            aria-hidden="true"
-          >
-            <Icon.ChevronDownSmall />
-          </RightSectionWrapper>
+          <SelectInputRightIconSection dropdownOpened={dropdownOpened} searchable={false} />
         )}
       </SelectInputChildrenWrapper>
-      {error && (
-        <ErrorContainer>
-          <Icon.AlertCircle color={color['error-30']} />
-          <B3 c="error-30">{error}</B3>
-        </ErrorContainer>
-      )}
+      {error && <SelectInputErrorSection error={error} />}
     </SelectInputWrapper>
   );
 }
@@ -146,6 +117,60 @@ function SelectedItemButton({
   );
 }
 
+function PluralItemInfoSection({
+  itemsCount,
+  onDeleteAll,
+}: {
+  itemsCount: number;
+  onDeleteAll: () => void;
+}) {
+  return (
+    <PluralDataWrapper>
+      <CountItemWrapper>
+        <B5 c="grey-10">{itemsCount}</B5>
+      </CountItemWrapper>
+      <CancelButtonWrapper onClickCapture={onDeleteAll}>
+        <Icon.CancelSmall />
+      </CancelButtonWrapper>
+    </PluralDataWrapper>
+  );
+}
+
+interface MultiSelectInputChildContentsProps<T extends string>
+  extends Pick<
+    SelectInputBaseProps<T>,
+    'width' | 'onDeleteSingle' | 'optionItems' | 'onDeleteAll'
+  > {
+  itemMaxWidth: number;
+}
+
+function MultiSelectInputChildContents<T extends string>({
+  width = 310,
+  onDeleteSingle,
+  optionItems,
+  onDeleteAll,
+  itemMaxWidth,
+}: MultiSelectInputChildContentsProps<T>) {
+  return (
+    <>
+      <ItemsWrapper maxWidth={width - 100}>
+        {optionItems.map(item => (
+          <SelectedItemButton
+            key={item.value + item?.label}
+            maxWidth={itemMaxWidth}
+            onDelete={() => onDeleteSingle(item.value)}
+          >
+            {item.label}
+          </SelectedItemButton>
+        ))}
+      </ItemsWrapper>
+      {optionItems.length > 1 && (
+        <PluralItemInfoSection itemsCount={optionItems.length} onDeleteAll={onDeleteAll} />
+      )}
+    </>
+  );
+}
+
 const CancelButtonWrapper = styled.button`
   height: 100%;
 
@@ -162,29 +187,6 @@ const SelectInputWrapper = styled.div<{ width?: number; cursor?: string }>`
   width: ${({ width }) => `${width}px` ?? '100%'};
   position: relative;
   cursor: ${({ cursor }) => cursor ?? 'auto'};
-`;
-
-const Star = styled.span`
-  color: #ff5362;
-`;
-
-const Description = styled.div`
-  display: flex;
-  margin-bottom: 8px;
-`;
-
-const LabelContainer = styled.div`
-  display: flex;
-  margin-bottom: 8px;
-  align-items: center;
-  gap: 4px;
-`;
-
-const ErrorContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 4px;
-  gap: 4px;
 `;
 
 const BaseInput = styled.div<{
@@ -292,12 +294,6 @@ const BaseSearchInput = styled.input<{
   `}
 `;
 
-const QuestionIconWrapper = styled.i`
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-`;
-
 const SelectInputChildrenWrapper = styled.div`
   position: relative;
   width: 100%;
@@ -323,10 +319,6 @@ const IconSectionWrapper = styled.button<{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`;
-
-const RightSectionWrapper = styled(IconSectionWrapper)`
-  right: 0;
 `;
 
 const LeftSectionWrapper = styled(IconSectionWrapper)`
@@ -364,10 +356,6 @@ const SelectedItemTextWrapper = styled.div<{ width?: CSSProperties['width'] }>`
   word-break: break-all;
   white-space: nowrap;
 `;
-
-const getItemButtonMaxWidth = (itemLen: number) => {
-  return itemLen <= 1 ? 266 : 214;
-};
 
 const ItemsWrapper = styled.div<{ maxWidth: number }>`
   width: ${({ maxWidth }) => {

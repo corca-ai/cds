@@ -1,10 +1,10 @@
-import { type KeyboardEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react';
 
 import styled from '@emotion/styled';
 
-import { type BasicOptionItem, OptionList } from './OptionList';
-import { SelectInput, type SelectInputBaseProps } from './SelectInput';
 import Icon from '../Icon';
+import { OptionList, type BasicOptionItem } from './OptionList';
+import { SelectInput, type SelectInputBaseProps } from './SelectInput';
 
 interface SelectProps<T extends string>
   extends Omit<SelectInputBaseProps, 'value' | 'onSelect' | 'width'> {
@@ -29,7 +29,7 @@ const OptionListWrapper = styled.div`
   z-index: 100;
 `;
 
-const CREATE_VALUE = 'CREATE_NEW_VALUE';
+export const CREATE_VALUE = 'CREATE_NEW_VALUE';
 
 export function Select<T extends string>({
   searchable,
