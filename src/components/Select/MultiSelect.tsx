@@ -14,7 +14,7 @@ interface MultiSelectSearchType extends SearchInputProps {
   searchable?: boolean;
 }
 
-interface MultiSelectProps<T extends string>
+export interface MultiSelectProps<T extends string>
   extends Omit<SelectInputBaseProps, 'value' | 'onSelect' | 'width' | 'searchable'> {
   search?: MultiSelectSearchType;
   selectedValues: T[];

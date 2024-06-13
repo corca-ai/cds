@@ -253,19 +253,21 @@ const BaseSearchInput = styled.input<{
   cursor?: string;
 }>`
   width: 100%;
+  height: 34px;
   padding: ${({ isRightSection, isLeftSection }) => {
     const paddingLeft = isLeftSection ? 30 : 12;
     return isRightSection ? `6px 36px 6px ${paddingLeft}px` : `6px ${paddingLeft}px`;
   }};
+
   outline: none;
   border: 1px solid ${color['grey-50']};
+  background: ${color['white']};
+  border-radius: 8px;
+
   font-style: normal;
   font-weight: 500;
   font-size: ${typography.size.xs}px;
   color: ${color['grey-80']};
-  background: ${color['white']};
-  border-radius: 8px;
-  height: 34px;
   cursor: ${({ cursor }) => cursor ?? 'auto'};
 
   &:disabled {
@@ -274,12 +276,10 @@ const BaseSearchInput = styled.input<{
     color: ${color['grey-50']};
     cursor: not-allowed;
   }
-
   &::placeholder {
     color: ${color['grey-50']};
     font-size: ${typography.size.xs}px;
   }
-
   ${({ error }) =>
     error
       ? `
@@ -303,15 +303,18 @@ const IconSectionWrapper = styled.button<{
   cursor?: string;
   rotate: string;
 }>`
+  height: 100%;
+  padding: 6px 8px;
+  overflow: visible;
+
   position: absolute;
   top: 0%;
-  padding: 6px 8px;
+
   background: transparent;
   border: none;
   box-shadow: none;
   border-radius: 0;
-  overflow: visible;
-  height: 100%;
+
   cursor: ${({ cursor }) => cursor ?? 'pointer'};
   transform: ${({ rotate }) => rotate ?? 'none'};
 
@@ -330,10 +333,10 @@ const SearchInputChildWrapper = styled(SelectInputChildrenWrapper)`
 `;
 
 const SelectedItemWrapper = styled.button<{ width: number }>`
-  min-width: 40px;
-  height: 21px;
   width: fit-content;
+  min-width: 40px;
   max-width: ${({ width }) => width}px;
+  height: 21px;
   padding: 3px 2px 3px 4px;
 
   text-align: center;
@@ -374,9 +377,9 @@ const ItemsWrapper = styled.div<{ maxWidth: number }>`
 const CountItemWrapper = styled.div`
   width: 20px;
   height: 20px;
-  display: flex;
   padding: 2px;
 
+  display: flex;
   align-items: center;
   justify-content: center;
 

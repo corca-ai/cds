@@ -6,7 +6,7 @@ import Icon from '../Icon';
 import { OptionList, type BasicOptionItem } from './OptionList';
 import { SelectInput, type SelectInputBaseProps } from './SelectInput';
 
-interface SelectProps<T extends string>
+export interface SelectProps<T extends string>
   extends Omit<SelectInputBaseProps, 'value' | 'onSelect' | 'width'> {
   searchable?: boolean;
   onCreate?: (value: string | null) => void;
