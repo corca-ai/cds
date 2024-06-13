@@ -10,6 +10,8 @@ import { type SelectInputBaseProps } from './SelectInput';
 import { SearchInputProps } from './MultiSelectInput';
 import { CREATE_VALUE } from './Select';
 
+const MULTI_SELECT_MIN_WIDTH = 310;
+
 interface MultiSelectSearchType extends SearchInputProps {
   searchable?: boolean;
 }
@@ -26,7 +28,7 @@ export interface MultiSelectProps<T extends string>
   width?: number;
 }
 
-/** min-width is 320px */
+/** min-width is 310px */
 export function MultiSelect<T extends string>({
   search = {
     searchable: false,
@@ -200,14 +202,16 @@ export function MultiSelect<T extends string>({
 }
 
 const SelectContainer = styled.div<{ width?: number }>`
-  position: relative;
   width: ${({ width }) => `${width}px` ?? '100%'};
-  min-width: 310px;
+  min-width: ${MULTI_SELECT_MIN_WIDTH}px;
+
+  position: relative;
 `;
 
 const OptionListWrapper = styled.div`
-  position: absolute;
   width: 100%;
   margin-top: 6px;
+
+  position: absolute;
   z-index: 100;
 `;
