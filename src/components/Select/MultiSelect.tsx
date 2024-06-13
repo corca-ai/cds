@@ -201,6 +201,7 @@ export function MultiSelect<T extends string>({
   );
 }
 
+//TODO: make input width 100% available as default
 const SelectContainer = styled.div<{ width?: number }>`
   width: ${({ width }) => `${width}px` ?? '100%'};
   min-width: ${MULTI_SELECT_MIN_WIDTH}px;
