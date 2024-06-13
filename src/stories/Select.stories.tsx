@@ -140,20 +140,24 @@ export function Default() {
         options={[{ label: '공백이없이라벨이긴예시', value: 'long' }, ...BASIC]}
       />
       <MultiSelect
-        label="Multi Select"
-        width={700}
+        label="Searchable Multi Select"
+        description="Searchable and not searchable is available."
         selectedValues={selectedItems}
         onSelect={value => setSelectedItems(prev => [...prev, value])}
-        onDisSelect={value => setSelectedItems(prev => prev.filter(v => v !== value))}
-        options={[{ label: '공백이없이라벨이긴예시', value: '' }, ...BASIC]}
-      />
-      <MultiSelect
-        label="Multi Select"
-        width={700}
-        selectedValues={selectedItems}
-        onSelect={value => setSelectedItems(prev => [...prev, value])}
-        onDisSelect={value => setSelectedItems(prev => prev.filter(v => v !== value))}
-        options={[{ label: '공백이없이라벨이긴예시', value: '' }, ...BASIC]}
+        onDeleteSingle={value => setSelectedItems(prev => prev.filter(v => v !== value))}
+        onDeleteAll={() => setSelectedItems([])}
+        options={[
+          {
+            label:
+              '공백이없이라벨이긴예시djfldjsljflkdsjklfjkldsjfkldsjklfjdskljflkjdslfjldsjflkdjslfjlksdjlkf',
+            value: 'long',
+          },
+          ...BASIC,
+        ]}
+        search={{
+          searchable: true,
+          placeholder: '캠페인 이름을 검색해주세요 (2자 이상)',
+        }}
       />
     </>
   );
@@ -162,7 +166,7 @@ export function Default() {
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  min-height: 800px;
+  min-height: 900px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

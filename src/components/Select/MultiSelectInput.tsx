@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from 'react';
+import { CSSProperties, InputHTMLAttributes, useMemo } from 'react';
 
 import styled from '@emotion/styled';
 
@@ -6,26 +6,26 @@ import Icon from '../Icon';
 import { B3, B5, B7 } from '../Text';
 import { Tooltip, TooltipProps } from '../Tooltip';
 import { color, typography } from '../styles';
+import { BasicOptionItem } from './OptionList';
 
 type SelectInputTooltipProps = Omit<TooltipProps, 'children'>;
 
-/** RightIcon prop can only be used with searchable true.
- * Without searchable, the right icon is always ChevronDownSmall as CDS design. */
-export interface SelectInputBaseProps
+export interface SelectInputBaseProps<T extends string>
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'width' | 'value'> {
-  values: string[];
+  optionItems: BasicOptionItem<T>[];
   label?: string;
   description?: string;
   error?: string;
   width?: number;
   tooltip?: SelectInputTooltipProps;
   dropdownOpened?: boolean;
-  searchable?: boolean;
   showIcon?: boolean;
+  onDeleteSingle: (value: T) => void;
+  onDeleteAll: () => void;
 }
 
-export function MultiSelectInput({
-  values,
+export function MultiSelectInput<T extends string>({
+  optionItems,
   label,
   description,
   required = false,
@@ -33,11 +33,14 @@ export function MultiSelectInput({
   width,
   tooltip,
   dropdownOpened,
-  searchable,
+  onDeleteSingle,
+  onDeleteAll,
   onClick,
   showIcon = true,
   ...props
-}: SelectInputBaseProps) {
+}: SelectInputBaseProps<T>) {
+  const itemMaxWidth = useMemo(() => getItemMaxWidth(optionItems.length), [optionItems]);
+
   return (
     <SelectInputWrapper width={width} onClick={onClick}>
       {label && (
@@ -64,19 +67,41 @@ export function MultiSelectInput({
         </Description>
       )}
       <SelectInputChildrenWrapper>
-        <BaseSelectInput
-          {...props}
-          cursor={!searchable ? 'pointer' : 'auto'}
-          isRightSection={true}
-          readOnly={!searchable}
-        />
+        <BaseInput {...props} cursor={'pointer'} isRightSection={true}>
+          {optionItems.length > 0 && (
+            <>
+              {optionItems.map(item => {
+                return (
+                  <SelectedItemButton
+                    key={item.value + item?.label}
+                    maxWidth={itemMaxWidth}
+                    onDelete={() => onDeleteSingle(item.value)}
+                  >
+                    {item.label}
+                  </SelectedItemButton>
+                );
+              })}
+              {optionItems.length > 1 && (
+                <>
+                  <B5 color={color['grey-10']}>{optionItems.length}</B5>
+                  <button
+                    onClickCapture={onDeleteAll}
+                    style={{ cursor: 'pointer', backgroundColor: 'white' }}
+                  >
+                    <Icon.CancelSmall />
+                  </button>
+                </>
+              )}
+            </>
+          )}
+        </BaseInput>
         {showIcon && (
           <RightSectionWrapper
-            cursor={!searchable ? 'text' : 'auto'}
-            rotate={dropdownOpened && !searchable ? 'rotate(180deg)' : 'none'}
+            cursor={'pointer'}
+            rotate={dropdownOpened ? 'rotate(180deg)' : 'none'}
             aria-hidden="true"
           >
-            {searchable ? <Icon.Search /> : <Icon.ChevronDownSmall />}
+            <Icon.ChevronDownSmall />
           </RightSectionWrapper>
         )}
       </SelectInputChildrenWrapper>
@@ -87,6 +112,52 @@ export function MultiSelectInput({
         </ErrorContainer>
       )}
     </SelectInputWrapper>
+  );
+}
+
+export interface SearchInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'width'> {
+  width?: number;
+  tooltip?: SelectInputTooltipProps;
+  showIcon?: boolean;
+}
+
+export function SearchInput({ width, tooltip, showIcon = true, ...props }: SearchInputProps) {
+  return (
+    <SearchInputChildWrapper>
+      {showIcon && (
+        <LeftSectionWrapper cursor={'text'} rotate={'none'} aria-hidden="true">
+          <Icon.Search color={color['grey-50']} />
+        </LeftSectionWrapper>
+      )}
+      <BaseSearchInput
+        {...props}
+        cursor={'text'}
+        isRightSection={false}
+        isLeftSection={true}
+        readOnly={false}
+      />
+    </SearchInputChildWrapper>
+  );
+}
+
+function SelectedItemButton({
+  onDelete,
+  children,
+  maxWidth,
+}: {
+  onDelete: () => void;
+  children: React.ReactNode;
+  maxWidth: number;
+}) {
+  return (
+    <SelectedItemWrapper width={maxWidth}>
+      <SelectedItemTextWrapper width={maxWidth - 5}>
+        <B5 color={color['grey-10']}>{children}</B5>
+      </SelectedItemTextWrapper>
+      <button onClickCapture={onDelete} style={{ cursor: 'pointer' }}>
+        <Icon.CancelSmall size={13} />
+      </button>
+    </SelectedItemWrapper>
   );
 }
 
@@ -119,13 +190,74 @@ const ErrorContainer = styled.div`
   gap: 4px;
 `;
 
-const BaseSelectInput = styled.input<{
+const BaseInput = styled.div<{
   error?: string;
   isRightSection?: boolean;
+  isLeftSection?: boolean;
   cursor?: string;
 }>`
   width: 100%;
-  padding: ${({ isRightSection }) => (isRightSection ? '6px 36px 6px 12px' : '6px 12px')};
+  height: 34px;
+  padding: ${({ isRightSection, isLeftSection }) => {
+    const paddingLeft = isLeftSection ? 30 : 12;
+    return isRightSection ? `5px 36px 5px ${paddingLeft}px` : `6px ${paddingLeft}px`;
+  }};
+
+  font-style: normal;
+  font-weight: 500;
+  font-size: ${typography.size.xs}px;
+  text-align: center;
+
+  color: ${color['grey-80']};
+  background: ${color['white']};
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid ${color['grey-50']};
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 4px;
+
+  cursor: ${({ cursor }) => cursor ?? 'auto'};
+
+  &:disabled {
+    border: none;
+    background: ${color['grey-10']};
+    color: ${color['grey-50']};
+    cursor: not-allowed;
+  }
+
+  &::placeholder {
+    color: ${color['grey-50']};
+    font-size: ${typography.size.xs}px;
+  }
+
+  ${({ error }) =>
+    error
+      ? `
+    border: 1px solid ${color['error-30']};
+    background: ${color['error-10']};
+  `
+      : `
+    &:focus-visible,
+    &:focus {
+      border: 1px solid ${color['grey-80']};
+    }
+  `}
+`;
+
+const BaseSearchInput = styled.input<{
+  error?: string;
+  isRightSection?: boolean;
+  isLeftSection?: boolean;
+  cursor?: string;
+}>`
+  width: 100%;
+  padding: ${({ isRightSection, isLeftSection }) => {
+    const paddingLeft = isLeftSection ? 30 : 12;
+    return isRightSection ? `6px 36px 6px ${paddingLeft}px` : `6px ${paddingLeft}px`;
+  }};
   outline: none;
   border: 1px solid ${color['grey-50']};
   font-style: normal;
@@ -171,13 +303,16 @@ const QuestionIconWrapper = styled.i`
 
 const SelectInputChildrenWrapper = styled.div`
   position: relative;
+  width: 100%;
 `;
 
-const RightSectionWrapper = styled.button<{ cursor?: string; rotate: string }>`
+const IconSectionWrapper = styled.button<{
+  cursor?: string;
+  rotate: string;
+}>`
   position: absolute;
   top: 0%;
   padding: 6px 8px;
-  right: 0;
   background: inherit;
   border: none;
   box-shadow: none;
@@ -186,4 +321,53 @@ const RightSectionWrapper = styled.button<{ cursor?: string; rotate: string }>`
   height: 100%;
   cursor: ${({ cursor }) => cursor ?? 'pointer'};
   transform: ${({ rotate }) => rotate ?? 'none'};
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
+
+const RightSectionWrapper = styled(IconSectionWrapper)`
+  right: 0;
+`;
+
+const LeftSectionWrapper = styled(IconSectionWrapper)`
+  left: 0;
+`;
+
+const SearchInputChildWrapper = styled(SelectInputChildrenWrapper)`
+  margin-bottom: 5px;
+`;
+
+const SelectedItemWrapper = styled.button<{ width: number }>`
+  min-width: 40px;
+  height: 21px;
+  width: fit-content;
+  max-width: ${({ width }) => width}px;
+  padding: 3px 2px 3px 4px;
+
+  text-align: center;
+  background: ${color['grey-20']};
+  border-radius: 4px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px;
+`;
+
+const SelectedItemTextWrapper = styled.button<{ width?: CSSProperties['width'] }>`
+  width: ${({ width }) => width};
+  height: 100%;
+  min-width: 20px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  white-space: nowrap;
+`;
+
+const getItemMaxWidth = (itemLen: number) => {
+  return itemLen <= 1 ? 266 : 214;
+};

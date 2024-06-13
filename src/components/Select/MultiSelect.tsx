@@ -3,73 +3,92 @@ import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent }
 import styled from '@emotion/styled';
 
 import Icon from '../Icon';
-import { B5 } from '../Text';
 import { color } from '../styles';
-import { MultiSelectInput } from './MultiSelectInput';
-import { MultipleOptionList, OptionList, type BasicOptionItem } from './OptionList';
+import { MultiSelectInput, SearchInput } from './MultiSelectInput';
+import { MultipleOptionList, type BasicOptionItem } from './OptionList';
 import { type SelectInputBaseProps } from './SelectInput';
 
-interface MultiSelectProps<T extends string>
-  extends Omit<SelectInputBaseProps, 'value' | 'onSelect' | 'width'> {
-  searchable?: boolean;
-  onCreate?: (value: string | null) => void;
-  selectedValues: T[]; // TODO: delete null type
-  onSelect: (value: T) => void;
-  onDisSelect: (value: T) => void;
-  options: Array<BasicOptionItem<T>>;
-  width?: number;
-  inputWidth?: number;
-}
+import { SearchInputProps } from './MultiSelectInput';
 
 const CREATE_VALUE = 'CREATE_NEW_VALUE';
 
+interface MultiSelectSearchType extends SearchInputProps {
+  searchable?: boolean;
+}
+
+interface MultiSelectProps<T extends string>
+  extends Omit<SelectInputBaseProps, 'value' | 'onSelect' | 'width' | 'searchable'> {
+  search?: MultiSelectSearchType;
+  selectedValues: T[];
+  onCreate?: (value: string | null) => void;
+  onSelect: (value: T) => void;
+  onDeleteSingle: (value: T) => void;
+  onDeleteAll: () => void;
+  options: Array<BasicOptionItem<T>>;
+  width?: number;
+}
+
 export function MultiSelect<T extends string>({
-  searchable,
-  onCreate,
+  search = {
+    searchable: false,
+  },
   options,
   selectedValues = [],
+  onCreate,
   onSelect,
-  onDisSelect,
+  onDeleteSingle,
+  onDeleteAll,
   width,
-  inputWidth,
+
   ...input
 }: MultiSelectProps<T>) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef(null);
 
   const [showDropdown, setShowDropdown] = useState(false);
-  const [searchLabel, setSearchLabel] = useState<string | null>(null);
   const [focusedItemIdx, setFocusedItemIdx] = useState(-1);
+  const [searchInputValue, setSearchInputValue] = useState<string | null>(null);
+  const [selectedOptionItem, setSelectedOptionItem] = useState<BasicOptionItem<T>[]>([]);
 
-  const selectedLabels = useMemo(() => {
-    const selectedLabels: string[] = [];
-    options.forEach(option => {
-      if (!selectedValues?.includes(option.value)) {
-        return;
+  const onHandleSelect = useCallback(
+    ({ value, label }: BasicOptionItem<T>) => {
+      onSelect(value);
+      setSelectedOptionItem(prev => [...prev, { label, value }]);
+    },
+    [onSelect, setSelectedOptionItem],
+  );
+
+  const onHandleDelete = useCallback(
+    (isSingle: boolean, value?: T) => {
+      if (isSingle && value) {
+        onDeleteSingle(value);
+        setSelectedOptionItem(prev => prev.filter(item => item.value !== value));
+      } else {
+        onDeleteAll();
+        setSelectedOptionItem([]);
       }
-      selectedLabels.push(option?.label ?? '');
-    });
-    return selectedLabels;
-  }, [selectedValues]);
+    },
+    [onDeleteSingle, onDeleteAll, setSelectedOptionItem],
+  );
 
   const optionItems: BasicOptionItem[] = useMemo(() => {
-    if (searchable && searchLabel) {
+    if (search.searchable && searchInputValue) {
       const searchFilteredOptions = options.filter(option =>
-        option.label.toLocaleLowerCase().includes(searchLabel.toLocaleLowerCase()),
+        option.label.toLocaleLowerCase().includes(searchInputValue.toLocaleLowerCase()),
       );
       if (onCreate != null) {
         return [
           ...searchFilteredOptions,
-          { icon: Icon.Add, label: searchLabel, value: CREATE_VALUE },
+          { icon: Icon.Add, label: searchInputValue, value: CREATE_VALUE },
         ];
       }
       return searchFilteredOptions;
     }
     return options;
-  }, [searchable, options, searchLabel]);
+  }, [search.searchable, options, searchInputValue]);
 
   const clearDropdownAndSearch = useCallback(() => {
-    setSearchLabel(null);
+    setSearchInputValue('');
     setFocusedItemIdx(-1);
     setShowDropdown(false);
   }, []);
@@ -90,12 +109,12 @@ export function MultiSelect<T extends string>({
           if (item.value === CREATE_VALUE) {
             return;
           }
-          onSelect(item.value as T);
+          onHandleSelect({ value: item.value as T, label: item.label });
           clearDropdownAndSearch();
         }
       }
     },
-    [setFocusedItemIdx, onSelect, setShowDropdown, optionItems, focusedItemIdx],
+    [setFocusedItemIdx, onHandleSelect, setShowDropdown, optionItems, focusedItemIdx],
   );
 
   useEffect(() => {
@@ -111,7 +130,7 @@ export function MultiSelect<T extends string>({
   }, [wrapperRef]);
 
   useEffect(() => {
-    if (!showDropdown || !optionItems?.length || !searchable) {
+    if (!showDropdown || !optionItems?.length || !search.searchable) {
       return;
     }
 
@@ -123,24 +142,19 @@ export function MultiSelect<T extends string>({
     return () => {
       document.removeEventListener('keyup', handleKeyEvent);
     };
-  }, [dropdownRef, showDropdown, optionItems, searchable, focusedItemIdx]);
+  }, [dropdownRef, showDropdown, optionItems, search.searchable, focusedItemIdx]);
 
   return (
     <SelectContainer width={width} ref={wrapperRef}>
-      <MultiSelectInput
-        searchable={searchable}
-        width={inputWidth}
+      <MultiSelectInput<T>
+        optionItems={selectedOptionItem}
+        onDeleteSingle={val => onHandleDelete(true, val)}
+        onDeleteAll={() => onHandleDelete(false)}
+        width={width}
         dropdownOpened={showDropdown}
-        values={selectedLabels}
-        onChange={e => {
-          if (searchable) {
-            if (!showDropdown) setShowDropdown(true);
-            setSearchLabel(e.currentTarget.value);
-          }
-        }}
         onFocus={() => {
-          if (searchable) {
-            setSearchLabel('');
+          if (search.searchable) {
+            setSearchInputValue('');
           }
         }}
         onClick={() => {
@@ -149,10 +163,10 @@ export function MultiSelect<T extends string>({
           }
           setShowDropdown(!showDropdown);
         }}
-        readOnly={!searchable}
+        readOnly={!search.searchable}
         {...input}
       />
-      {showDropdown && !(optionItems.length === 0) && (
+      {showDropdown && (
         <OptionListWrapper ref={dropdownRef}>
           <MultipleOptionList
             focusedItemIdx={focusedItemIdx}
@@ -162,16 +176,26 @@ export function MultiSelect<T extends string>({
               items: optionItems,
             }}
             onChange={item => {
-              if (item === CREATE_VALUE) {
-                onCreate?.(searchLabel);
-                onSelect(searchLabel as T);
-              } else if (selectedValues.find(value => value === item)) {
-                onDisSelect(item as T);
+              if (item.value === CREATE_VALUE) {
+                onCreate?.(searchInputValue);
+                onHandleSelect({ value: searchInputValue as T, label: searchInputValue as T });
+              } else if (selectedValues.includes(item.value as T)) {
+                onHandleDelete(true, item.value as T);
               } else {
-                onSelect(item as T);
+                onHandleSelect(item as BasicOptionItem<T>);
               }
               clearDropdownAndSearch();
             }}
+            searchInput={
+              search.searchable ? (
+                <SearchInput
+                  {...search}
+                  type="text"
+                  value={searchInputValue ?? ''}
+                  onChange={e => setSearchInputValue(e.currentTarget.value)}
+                />
+              ) : null
+            }
           />
         </OptionListWrapper>
       )}
@@ -179,22 +203,10 @@ export function MultiSelect<T extends string>({
   );
 }
 
-// interface SelectedItemButtonProps {
-//   title: MultiSelectProps['selectedValues'];
-//   onClick: () => void;
-// }
-// function SelectedItemButton() {
-//   return (
-//     <SelectedItemWrapper>
-//       <B5></B5>
-//       <Icon.CancelSmall size={13} />
-//     </SelectedItemWrapper>
-//   );
-// }
-
 const SelectContainer = styled.div<{ width?: number }>`
   position: relative;
   width: ${({ width }) => `${width}px` ?? '100%'};
+  min-width: 310px;
 `;
 
 const OptionListWrapper = styled.div`
