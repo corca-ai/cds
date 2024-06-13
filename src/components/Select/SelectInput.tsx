@@ -39,24 +39,7 @@ export function SelectInput({
 }: SelectInputBaseProps) {
   return (
     <SelectInputWrapper width={width} onClick={onClick}>
-      {label && (
-        <LabelContainer>
-          <B7>
-            {label} {required && <Star> *</Star>}
-          </B7>
-          {tooltip && (
-            <Tooltip
-              content={tooltip.content}
-              direction={tooltip.direction}
-              withArrow={tooltip.withArrow}
-            >
-              <QuestionIconWrapper>
-                <Icon.QuestionCircle />
-              </QuestionIconWrapper>
-            </Tooltip>
-          )}
-        </LabelContainer>
-      )}
+      {label && <SelectInputLabel label={label} required={required} tooltip={tooltip} />}
       {description && (
         <Description>
           <B5 c="grey-60">{description}</B5>
@@ -90,6 +73,29 @@ export function SelectInput({
         </ErrorContainer>
       )}
     </SelectInputWrapper>
+  );
+}
+
+type SelectInputLabelProps = Pick<SelectInputBaseProps, 'label' | 'required' | 'tooltip'>;
+
+export function SelectInputLabel({ label, required, tooltip }: SelectInputLabelProps) {
+  return (
+    <LabelContainer>
+      <B7>
+        {label} {required && <Star> *</Star>}
+      </B7>
+      {tooltip && (
+        <Tooltip
+          content={tooltip.content}
+          direction={tooltip.direction}
+          withArrow={tooltip.withArrow}
+        >
+          <QuestionIconWrapper>
+            <Icon.QuestionCircle />
+          </QuestionIconWrapper>
+        </Tooltip>
+      )}
+    </LabelContainer>
   );
 }
 

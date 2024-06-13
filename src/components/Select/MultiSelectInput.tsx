@@ -7,6 +7,7 @@ import { B3, B5, B7 } from '../Text';
 import { Tooltip, TooltipProps } from '../Tooltip';
 import { color, typography } from '../styles';
 import { BasicOptionItem } from './OptionList';
+import { SelectInputLabel } from './SelectInput';
 
 type SelectInputTooltipProps = Omit<TooltipProps, 'children'>;
 
@@ -43,24 +44,7 @@ export function MultiSelectInput<T extends string>({
 
   return (
     <SelectInputWrapper width={width} onClick={onClick}>
-      {label && (
-        <LabelContainer>
-          <B7>
-            {label} {required && <Star> *</Star>}
-          </B7>
-          {tooltip && (
-            <Tooltip
-              content={tooltip.content}
-              direction={tooltip.direction}
-              withArrow={tooltip.withArrow}
-            >
-              <QuestionIconWrapper>
-                <Icon.QuestionCircle />
-              </QuestionIconWrapper>
-            </Tooltip>
-          )}
-        </LabelContainer>
-      )}
+      {label && <SelectInputLabel label={label} required={required} tooltip={tooltip} />}
       {description && (
         <Description>
           <B5 c="grey-60">{description}</B5>
