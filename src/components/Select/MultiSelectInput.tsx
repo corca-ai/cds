@@ -55,7 +55,7 @@ export function MultiSelectInput<T extends string>({
       {label && <SelectInputLabel label={label} required={required} tooltip={tooltip} />}
       {description && <SelectInputDescription description={description} />}
       <SelectInputChildrenWrapper>
-        <MainInputSection {...props} cursor={'pointer'} isRightSection={true}>
+        <MainInputSection {...props} isRightSection={true}>
           {optionItems.length > 0 && (
             <MultiSelectInputChildContents<T>
               {...{ width, onDeleteSingle, optionItems, onDeleteAll, itemMaxWidth }}
@@ -193,7 +193,6 @@ const MainInputSection = styled.div<{
   error?: string;
   isRightSection?: boolean;
   isLeftSection?: boolean;
-  cursor?: string;
 }>`
   width: 100%;
   height: 34px;
@@ -212,13 +211,12 @@ const MainInputSection = styled.div<{
   border-radius: 8px;
   outline: none;
   border: 1px solid ${color['grey-50']};
+  cursor: pointer;
 
   display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: 4px;
-
-  cursor: ${({ cursor }) => cursor ?? 'auto'};
 
   &:disabled {
     border: none;

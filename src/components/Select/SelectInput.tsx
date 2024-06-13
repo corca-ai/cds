@@ -95,7 +95,7 @@ export function SelectInputRightIconSection({
 }: SelectInputRightIconSectionProps) {
   return (
     <RightSectionWrapper
-      cursor={!searchable ? 'text' : 'auto'}
+      cursor={!searchable ? 'pointer' : 'text'}
       rotate={dropdownOpened && !searchable ? 'rotate(180deg)' : 'none'}
       aria-hidden="true"
     >
