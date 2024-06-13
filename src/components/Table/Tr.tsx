@@ -19,7 +19,7 @@ export const Tr = ({ children, readOnly = false, onClick }: Props) => {
 
 const TableRow = styled.tr<Props>`
   display: table-row;
-  cursor: ${props => (props.readOnly ? 'pointer' : 'default')};
+  cursor: ${props => (props.readOnly ? 'default' : 'pointer')};
   border-width: 1px 0 1px 0;
   border-style: inherit;
   border-color: inherit;
@@ -30,7 +30,7 @@ const TableRow = styled.tr<Props>`
   border-color: inherit;
 
   ${props =>
-    props.readOnly &&
+    props.readOnly ||
     `
     &:hover {
       background-color: ${color['grey-20']};
