@@ -50,6 +50,22 @@ export function MultiSelect<T extends string>({
   const [searchInputValue, setSearchInputValue] = useState<string | null>(null);
   const [selectedOptionItem, setSelectedOptionItem] = useState<BasicOptionItem<T>[]>([]);
 
+  const optionItems: BasicOptionItem[] = useMemo(() => {
+    if (search.searchable && searchInputValue) {
+      const searchFilteredOptions = options.filter(option =>
+        option.label.toLocaleLowerCase().includes(searchInputValue.toLocaleLowerCase()),
+      );
+      if (onCreate != null) {
+        return [
+          ...searchFilteredOptions,
+          { icon: Icon.Add, label: searchInputValue, value: CREATE_VALUE },
+        ];
+      }
+      return searchFilteredOptions;
+    }
+    return options;
+  }, [search.searchable, options, searchInputValue]);
+
   const onHandleSelect = useCallback(
     ({ value, label }: BasicOptionItem<T>) => {
       onSelect(value);
@@ -71,27 +87,33 @@ export function MultiSelect<T extends string>({
     [onDeleteSingle, onDeleteAll, setSelectedOptionItem],
   );
 
-  const optionItems: BasicOptionItem[] = useMemo(() => {
-    if (search.searchable && searchInputValue) {
-      const searchFilteredOptions = options.filter(option =>
-        option.label.toLocaleLowerCase().includes(searchInputValue.toLocaleLowerCase()),
-      );
-      if (onCreate != null) {
-        return [
-          ...searchFilteredOptions,
-          { icon: Icon.Add, label: searchInputValue, value: CREATE_VALUE },
-        ];
-      }
-      return searchFilteredOptions;
-    }
-    return options;
-  }, [search.searchable, options, searchInputValue]);
-
   const clearDropdownAndSearch = useCallback(() => {
     setSearchInputValue('');
     setFocusedItemIdx(-1);
     setShowDropdown(false);
   }, []);
+
+  const onOptionListChange = useCallback(
+    (item: BasicOptionItem<T>) => {
+      if (item.value === CREATE_VALUE) {
+        onCreate?.(searchInputValue);
+        onHandleSelect({ value: searchInputValue as T, label: searchInputValue as T });
+      } else if (selectedValues.includes(item.value as T)) {
+        onHandleDelete(true, item.value as T);
+      } else {
+        onHandleSelect(item as BasicOptionItem<T>);
+      }
+      clearDropdownAndSearch();
+    },
+    [
+      onCreate,
+      searchInputValue,
+      onHandleSelect,
+      selectedValues,
+      onHandleDelete,
+      clearDropdownAndSearch,
+    ],
+  );
 
   const handleKeyUpEvent = useCallback(
     (event: KeyboardEvent<HTMLInputElement>) => {
@@ -152,15 +174,9 @@ export function MultiSelect<T extends string>({
         onDeleteAll={() => onHandleDelete(false)}
         width={width}
         dropdownOpened={showDropdown}
-        onFocus={() => {
-          if (search.searchable) {
-            setSearchInputValue('');
-          }
-        }}
+        onFocus={() => search.searchable && setSearchInputValue('')}
         onClick={() => {
-          if (showDropdown) {
-            setFocusedItemIdx(-1);
-          }
+          showDropdown && setFocusedItemIdx(-1);
           setShowDropdown(!showDropdown);
         }}
         readOnly={!search.searchable}
@@ -168,33 +184,23 @@ export function MultiSelect<T extends string>({
       />
       {showDropdown && (
         <OptionListWrapper ref={dropdownRef}>
-          <MultipleOptionList
+          <MultipleOptionList<T>
             focusedItemIdx={focusedItemIdx}
             values={selectedValues}
             option={{
               type: 'basic',
-              items: optionItems,
+              items: optionItems as BasicOptionItem<T>[],
             }}
-            onChange={item => {
-              if (item.value === CREATE_VALUE) {
-                onCreate?.(searchInputValue);
-                onHandleSelect({ value: searchInputValue as T, label: searchInputValue as T });
-              } else if (selectedValues.includes(item.value as T)) {
-                onHandleDelete(true, item.value as T);
-              } else {
-                onHandleSelect(item as BasicOptionItem<T>);
-              }
-              clearDropdownAndSearch();
-            }}
+            onChange={onOptionListChange}
             searchInput={
-              search.searchable ? (
+              search.searchable && (
                 <SearchInput
                   {...search}
                   type="text"
                   value={searchInputValue ?? ''}
                   onChange={e => setSearchInputValue(e.currentTarget.value)}
                 />
-              ) : null
+              )
             }
           />
         </OptionListWrapper>
@@ -214,14 +220,4 @@ const OptionListWrapper = styled.div`
   width: 100%;
   margin-top: 6px;
   z-index: 100;
-`;
-
-const SelectedItemWrapper = styled.div`
-  height: 20px;
-  padding: 3px 2px 3px 4px;
-  border-radius: 4px 0px 0px 0px;
-  background-color: ${color['grey-20']};
-
-  display: flex;
-  align-items: space-between;
 `;
