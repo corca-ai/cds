@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 
 import { Select, type BasicOptionItem } from '../components';
 import Icon from '../components/Icon';
+import { MultiSelect } from '../components/Select/MultiSelect';
 
 export default {
   title: 'Components/Select',
@@ -36,6 +37,14 @@ const BASIC: BasicOptionItem[] = [
   { label: 'Label3 with just disabled', value: '3', disabled: true },
   { label: 'Label4', value: '4' },
   { label: 'Label5', value: '5' },
+  { label: 'Label6', value: '6' },
+  { label: 'Label7', value: '7' },
+  { label: 'Label8', value: '8' },
+  { label: 'Label9', value: '9' },
+  { label: 'Label10', value: '10' },
+  { label: 'Label11', value: '11' },
+  { label: 'Label12', value: '12' },
+  { label: 'Label13', value: '13' },
 ];
 
 export function Default() {
@@ -44,6 +53,7 @@ export function Default() {
   const [searchableValue, setSearchableValue] = useState('');
   const [withoutIconValue, setWithoutIcon] = useState('');
   const [selectItems, setSelectItems] = useState(BASIC);
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [selectItemWithIcon, setSelectItemWithIcon] = useState('');
 
   return (
@@ -129,6 +139,26 @@ export function Default() {
         onSelect={value => setSelectItemWithIcon(value)}
         options={[{ label: '공백이없이라벨이긴예시', value: 'long' }, ...BASIC]}
       />
+      <MultiSelect
+        label="Searchable Multi Select"
+        description="Searchable and not searchable is available."
+        selectedValues={selectedItems}
+        onSelect={value => setSelectedItems(prev => [...prev, value])}
+        onDeleteSingle={value => setSelectedItems(prev => prev.filter(v => v !== value))}
+        onDeleteAll={() => setSelectedItems([])}
+        options={[
+          {
+            label:
+              '공백이없이라벨이긴예시djfldjsljflkdsjklfjkldsjfkldsjklfjdskljflkjdslfjldsjflkdjslfjlksdjlkf',
+            value: 'long',
+          },
+          ...BASIC,
+        ]}
+        search={{
+          searchable: true,
+          placeholder: '캠페인 이름을 검색해주세요 (2자 이상)',
+        }}
+      />
     </>
   );
 }
@@ -136,7 +166,7 @@ export function Default() {
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  min-height: 600px;
+  min-height: 900px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

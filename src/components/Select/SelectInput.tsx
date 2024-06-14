@@ -39,29 +39,8 @@ export function SelectInput({
 }: SelectInputBaseProps) {
   return (
     <SelectInputWrapper width={width} onClick={onClick}>
-      {label && (
-        <LabelContainer>
-          <B7>
-            {label} {required && <Star> *</Star>}
-          </B7>
-          {tooltip && (
-            <Tooltip
-              content={tooltip.content}
-              direction={tooltip.direction}
-              withArrow={tooltip.withArrow}
-            >
-              <QuestionIconWrapper>
-                <Icon.QuestionCircle />
-              </QuestionIconWrapper>
-            </Tooltip>
-          )}
-        </LabelContainer>
-      )}
-      {description && (
-        <Description>
-          <B5 c="grey-60">{description}</B5>
-        </Description>
-      )}
+      {label && <SelectInputLabel label={label} required={required} tooltip={tooltip} />}
+      {description && <SelectInputDescription description={description} />}
       <SelectInputChildrenWrapper>
         {!!leftIcon && (
           <LeftSectionWrapper cursor={!searchable ? 'text' : 'auto'}>{leftIcon}</LeftSectionWrapper>
@@ -74,22 +53,75 @@ export function SelectInput({
           readOnly={!searchable}
         />
         {showIcon && (
-          <RightSectionWrapper
-            cursor={!searchable ? 'text' : 'auto'}
-            rotate={dropdownOpened && !searchable ? 'rotate(180deg)' : 'none'}
-            aria-hidden="true"
-          >
-            {searchable ? <Icon.Search /> : <Icon.ChevronDownSmall />}
-          </RightSectionWrapper>
+          <SelectInputRightIconSection dropdownOpened={dropdownOpened} searchable={searchable} />
         )}
       </SelectInputChildrenWrapper>
-      {error && (
-        <ErrorContainer>
-          <Icon.AlertCircle color={color['error-30']} />
-          <B3 c="error-30">{error}</B3>
-        </ErrorContainer>
-      )}
+      {error && <SelectInputErrorSection error={error} />}
     </SelectInputWrapper>
+  );
+}
+
+type SelectInputLabelProps = Pick<SelectInputBaseProps, 'label' | 'required' | 'tooltip'>;
+
+export function SelectInputLabel({ label, required, tooltip }: SelectInputLabelProps) {
+  return (
+    <LabelContainer>
+      <B7>
+        {label} {required && <Star> *</Star>}
+      </B7>
+      {tooltip && (
+        <Tooltip
+          content={tooltip.content}
+          direction={tooltip.direction}
+          withArrow={tooltip.withArrow}
+        >
+          <QuestionIconWrapper>
+            <Icon.QuestionCircle />
+          </QuestionIconWrapper>
+        </Tooltip>
+      )}
+    </LabelContainer>
+  );
+}
+
+export type SelectInputRightIconSectionProps = Pick<
+  SelectInputBaseProps,
+  'dropdownOpened' | 'searchable'
+>;
+
+export function SelectInputRightIconSection({
+  dropdownOpened,
+  searchable,
+}: SelectInputRightIconSectionProps) {
+  return (
+    <RightSectionWrapper
+      cursor={!searchable ? 'pointer' : 'text'}
+      rotate={dropdownOpened && !searchable ? 'rotate(180deg)' : 'none'}
+      aria-hidden="true"
+    >
+      {searchable ? <Icon.Search /> : <Icon.ChevronDownSmall />}
+    </RightSectionWrapper>
+  );
+}
+
+type SelectInputDescriptionProps = Pick<SelectInputBaseProps, 'description'>;
+
+export function SelectInputDescription({ description }: SelectInputDescriptionProps) {
+  return (
+    <Description>
+      <B5 c="grey-60">{description}</B5>
+    </Description>
+  );
+}
+
+type SelectInputErrorProps = Pick<SelectInputBaseProps, 'error'>;
+
+export function SelectInputErrorSection({ error }: SelectInputErrorProps) {
+  return (
+    <ErrorContainer>
+      <Icon.AlertCircle color={color['error-30']} />
+      <B3 c="error-30">{error}</B3>
+    </ErrorContainer>
   );
 }
 
