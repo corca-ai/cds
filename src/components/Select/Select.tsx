@@ -55,12 +55,12 @@ export function Select<T extends string | number>({
   const optionItems: BasicOptionItem[] = useMemo(() => {
     if (searchable && searchLabel) {
       const searchFilteredOptions = options.filter(option =>
-        option.label.toLocaleLowerCase().includes(searchLabel.toLocaleLowerCase()),
+        option.label.toLocaleLowerCase().includes(String(searchLabel).toLocaleLowerCase()),
       );
       if (onCreate != null) {
         return [
           ...searchFilteredOptions,
-          { icon: Icon.Add, label: searchLabel, value: CREATE_VALUE },
+          { icon: Icon.Add, label: String(searchLabel), value: CREATE_VALUE },
         ];
       }
       return searchFilteredOptions;
@@ -163,7 +163,7 @@ export function Select<T extends string | number>({
             }}
             onChange={item => {
               if (item === CREATE_VALUE) {
-                onCreate?.(searchLabel);
+                onCreate?.(String(searchLabel));
                 onSelect(searchLabel as T);
               } else {
                 onSelect(item as T);

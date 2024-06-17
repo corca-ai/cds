@@ -96,7 +96,7 @@ export function MultiSelect<T extends string | number>({
   const onOptionListChange = useCallback(
     (item: BasicOptionItem<T>) => {
       if (item.value === CREATE_VALUE) {
-        onCreate?.(searchInputValue);
+        onCreate?.(String(searchInputValue));
         onHandleSelect({ value: searchInputValue as T, label: String(searchInputValue) });
       } else if (selectedValues.includes(item.value as T)) {
         onHandleDelete(true, item.value as T);
