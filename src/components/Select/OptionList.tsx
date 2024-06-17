@@ -7,14 +7,14 @@ import { type IconProps } from '../Icon/type';
 import { B3, B4 } from '../Text';
 import { color } from '../styles';
 
-export interface BasicOptionItem<T = string> {
+export interface BasicOptionItem<T = string | number> {
   label: string;
   value: T;
   icon?: (props: IconProps) => ReactElement;
   disabled?: boolean;
 }
 
-export interface SectionOptionItem<T = string> {
+export interface SectionOptionItem<T = string | number> {
   sectionTitle: ReactNode;
   sectionItems: Array<BasicOptionItem<T>>;
 }
@@ -29,7 +29,7 @@ interface SectionOptionList<T> {
   items: Array<SectionOptionItem<T>>;
 }
 
-interface OptionListProps<T = string> {
+interface OptionListProps<T = string | number> {
   width?: number;
   onChange: (value: T) => void;
   option: BasicOptionList<T> | SectionOptionList<T>;
@@ -82,7 +82,7 @@ function OptionItems<T>({
   );
 }
 
-export function OptionList<T = string>({
+export function OptionList<T = string | number>({
   onChange,
   option,
   value,
@@ -135,7 +135,7 @@ export function OptionList<T = string>({
   );
 }
 
-interface MultipleOptionListProps<T = string>
+interface MultipleOptionListProps<T = string | number>
   extends Omit<OptionListProps<T>, 'value' | 'onChange'> {
   values: T[];
   searchInput?: ReactNode;
@@ -193,7 +193,7 @@ function MultipleOptionItems<T>({
   );
 }
 
-export function MultipleOptionList<T = string>({
+export function MultipleOptionList<T = string | number>({
   searchInput,
   onChange,
   option,

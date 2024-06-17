@@ -16,7 +16,7 @@ interface MultiSelectSearchType extends SearchInputProps {
   searchable?: boolean;
 }
 
-export interface MultiSelectProps<T extends string>
+export interface MultiSelectProps<T extends string | number>
   extends Omit<SelectInputBaseProps, 'value' | 'onSelect' | 'width' | 'searchable'> {
   search?: MultiSelectSearchType;
   selectedValues: T[];
@@ -29,7 +29,7 @@ export interface MultiSelectProps<T extends string>
 }
 
 /** min-width is 310px */
-export function MultiSelect<T extends string>({
+export function MultiSelect<T extends string | number>({
   search = {
     searchable: false,
   },
@@ -53,12 +53,12 @@ export function MultiSelect<T extends string>({
   const optionItems: BasicOptionItem[] = useMemo(() => {
     if (search.searchable && searchInputValue) {
       const searchFilteredOptions = options.filter(option =>
-        option.label.toLocaleLowerCase().includes(searchInputValue.toLocaleLowerCase()),
+        option.label.toLocaleLowerCase().includes(String(searchInputValue).toLocaleLowerCase()),
       );
       if (onCreate != null) {
         return [
           ...searchFilteredOptions,
-          { icon: Icon.Add, label: searchInputValue, value: CREATE_VALUE },
+          { icon: Icon.Add, label: String(searchInputValue), value: CREATE_VALUE },
         ];
       }
       return searchFilteredOptions;
@@ -96,8 +96,8 @@ export function MultiSelect<T extends string>({
   const onOptionListChange = useCallback(
     (item: BasicOptionItem<T>) => {
       if (item.value === CREATE_VALUE) {
-        onCreate?.(searchInputValue);
-        onHandleSelect({ value: searchInputValue as T, label: searchInputValue as T });
+        onCreate?.(String(searchInputValue));
+        onHandleSelect({ value: searchInputValue as T, label: String(searchInputValue) });
       } else if (selectedValues.includes(item.value as T)) {
         onHandleDelete(true, item.value as T);
       } else {

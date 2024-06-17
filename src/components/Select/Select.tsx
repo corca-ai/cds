@@ -6,7 +6,7 @@ import Icon from '../Icon';
 import { OptionList, type BasicOptionItem } from './OptionList';
 import { SelectInput, type SelectInputBaseProps } from './SelectInput';
 
-export interface SelectProps<T extends string>
+export interface SelectProps<T extends string | number>
   extends Omit<SelectInputBaseProps, 'value' | 'onSelect' | 'width'> {
   searchable?: boolean;
   onCreate?: (value: string | null) => void;
@@ -31,7 +31,7 @@ const OptionListWrapper = styled.div`
 
 export const CREATE_VALUE = 'CREATE_NEW_VALUE';
 
-export function Select<T extends string>({
+export function Select<T extends string | number>({
   searchable,
   onCreate,
   options,
@@ -55,12 +55,12 @@ export function Select<T extends string>({
   const optionItems: BasicOptionItem[] = useMemo(() => {
     if (searchable && searchLabel) {
       const searchFilteredOptions = options.filter(option =>
-        option.label.toLocaleLowerCase().includes(searchLabel.toLocaleLowerCase()),
+        option.label.toLocaleLowerCase().includes(String(searchLabel).toLocaleLowerCase()),
       );
       if (onCreate != null) {
         return [
           ...searchFilteredOptions,
-          { icon: Icon.Add, label: searchLabel, value: CREATE_VALUE },
+          { icon: Icon.Add, label: String(searchLabel), value: CREATE_VALUE },
         ];
       }
       return searchFilteredOptions;
@@ -163,7 +163,7 @@ export function Select<T extends string>({
             }}
             onChange={item => {
               if (item === CREATE_VALUE) {
-                onCreate?.(searchLabel);
+                onCreate?.(String(searchLabel));
                 onSelect(searchLabel as T);
               } else {
                 onSelect(item as T);
