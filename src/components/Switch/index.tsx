@@ -2,13 +2,13 @@ import styled from '@emotion/styled';
 
 import { color, typography } from '../styles';
 
-interface Props {
+export interface SwitchProps {
   checked: boolean;
   onChange: (checked: boolean) => void;
   disabled?: boolean;
 }
 
-export function Switch({ checked, onChange, disabled = false }: Props) {
+export function Switch({ checked, onChange, disabled = false }: SwitchProps) {
   const SwitchTextComponent = checked ? OnLabel : OffLabel;
 
   return (
@@ -30,7 +30,7 @@ export function Switch({ checked, onChange, disabled = false }: Props) {
   );
 }
 
-type StylesProps = Omit<Props, 'onChange'>;
+type StylesProps = Omit<SwitchProps, 'onChange'>;
 
 const SWITCH_WIDTH = 38;
 const SWITCH_HEIGHT = 18;

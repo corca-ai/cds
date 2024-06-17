@@ -15,13 +15,13 @@ const Image = styled.img`
   border-radius: 4px;
 `;
 
-interface Props {
+export interface ThumbnailProps {
   url: string | null;
   alt?: string;
   size?: number;
 }
 
-export function Thumbnail({ url, alt = 'image alt', size = 54 }: Props) {
+export function Thumbnail({ url, alt = 'image alt', size = 54 }: ThumbnailProps) {
   return (
     <Container size={size}>
       {url && <Image src={url} alt={alt} width={size} height={size} />}

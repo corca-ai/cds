@@ -7,13 +7,13 @@ import { color } from '../styles';
 
 export type SpinnerSize = 's' | 'm' | 'l';
 
-interface SpinnerProps {
+export interface SpinnerProps {
   color?: string;
   size?: SpinnerSize;
   speed?: number;
 }
 
-const SpinnerSizeMap = { s: 20, m: 25, l: 30 };
+export const SpinnerSizeMap = { s: 20, m: 25, l: 30 };
 
 export function Spinner({ color: c = color['main-black'], size = 'm', speed = 1 }: SpinnerProps) {
   const spinnerSize = SpinnerSizeMap[size];

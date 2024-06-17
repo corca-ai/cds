@@ -41,7 +41,7 @@ interface TabItem {
   value: string;
 }
 
-interface Props {
+export interface TabsProps {
   onChange: (v: string) => void;
   selectedTab: string;
   items: TabItem[];
@@ -49,7 +49,7 @@ interface Props {
   tabFullWidth?: boolean;
 }
 
-export function Tabs({ items, onChange, selectedTab, tabWidth = 74, tabFullWidth }: Props) {
+export function Tabs({ items, onChange, selectedTab, tabWidth = 74, tabFullWidth }: TabsProps) {
   return (
     <Container style={{ width: '100%' }}>
       <Contents style={{ minWidth: '100%' }}>

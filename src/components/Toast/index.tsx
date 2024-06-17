@@ -11,7 +11,7 @@ export const ToastPrepare = () => {
   return <Toaster />;
 };
 
-interface ToastData {
+export interface ToastData {
   title?: string;
   message: string;
   durationMs?: number;
@@ -24,9 +24,7 @@ const ToastBase = styled.div`
   justify-content: space-between;
   background-color: ${color.white};
   border-radius: 9px;
-  box-shadow:
-    0px 0px 1px 0px rgba(132, 132, 132, 0.31),
-    0px 2px 5px 0px rgba(70, 70, 70, 0.2);
+  box-shadow: 0px 0px 1px 0px rgba(132, 132, 132, 0.31), 0px 2px 5px 0px rgba(70, 70, 70, 0.2);
 `;
 
 const Left = styled.div`

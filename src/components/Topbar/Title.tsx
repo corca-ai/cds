@@ -17,7 +17,12 @@ const QuestionIconWrapper = styled.i`
   align-items: center;
 `;
 
-export function Title({ title, description }: { title: string; description?: string }) {
+export interface TitleProps {
+  title: string;
+  description?: string;
+}
+
+export function Title({ title, description }: TitleProps) {
   return (
     <TitleSection>
       <H1>{title}</H1>

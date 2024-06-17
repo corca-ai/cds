@@ -5,8 +5,8 @@ import styled from '@emotion/styled';
 
 import { color, typography } from '../styles';
 
-type Placement = 'top' | 'bottom' | 'left' | 'right';
-type Position = 'start' | 'end' | 'center';
+export type Placement = 'top' | 'bottom' | 'left' | 'right';
+export type Position = 'start' | 'end' | 'center';
 
 export type TooltipDirection = `${Placement}-${Position}`;
 

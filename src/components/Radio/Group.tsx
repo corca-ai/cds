@@ -4,7 +4,7 @@ import { RadioItem, type RadioItemProps } from './RadioItem';
 
 export type RadioGroupOption<T> = Omit<RadioItemProps<T>, 'onSelect' | 'selected'>;
 
-type RadioDirection = 'row' | 'column';
+export type RadioDirection = 'row' | 'column';
 
 const Container = styled.fieldset<{ direction: RadioDirection; gap: number }>`
   // reset fieldset css
@@ -17,7 +17,8 @@ const Container = styled.fieldset<{ direction: RadioDirection; gap: number }>`
   gap: ${({ gap }) => gap}px;
 `;
 
-interface RadioGroupProps<T> extends Omit<RadioItemProps<T>, 'value' | 'disabled' | 'selected'> {
+export interface RadioGroupProps<T>
+  extends Omit<RadioItemProps<T>, 'value' | 'disabled' | 'selected'> {
   selectedValue?: T;
   options: Array<RadioGroupOption<T>>;
   direction?: RadioDirection;
