@@ -53,7 +53,7 @@ export function MultiSelect<T extends string | number>({
   const optionItems: BasicOptionItem[] = useMemo(() => {
     if (search.searchable && searchInputValue) {
       const searchFilteredOptions = options.filter(option =>
-        option.label.toLocaleLowerCase().includes(searchInputValue.toLocaleLowerCase()),
+        option.label.toLocaleLowerCase().includes(String(searchInputValue).toLocaleLowerCase()),
       );
       if (onCreate != null) {
         return [
