@@ -58,7 +58,7 @@ export function MultiSelect<T extends string | number>({
       if (onCreate != null) {
         return [
           ...searchFilteredOptions,
-          { icon: Icon.Add, label: searchInputValue, value: CREATE_VALUE },
+          { icon: Icon.Add, label: String(searchInputValue), value: CREATE_VALUE },
         ];
       }
       return searchFilteredOptions;
