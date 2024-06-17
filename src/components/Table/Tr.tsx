@@ -3,13 +3,13 @@ import styled from '@emotion/styled';
 import { color } from '../styles';
 import { ReactNode } from 'react';
 
-export interface Props {
+export interface TrProps {
   children: ReactNode;
   readOnly?: boolean;
   onClick?: () => void;
 }
 
-export const Tr = ({ children, readOnly = false, onClick }: Props) => {
+export const Tr = ({ children, readOnly = false, onClick }: TrProps) => {
   return (
     <TableRow onClick={onClick} readOnly={readOnly}>
       {children}
@@ -17,7 +17,7 @@ export const Tr = ({ children, readOnly = false, onClick }: Props) => {
   );
 };
 
-const TableRow = styled.tr<Props>`
+const TableRow = styled.tr<TrProps>`
   display: table-row;
   cursor: ${props => (props.readOnly ? 'default' : 'pointer')};
   border-width: 1px 0 1px 0;

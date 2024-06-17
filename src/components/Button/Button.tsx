@@ -5,8 +5,8 @@ import styled from '@emotion/styled';
 import { B2 } from '../Text';
 import { color } from '../styles';
 
-type ButtonVariant = 'filled' | 'outline' | 'text';
-type ButtonSize = 'small' | 'large';
+export type ButtonVariant = 'filled' | 'outline' | 'text';
+export type ButtonSize = 'small' | 'large';
 
 interface CommonButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: ButtonVariant;
@@ -21,7 +21,7 @@ interface OutlineButtonProps extends CommonButtonProps {
 
 export type ButtonProps = CommonButtonProps | OutlineButtonProps;
 
-type DefaultStyleSheet = {
+export type DefaultStyleSheet = {
   bg: keyof typeof color | null;
   border: keyof typeof color | null;
 };
@@ -134,6 +134,7 @@ const IconContainer = styled.div<{ size: number }>`
 const LabelContainer = styled.div`
   line-height: 17px;
 `;
+
 export function Button({
   variant,
   size,

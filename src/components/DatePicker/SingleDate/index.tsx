@@ -74,7 +74,7 @@ export function SingleDate({
   );
 }
 
-interface CustomInputProps extends DateInputProps {
+export interface CustomInputProps extends DateInputProps {
   onClick: MouseEventHandler<HTMLInputElement>;
   date?: string;
 }

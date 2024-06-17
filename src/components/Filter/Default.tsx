@@ -17,86 +17,18 @@ export interface FilterCategoryType<T> {
   options: Array<FilterOptionType<T>>;
 }
 
-interface FilterCategoryProps<T> extends FilterCategoryType<T> {
+export interface FilterCategoryProps<T> extends FilterCategoryType<T> {
   selected: T | T[];
   changeValue: (value: T) => void;
 }
 
-const FilterContainer = styled.div<{ width: number }>`
-  width: ${({ width }) => `${width}px;`};
-  background-color: ${color.white};
-  border-radius: 12px;
-
-  box-shadow:
-    0px 0px 1px 0px rgba(132, 132, 132, 0.31),
-    0px 2px 5px 0px rgba(70, 70, 70, 0.2);
-`;
-
-const CategoryContainer = styled.div`
-  width: 100%;
-  padding: 26px 28px;
-`;
-
-const BottomContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  aligh-items: center;
-  width: 100%;
-  padding: 10px 10px 10px 30px;
-  border-top: 1px solid ${color['grey-30']};
-`;
-
-const CloseButtonWrapper = styled.div`
-  width: 100%;
-  text-align: right;
-  height: 25px;
-`;
-
-const CategoryWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 26px;
-`;
-
-export const CategoryLabel = styled.div`
-  margin-bottom: 10px;
-  height: 17px;
-  ${fontStyle.b7}
-`;
-
-export const CategoryItemWrapper = styled.div<{ wrap?: 'wrap' | 'no-wrap' }>`
-  display: flex;
-  gap: 8px 6px;
-  align-self: stretch;
-  flex-wrap: ${({ wrap }) => wrap ?? 'wrap'};
-`;
-
-const OptionItem = styled.button<{ selected: boolean }>`
-  height: 32px;
-  border-radius: 30px;
-  border: 1px solid ${color['grey-50']};
-  background: ${color.white};
-  padding: 7px 15px;
-  cursor: pointer;
-  ${fontStyle.b3}
-  ${({ selected }) =>
-    selected &&
-    `
-background: ${color['grey-80']};
-color: ${color.white};
-border: 1px solid ${color['grey-80']};
-`}
-&:disabled {
-    border: 1px solid ${color['grey-50']};
-    background: ${color['grey-30']};
-    cursor: default;
-    color: ${color['grey-50']};
-  }
-`;
-const IconBtn = styled.button`
-  background: inherit;
-  cursor: pointer;
-`;
+export interface FilterFrameProps {
+  closeFilter: () => void;
+  reset: () => void;
+  resetLabel: string;
+  children: ReactNode;
+  width?: number;
+}
 
 export function FilterFrame({
   closeFilter,
@@ -165,3 +97,77 @@ export function FilterCategory<T>({
     </div>
   );
 }
+
+const FilterContainer = styled.div<{ width: number }>`
+  width: ${({ width }) => `${width}px;`};
+  background-color: ${color.white};
+  border-radius: 12px;
+
+  box-shadow: 0px 0px 1px 0px rgba(132, 132, 132, 0.31), 0px 2px 5px 0px rgba(70, 70, 70, 0.2);
+`;
+
+const CategoryContainer = styled.div`
+  width: 100%;
+  padding: 26px 28px;
+`;
+
+const BottomContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  aligh-items: center;
+  width: 100%;
+  padding: 10px 10px 10px 30px;
+  border-top: 1px solid ${color['grey-30']};
+`;
+
+const CloseButtonWrapper = styled.div`
+  width: 100%;
+  text-align: right;
+  height: 25px;
+`;
+
+const CategoryWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+`;
+
+export const CategoryLabel = styled.div`
+  margin-bottom: 10px;
+  height: 17px;
+  ${fontStyle.b7}
+`;
+
+export const CategoryItemWrapper = styled.div<{ wrap?: 'wrap' | 'no-wrap' }>`
+  display: flex;
+  gap: 8px 6px;
+  align-self: stretch;
+  flex-wrap: ${({ wrap }) => wrap ?? 'wrap'};
+`;
+
+const OptionItem = styled.button<{ selected: boolean }>`
+  height: 32px;
+  border-radius: 30px;
+  border: 1px solid ${color['grey-50']};
+  background: ${color.white};
+  padding: 7px 15px;
+  cursor: pointer;
+  ${fontStyle.b3}
+  ${({ selected }) =>
+    selected &&
+    `
+background: ${color['grey-80']};
+color: ${color.white};
+border: 1px solid ${color['grey-80']};
+`}
+&:disabled {
+    border: 1px solid ${color['grey-50']};
+    background: ${color['grey-30']};
+    cursor: default;
+    color: ${color['grey-50']};
+  }
+`;
+const IconBtn = styled.button`
+  background: inherit;
+  cursor: pointer;
+`;

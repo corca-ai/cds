@@ -43,7 +43,7 @@ export type TableThStyleType = {
   };
 };
 
-const TABLE_TH_STYLE: TableThStyleType = {
+export const TABLE_TH_STYLE: TableThStyleType = {
   l: {
     height: 46,
     iconSize: 20,
@@ -61,14 +61,14 @@ const TABLE_TH_STYLE: TableThStyleType = {
   },
 };
 
-export interface Props {
+export interface DefaultThProps {
   text: string;
   icon?: ReactNode;
   width?: string;
   size: ThSizeType;
 }
 
-export const DefaultTh = ({ text, icon, size, width = 'auto' }: Props) => {
+export const DefaultTh = ({ text, icon, size, width = 'auto' }: DefaultThProps) => {
   const thStyle = TABLE_TH_STYLE[size];
   return (
     <TableDefaultHeader width={width} height={thStyle.height}>
@@ -83,13 +83,12 @@ export const DefaultTh = ({ text, icon, size, width = 'auto' }: Props) => {
   );
 };
 
-export const CheckboxTh = ({
-  size,
-  checkboxType,
-}: {
+export interface CheckboxThProps {
   size: ThSizeType;
   checkboxType: CheckboxProps;
-}) => {
+}
+
+export const CheckboxTh = ({ size, checkboxType }: CheckboxThProps) => {
   const thStyle = TABLE_TH_STYLE[size];
   return (
     <CheckboxTableHeader

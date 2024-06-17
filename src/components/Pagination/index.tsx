@@ -24,7 +24,7 @@ const Container = styled.div`
   gap: 6px;
 `;
 
-interface Props {
+export interface PaginationProps {
   current: number;
   total: number;
   onSelect: (page: number) => void;
@@ -36,7 +36,7 @@ const range = (start: number, end: number): number[] => {
 
 const COUNT_PER_PAGE = 5;
 
-export function Pagination({ current, total, onSelect }: Props) {
+export function Pagination({ current, total, onSelect }: PaginationProps) {
   const { start, end, visiblePages, showMore, canGoNext, canGoPrev } = useMemo(() => {
     const start = (Math.ceil(current / COUNT_PER_PAGE) - 1) * COUNT_PER_PAGE + 1;
     const end = Math.min(start + COUNT_PER_PAGE - 1, total);

@@ -96,15 +96,13 @@ export function SearchInput({ width, tooltip, showIcon = true, ...props }: Searc
   );
 }
 
-function SelectedItemButton({
-  onDelete,
-  children,
-  maxWidth,
-}: {
+export interface SelectedItemButtonProps {
   onDelete: () => void;
   children: React.ReactNode;
   maxWidth: number;
-}) {
+}
+
+function SelectedItemButton({ onDelete, children, maxWidth }: SelectedItemButtonProps) {
   return (
     <SelectedItemWrapper width={maxWidth}>
       <SelectedItemTextWrapper width={maxWidth - 5}>
@@ -117,13 +115,12 @@ function SelectedItemButton({
   );
 }
 
-function PluralItemInfoSection({
-  itemsCount,
-  onDeleteAll,
-}: {
+export interface PluralItemInfoSectionProps {
   itemsCount: number;
   onDeleteAll: () => void;
-}) {
+}
+
+function PluralItemInfoSection({ itemsCount, onDeleteAll }: PluralItemInfoSectionProps) {
   return (
     <PluralDataWrapper>
       <CountItemWrapper>
@@ -136,7 +133,7 @@ function PluralItemInfoSection({
   );
 }
 
-interface MultiSelectInputChildContentsProps<T extends string>
+export interface MultiSelectInputChildContentsProps<T extends string>
   extends Pick<
     SelectInputBaseProps<T>,
     'width' | 'onDeleteSingle' | 'optionItems' | 'onDeleteAll'

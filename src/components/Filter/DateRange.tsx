@@ -22,19 +22,21 @@ const DatePickerItem = styled.div`
   }
 `;
 
+export interface FilterDateRangeProps {
+  dateRange: [Date, Date];
+  changeValue: (dateRange: [Date, Date]) => void;
+  startDateLabel?: string;
+  endDateLabel?: string;
+  language: SupportLocale;
+}
+
 export function FilterDateRange({
   dateRange,
   changeValue,
   startDateLabel,
   endDateLabel,
   language,
-}: {
-  dateRange: [Date, Date];
-  changeValue: (dateRange: [Date, Date]) => void;
-  startDateLabel?: string;
-  endDateLabel?: string;
-  language: SupportLocale;
-}) {
+}: FilterDateRangeProps) {
   return (
     <DatePickerRange>
       <DatePickerItem>

@@ -20,17 +20,19 @@ export enum AMPM {
   PM = 'PM',
 }
 
+export interface CustomTimeInputProps {
+  newDate: Date;
+  language: SupportLocale;
+  onConfirm: () => void;
+  setNewDate: (date: Date) => void;
+}
+
 export const CustomTimeInput = ({
   newDate,
   language,
   onConfirm,
   setNewDate,
-}: {
-  newDate: Date;
-  language: SupportLocale;
-  onConfirm: () => void;
-  setNewDate: (date: Date) => void;
-}) => {
+}: CustomTimeInputProps) => {
   const getFormattedHour = (hour: number): string => {
     return (hour > 12 ? hour - 12 : hour).toString().padStart(2, '0');
   };

@@ -6,7 +6,7 @@ import { type IconProps } from '../Icon/type';
 import { Text } from '../Text';
 import { color, typography } from '../styles';
 
-interface NavItemType {
+export interface NavItemType {
   icon: (icon: IconProps) => ReactElement;
   label: string;
   href: string;
@@ -94,6 +94,15 @@ const BottomSection = styled.div`
   width: 100%;
 `;
 
+export interface NavigationProps {
+  logoImage: { src: string; width: number; height: number };
+  logoHref: string;
+  bottom?: ReactNode;
+  navbarGroup: NavbarGroup[];
+  selectedColor?: string;
+  LinkElement?: ReactElement;
+}
+
 export function Navigation({
   logoImage,
   logoHref,
@@ -101,14 +110,7 @@ export function Navigation({
   navbarGroup,
   selectedColor,
   LinkElement,
-}: {
-  logoImage: { src: string; width: number; height: number };
-  logoHref: string;
-  bottom?: ReactNode;
-  navbarGroup: NavbarGroup[];
-  selectedColor?: string;
-  LinkElement?: ReactElement;
-}) {
+}: NavigationProps) {
   const Link = useCallback(
     ({ href, children }: { href: string; children: ReactElement }) =>
       LinkElement != null

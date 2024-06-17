@@ -4,7 +4,7 @@ import { Button } from '../Button';
 import { B2, H2 } from '../Text';
 import { color } from '../styles';
 
-interface Props {
+export interface EmptyStateProps {
   label: string;
   description: string;
   button?: {
@@ -13,7 +13,7 @@ interface Props {
   };
 }
 
-export function EmptyState({ label, description, button }: Props) {
+export function EmptyState({ label, description, button }: EmptyStateProps) {
   return (
     <Container>
       <EmptyImage />

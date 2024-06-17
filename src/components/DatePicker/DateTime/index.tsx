@@ -14,6 +14,7 @@ import {
 } from '../SingleDate';
 import { LOCALE, MONTHS } from '../constant';
 import { CustomTimeInput } from './CustomTimeInput';
+export * from './CustomTimeInput';
 
 export function DateTime({
   selected,

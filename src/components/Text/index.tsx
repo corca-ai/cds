@@ -3,7 +3,7 @@ import { type HTMLAttributes } from 'react';
 
 import { color, fontStyle, typography } from '../styles';
 
-interface TypographyProps {
+export interface TypographyProps {
   children: ReactNode;
   size?: keyof typeof typography.size;
   fw?: keyof typeof typography.weight;
@@ -12,7 +12,7 @@ interface TypographyProps {
   ellipsis?: boolean;
 }
 
-interface StyleProps extends HTMLAttributes<HTMLSpanElement> {
+export interface StyleProps extends HTMLAttributes<HTMLSpanElement> {
   c?: keyof typeof color;
   ellipsis?: boolean;
 }
