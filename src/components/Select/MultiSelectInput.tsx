@@ -19,7 +19,7 @@ const getItemButtonMaxWidth = (itemLen: number) => {
 };
 type SelectInputTooltipProps = Omit<TooltipProps, 'children'>;
 
-export interface SelectInputBaseProps<T extends string>
+export interface SelectInputBaseProps<T extends string | number>
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'width' | 'value'> {
   optionItems: BasicOptionItem<T>[];
   onDeleteSingle: (value: T) => void;
@@ -33,7 +33,7 @@ export interface SelectInputBaseProps<T extends string>
   showIcon?: boolean;
 }
 
-export function MultiSelectInput<T extends string>({
+export function MultiSelectInput<T extends string | number>({
   optionItems,
   label,
   description,
@@ -133,7 +133,7 @@ function PluralItemInfoSection({ itemsCount, onDeleteAll }: PluralItemInfoSectio
   );
 }
 
-export interface MultiSelectInputChildContentsProps<T extends string>
+export interface MultiSelectInputChildContentsProps<T extends string | number>
   extends Pick<
     SelectInputBaseProps<T>,
     'width' | 'onDeleteSingle' | 'optionItems' | 'onDeleteAll'
@@ -141,7 +141,7 @@ export interface MultiSelectInputChildContentsProps<T extends string>
   itemMaxWidth: number;
 }
 
-function MultiSelectInputChildContents<T extends string>({
+function MultiSelectInputChildContents<T extends string | number>({
   width = 310,
   onDeleteSingle,
   optionItems,

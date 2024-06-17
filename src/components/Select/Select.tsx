@@ -6,7 +6,7 @@ import Icon from '../Icon';
 import { OptionList, type BasicOptionItem } from './OptionList';
 import { SelectInput, type SelectInputBaseProps } from './SelectInput';
 
-export interface SelectProps<T extends string>
+export interface SelectProps<T extends string | number>
   extends Omit<SelectInputBaseProps, 'value' | 'onSelect' | 'width'> {
   searchable?: boolean;
   onCreate?: (value: string | null) => void;
@@ -31,7 +31,7 @@ const OptionListWrapper = styled.div`
 
 export const CREATE_VALUE = 'CREATE_NEW_VALUE';
 
-export function Select<T extends string>({
+export function Select<T extends string | number>({
   searchable,
   onCreate,
   options,

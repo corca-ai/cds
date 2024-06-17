@@ -16,7 +16,7 @@ interface MultiSelectSearchType extends SearchInputProps {
   searchable?: boolean;
 }
 
-export interface MultiSelectProps<T extends string>
+export interface MultiSelectProps<T extends string | number>
   extends Omit<SelectInputBaseProps, 'value' | 'onSelect' | 'width' | 'searchable'> {
   search?: MultiSelectSearchType;
   selectedValues: T[];
@@ -29,7 +29,7 @@ export interface MultiSelectProps<T extends string>
 }
 
 /** min-width is 310px */
-export function MultiSelect<T extends string>({
+export function MultiSelect<T extends string | number>({
   search = {
     searchable: false,
   },
@@ -97,7 +97,7 @@ export function MultiSelect<T extends string>({
     (item: BasicOptionItem<T>) => {
       if (item.value === CREATE_VALUE) {
         onCreate?.(searchInputValue);
-        onHandleSelect({ value: searchInputValue as T, label: searchInputValue as T });
+        onHandleSelect({ value: searchInputValue as T, label: String(searchInputValue) });
       } else if (selectedValues.includes(item.value as T)) {
         onHandleDelete(true, item.value as T);
       } else {
