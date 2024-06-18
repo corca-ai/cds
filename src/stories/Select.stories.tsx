@@ -63,7 +63,7 @@ export function Default() {
         width={400}
         selectedValue={defaultValue}
         onSelect={value => {
-          setDefaultValue(value);
+          setDefaultValue(value as string);
         }}
         options={BASIC}
       />
@@ -73,7 +73,7 @@ export function Default() {
         width={400}
         selectedValue={createValue}
         onSelect={value => {
-          setCreateValue(value);
+          setCreateValue(value as string);
         }}
         options={selectItems}
         onCreate={v => {
@@ -136,14 +136,14 @@ export function Default() {
         label="Left Icon 있는 input 창"
         width={150}
         selectedValue={selectItemWithIcon}
-        onSelect={value => setSelectItemWithIcon(value)}
+        onSelect={value => setSelectItemWithIcon(value as string)}
         options={[{ label: '공백이없이라벨이긴예시', value: 'long' }, ...BASIC]}
       />
       <MultiSelect
         label="Searchable Multi Select"
         description="Searchable and not searchable is available."
         selectedValues={selectedItems}
-        onSelect={value => setSelectedItems(prev => [...prev, value])}
+        onSelect={value => setSelectedItems(prev => [...prev, value as string])}
         onDeleteSingle={value => setSelectedItems(prev => prev.filter(v => v !== value))}
         onDeleteAll={() => setSelectedItems([])}
         options={[
