@@ -327,7 +327,7 @@ const SearchInputChildWrapper = styled(SelectInputChildrenWrapper)`
   margin-bottom: 5px;
 `;
 
-const SelectedItemWrapper = styled.button<{ width: number }>`
+const SelectedItemWrapper = styled.div<{ width: number }>`
   width: fit-content;
   min-width: 40px;
   max-width: ${({ width }) => width}px;
