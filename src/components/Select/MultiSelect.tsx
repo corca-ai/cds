@@ -48,7 +48,9 @@ export function MultiSelect<T extends string | number>({
   const [showDropdown, setShowDropdown] = useState(false);
   const [focusedItemIdx, setFocusedItemIdx] = useState(-1);
   const [searchInputValue, setSearchInputValue] = useState<string | null>(null);
-  const [selectedOptionItem, setSelectedOptionItem] = useState<BasicOptionItem<T>[]>([]);
+  const [selectedOptionItem, setSelectedOptionItem] = useState<BasicOptionItem<T>[]>(() => [
+    ...options.filter(option => selectedValues.includes(option.value as T)),
+  ]);
 
   const optionItems: BasicOptionItem[] = useMemo(() => {
     if (search.searchable && searchInputValue) {
