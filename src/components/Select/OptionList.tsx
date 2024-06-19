@@ -276,7 +276,7 @@ const ItemList = styled.li`
   width: 100%;
 `;
 
-const ItemButton = styled.button<{
+const ItemButton = styled.div<{
   selected?: boolean;
   disabled?: boolean;
   focused: boolean;

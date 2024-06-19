@@ -212,7 +212,7 @@ const SelectInputChildrenWrapper = styled.div`
   position: relative;
 `;
 
-const RightSectionWrapper = styled.button<{ cursor?: string; rotate: string }>`
+const RightSectionWrapper = styled.div<{ cursor?: string; rotate: string }>`
   position: absolute;
   top: 0%;
   padding: 6px 8px;
