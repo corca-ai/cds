@@ -168,7 +168,7 @@ function MultiSelectInputChildContents<T extends string | number>({
   );
 }
 
-const CancelButtonWrapper = styled.button`
+const CancelButtonWrapper = styled.div`
   height: 100%;
 
   cursor: pointer;
@@ -294,7 +294,7 @@ const SelectInputChildrenWrapper = styled.div`
   width: 100%;
 `;
 
-const IconSectionWrapper = styled.button<{
+const IconSectionWrapper = styled.div<{
   cursor?: string;
   rotate: string;
 }>`
