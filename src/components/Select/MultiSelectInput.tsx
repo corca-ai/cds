@@ -48,7 +48,10 @@ export function MultiSelectInput<T extends string | number>({
   showIcon = true,
   ...props
 }: SelectInputBaseProps<T>) {
-  const itemMaxWidth = useMemo(() => getItemButtonMaxWidth(optionItems.length), [optionItems]);
+  const itemMaxWidth = useMemo(
+    () => getItemButtonMaxWidth(optionItems.length),
+    [optionItems.length],
+  );
 
   return (
     <SelectInputWrapper width={width} onClick={onClick}>

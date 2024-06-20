@@ -51,7 +51,7 @@ export function MultiSelect<T extends string | number>({
 
   const selectedOptionItem = useMemo(() => {
     return options.filter(option => selectedValues.includes(option.value as T));
-  }, [options.length, selectedValues.length]);
+  }, [options.length, selectedValues?.length, options?.[0]?.value, selectedValues?.[0]]);
 
   const optionItems: BasicOptionItem[] = useMemo(() => {
     if (search.searchable && searchInputValue) {
