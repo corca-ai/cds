@@ -50,7 +50,7 @@ export function MultiSelectInput<T extends string | number>({
 }: SelectInputBaseProps<T>) {
   const itemMaxWidth = useMemo(
     () => getItemButtonMaxWidth(optionItems.length),
-    [optionItems.length],
+    [optionItems?.length],
   );
 
   return (
