@@ -48,9 +48,10 @@ export function MultiSelect<T extends string | number>({
   const [showDropdown, setShowDropdown] = useState(false);
   const [focusedItemIdx, setFocusedItemIdx] = useState(-1);
   const [searchInputValue, setSearchInputValue] = useState<string | null>(null);
-  const [selectedOptionItem, setSelectedOptionItem] = useState<BasicOptionItem<T>[]>(() => [
-    ...options.filter(option => selectedValues.includes(option.value as T)),
-  ]);
+
+  const selectedOptionItem = useMemo(() => {
+    return options.filter(option => selectedValues.includes(option.value as T));
+  }, [options, options.length, selectedValues.length]);
 
   const optionItems: BasicOptionItem[] = useMemo(() => {
     if (search.searchable && searchInputValue) {
@@ -68,25 +69,15 @@ export function MultiSelect<T extends string | number>({
     return options;
   }, [search.searchable, options, searchInputValue]);
 
-  const onHandleSelect = useCallback(
-    ({ value, label }: BasicOptionItem<T>) => {
-      onSelect(value);
-      setSelectedOptionItem(prev => [...prev, { label, value }]);
-    },
-    [onSelect, setSelectedOptionItem],
-  );
-
   const onHandleDelete = useCallback(
     (isSingle: boolean, value?: T) => {
       if (isSingle && value) {
         onDeleteSingle(value);
-        setSelectedOptionItem(prev => prev.filter(item => item.value !== value));
       } else {
         onDeleteAll();
-        setSelectedOptionItem([]);
       }
     },
-    [onDeleteSingle, onDeleteAll, setSelectedOptionItem],
+    [onDeleteSingle, onDeleteAll],
   );
 
   const clearDropdownAndSearch = useCallback(() => {
@@ -99,14 +90,14 @@ export function MultiSelect<T extends string | number>({
     (item: BasicOptionItem<T>) => {
       if (item.value === CREATE_VALUE) {
         onCreate?.(String(searchInputValue));
-        onHandleSelect({ value: searchInputValue as T, label: String(searchInputValue) });
+        onSelect(searchInputValue as T);
       } else if (selectedValues.includes(item.value as T)) {
         onHandleDelete(true, item.value as T);
       } else {
-        onHandleSelect(item as BasicOptionItem<T>);
+        onSelect(item.value as T);
       }
     },
-    [onCreate, searchInputValue, onHandleSelect, selectedValues, onHandleDelete],
+    [onCreate, searchInputValue, selectedValues, onHandleDelete],
   );
 
   const handleKeyUpEvent = useCallback(
@@ -125,12 +116,12 @@ export function MultiSelect<T extends string | number>({
           if (item.value === CREATE_VALUE) {
             return;
           }
-          onHandleSelect({ value: item.value as T, label: item.label });
+          onSelect(item.value as T);
           clearDropdownAndSearch();
         }
       }
     },
-    [setFocusedItemIdx, onHandleSelect, setShowDropdown, optionItems, focusedItemIdx],
+    [setFocusedItemIdx, setShowDropdown, optionItems, focusedItemIdx],
   );
 
   useEffect(() => {
