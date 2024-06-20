@@ -51,7 +51,7 @@ export function MultiSelect<T extends string | number>({
 
   const selectedOptionItem = useMemo(() => {
     return options.filter(option => selectedValues.includes(option.value as T));
-  }, [options, selectedValues]);
+  }, [options, options.length, selectedValues.length]);
 
   const optionItems: BasicOptionItem[] = useMemo(() => {
     if (search.searchable && searchInputValue) {
@@ -94,7 +94,7 @@ export function MultiSelect<T extends string | number>({
       } else if (selectedValues.includes(item.value as T)) {
         onHandleDelete(true, item.value as T);
       } else {
-        onSelect(searchInputValue as T);
+        onSelect(item.value as T);
       }
     },
     [onCreate, searchInputValue, selectedValues, onHandleDelete],
