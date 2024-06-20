@@ -67,7 +67,7 @@ export function MultiSelect<T extends string | number>({
       return searchFilteredOptions;
     }
     return options;
-  }, [search.searchable, options, searchInputValue]);
+  }, [search.searchable, options, options.length, searchInputValue]);
 
   const clearDropdownAndSearch = useCallback(() => {
     setSearchInputValue('');
@@ -86,7 +86,7 @@ export function MultiSelect<T extends string | number>({
         onSelect(item.value as T);
       }
     },
-    [onCreate, searchInputValue, selectedValues, onDeleteSingle],
+    [onCreate, searchInputValue, selectedValues, onDeleteSingle, onSelect],
   );
 
   const handleKeyUpEvent = useCallback(
@@ -110,7 +110,7 @@ export function MultiSelect<T extends string | number>({
         }
       }
     },
-    [setFocusedItemIdx, setShowDropdown, optionItems, focusedItemIdx],
+    [setFocusedItemIdx, setShowDropdown, onSelect, optionItems, focusedItemIdx],
   );
 
   useEffect(() => {
