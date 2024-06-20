@@ -73,7 +73,7 @@ export function MultiSelect<T extends string | number>({
     setSearchInputValue('');
     setFocusedItemIdx(-1);
     setShowDropdown(false);
-  }, []);
+  }, [setSearchInputValue, setFocusedItemIdx, setShowDropdown]);
 
   const onOptionListChange = useCallback(
     (item: BasicOptionItem<T>) => {
