@@ -48,9 +48,10 @@ export function MultiSelect<T extends string | number>({
   const [showDropdown, setShowDropdown] = useState(false);
   const [focusedItemIdx, setFocusedItemIdx] = useState(-1);
   const [searchInputValue, setSearchInputValue] = useState<string | null>(null);
-  const [selectedOptionItem, setSelectedOptionItem] = useState<BasicOptionItem<T>[]>(() => [
-    ...options.filter(option => selectedValues.includes(option.value as T)),
-  ]);
+
+  const selectedOptionItem = useMemo(() => {
+    return options.filter(option => selectedValues.includes(option.value as T));
+  }, [options.length, selectedValues.length]);
 
   const optionItems: BasicOptionItem[] = useMemo(() => {
     if (search.searchable && searchInputValue) {
@@ -66,47 +67,26 @@ export function MultiSelect<T extends string | number>({
       return searchFilteredOptions;
     }
     return options;
-  }, [search.searchable, options, searchInputValue]);
-
-  const onHandleSelect = useCallback(
-    ({ value, label }: BasicOptionItem<T>) => {
-      onSelect(value);
-      setSelectedOptionItem(prev => [...prev, { label, value }]);
-    },
-    [onSelect, setSelectedOptionItem],
-  );
-
-  const onHandleDelete = useCallback(
-    (isSingle: boolean, value?: T) => {
-      if (isSingle && value) {
-        onDeleteSingle(value);
-        setSelectedOptionItem(prev => prev.filter(item => item.value !== value));
-      } else {
-        onDeleteAll();
-        setSelectedOptionItem([]);
-      }
-    },
-    [onDeleteSingle, onDeleteAll, setSelectedOptionItem],
-  );
+  }, [search.searchable, options, options.length, searchInputValue]);
 
   const clearDropdownAndSearch = useCallback(() => {
     setSearchInputValue('');
     setFocusedItemIdx(-1);
     setShowDropdown(false);
-  }, []);
+  }, [setSearchInputValue, setFocusedItemIdx, setShowDropdown]);
 
   const onOptionListChange = useCallback(
     (item: BasicOptionItem<T>) => {
       if (item.value === CREATE_VALUE) {
         onCreate?.(String(searchInputValue));
-        onHandleSelect({ value: searchInputValue as T, label: String(searchInputValue) });
+        onSelect(searchInputValue as T);
       } else if (selectedValues.includes(item.value as T)) {
-        onHandleDelete(true, item.value as T);
+        onDeleteSingle(item.value as T);
       } else {
-        onHandleSelect(item as BasicOptionItem<T>);
+        onSelect(item.value as T);
       }
     },
-    [onCreate, searchInputValue, onHandleSelect, selectedValues, onHandleDelete],
+    [onCreate, searchInputValue, selectedValues, onDeleteSingle, onSelect],
   );
 
   const handleKeyUpEvent = useCallback(
@@ -125,12 +105,12 @@ export function MultiSelect<T extends string | number>({
           if (item.value === CREATE_VALUE) {
             return;
           }
-          onHandleSelect({ value: item.value as T, label: item.label });
+          onSelect(item.value as T);
           clearDropdownAndSearch();
         }
       }
     },
-    [setFocusedItemIdx, onHandleSelect, setShowDropdown, optionItems, focusedItemIdx],
+    [setFocusedItemIdx, setShowDropdown, onSelect, optionItems, focusedItemIdx],
   );
 
   useEffect(() => {
@@ -165,8 +145,8 @@ export function MultiSelect<T extends string | number>({
       <MultiSelectInput<T>
         {...input}
         optionItems={selectedOptionItem}
-        onDeleteSingle={val => onHandleDelete(true, val)}
-        onDeleteAll={() => onHandleDelete(false)}
+        onDeleteSingle={onDeleteSingle}
+        onDeleteAll={onDeleteAll}
         width={width}
         dropdownOpened={showDropdown}
         onFocus={() => search.searchable && setSearchInputValue('')}
