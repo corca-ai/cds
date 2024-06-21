@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode, cloneElement } from 'react';
+import { CSSProperties, ReactElement, ReactNode, cloneElement } from 'react';
 
 import styled from '@emotion/styled';
 
@@ -66,12 +66,15 @@ export interface DefaultThProps {
   icon?: ReactNode;
   width?: string;
   size: ThSizeType;
+  borderLeft?: CSSProperties['borderLeft'];
+  borderRight?: CSSProperties['borderRight'];
+  background?: CSSProperties['background'];
 }
 
-export const DefaultTh = ({ text, icon, size, width = 'auto' }: DefaultThProps) => {
+export const DefaultTh = ({ text, icon, size, width = 'auto', ...props }: DefaultThProps) => {
   const thStyle = TABLE_TH_STYLE[size];
   return (
-    <TableDefaultHeader width={width} height={thStyle.height}>
+    <TableDefaultHeader width={width} height={thStyle.height} {...props}>
       <ThContents>
         <thStyle.textComponent>{text}</thStyle.textComponent>
         {icon &&
@@ -86,12 +89,16 @@ export const DefaultTh = ({ text, icon, size, width = 'auto' }: DefaultThProps) 
 export interface CheckboxThProps {
   size: ThSizeType;
   checkboxType: CheckboxProps;
+  borderLeft?: CSSProperties['borderLeft'];
+  borderRight?: CSSProperties['borderRight'];
+  background?: CSSProperties['background'];
 }
 
-export const CheckboxTh = ({ size, checkboxType }: CheckboxThProps) => {
+export const CheckboxTh = ({ size, checkboxType, ...props }: CheckboxThProps) => {
   const thStyle = TABLE_TH_STYLE[size];
   return (
     <CheckboxTableHeader
+      {...props}
       width={FIXED_TH_WIDTH[FixedCellType.CHECKBOX][size]}
       height={thStyle.height}
     >
@@ -115,11 +122,20 @@ const ThContents = styled.div`
   gap: 2px;
 `;
 
-const TableHeader = styled.th<{ width: string; height: number }>`
+const TableHeader = styled.th<{
+  width: string;
+  height: number;
+  borderLeft?: CSSProperties['borderLeft'];
+  borderRight?: CSSProperties['borderRight'];
+  background?: CSSProperties['background'];
+}>`
   width: ${({ width }) => width};
   height: ${({ height }) => height}px;
   vertical-align: middle;
   text-wrap: nowrap;
+  border-left: ${({ borderLeft }) => borderLeft ?? 'none'};
+  border-right: ${({ borderRight }) => borderRight ?? 'none'};
+  background: ${({ background }) => background ?? 'inherit'};
 `;
 
 const TableDefaultHeader = styled(TableHeader)`
