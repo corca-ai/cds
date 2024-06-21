@@ -584,6 +584,7 @@ export const CustomStyle = () => {
             size={size}
             background={'#f0f0f0'}
             borderLeft={'1px solid #000'}
+            borderRight={'1px solid #000'}
           />
           <Table.Th.Default width="100px" text="Label" size={size} />
           <Table.Th.Default width="100px" text="Label" size={size} />
@@ -607,7 +608,14 @@ export const CustomStyle = () => {
           <Table.Tr readOnly key={index.toString() + 'Items'} onClick={() => {}}>
             <Table.Td.Img src={d.img} size={size} />
             <Table.Td.Text size={size}>{d.Label1}</Table.Td.Text>
-            <Table.Td.Text size={size}>{d.Label1}</Table.Td.Text>
+            <Table.Td.Text
+              size={size}
+              background={'#f0f0f0'}
+              borderLeft={'1px solid #000'}
+              borderRight={'1px solid #000'}
+            >
+              {d.Label1}
+            </Table.Td.Text>
             <Table.Td.Text size={size}>{d.Label1}</Table.Td.Text>
             <Table.Td.Text size={size}>{d.Label1}</Table.Td.Text>
             <Table.Td.Text size={size}>{d.Label1}</Table.Td.Text>
