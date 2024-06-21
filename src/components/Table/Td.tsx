@@ -1,4 +1,4 @@
-import { ElementType, ReactNode, type PropsWithChildren } from 'react';
+import { CSSProperties, ElementType, ReactNode, type PropsWithChildren } from 'react';
 
 import styled from '@emotion/styled';
 
@@ -36,27 +36,48 @@ const TABLE_TEXT_TD_STYLE: Record<TdSizeType, { textComponent: ElementType }> = 
   },
 };
 
-const TableDefaultTd = styled.td<{ width?: number; height: number }>`
+const TableDefaultTd = styled.td<{
+  width?: number;
+  height: number;
+  borderLeft?: CSSProperties['borderLeft'];
+  borderRight?: CSSProperties['borderRight'];
+  background?: CSSProperties['background'];
+}>`
   display: table-cell;
   align-items: center;
   flex-shrink: 0;
   width: ${({ width }) => (width ? `${width}px` : 'auto')};
   height: ${({ height }) => height}px;
+  border-left: ${({ borderLeft }) => borderLeft ?? 'none'};
+  border-right: ${({ borderRight }) => borderRight ?? 'none'};
+  background: ${({ background }) => background ?? 'inherit'};
 `;
 
+export interface CommonTdProps {
+  size: TdSizeType;
+  borderLeft?: CSSProperties['borderLeft'];
+  borderRight?: CSSProperties['borderRight'];
+  background?: CSSProperties['background'];
+}
+
+/**
+ * @description when using ellipsis width is must given
+ */
 export const TextTd = ({
   width,
   size,
   children,
   ellipsis,
-}: PropsWithChildren<{
-  width?: number;
-  size: TdSizeType;
-  ellipsis?: boolean;
-}>) => {
+  ...props
+}: PropsWithChildren<
+  {
+    width?: number;
+    ellipsis?: boolean;
+  } & CommonTdProps
+>) => {
   const tdStyle = TABLE_TEXT_TD_STYLE[size];
   return (
-    <TableText ellipsis={ellipsis} width={width} height={TABLE_TD_HEIGHT[size]}>
+    <TableText ellipsis={ellipsis} width={width} height={TABLE_TD_HEIGHT[size]} {...props}>
       <tdStyle.textComponent>{children}</tdStyle.textComponent>
     </TableText>
   );
@@ -87,17 +108,29 @@ const TABLE_IMG_TD_SIZE: Record<TdSizeType, number> = {
   xs: 5,
 };
 
-export const ImgTd = ({ size, src }: { size: TdSizeType; src: string }) => {
+export const ImgTd = ({
+  size,
+  src,
+  ...props
+}: {
+  src: string;
+} & CommonTdProps) => {
   const imgTdSize = TABLE_TD_HEIGHT[size];
   const imgTdPadding = TABLE_IMG_TD_SIZE[size];
   return (
-    <TableDataImage size={imgTdSize} padding={imgTdPadding}>
+    <TableDataImage size={imgTdSize} padding={imgTdPadding} {...props}>
       <TableImg src={src} />
     </TableDataImage>
   );
 };
 
-const TableDataImage = styled.td<{ size: number; padding: number }>`
+const TableDataImage = styled.td<{
+  size: number;
+  padding: number;
+  borderLeft?: CSSProperties['borderLeft'];
+  borderRight?: CSSProperties['borderRight'];
+  background?: CSSProperties['background'];
+}>`
   width: ${({ size }) => size}px;
   height: ${({ size }) => size}px;
   max-width: ${({ size }) => size}px;
@@ -105,6 +138,9 @@ const TableDataImage = styled.td<{ size: number; padding: number }>`
   padding: ${({ padding }) => padding}px;
   vertical-align: middle;
   display: flex;
+  border-left: ${({ borderLeft }) => borderLeft ?? 'none'};
+  border-right: ${({ borderRight }) => borderRight ?? 'none'};
+  background: ${({ background }) => background ?? 'inherit'};
 `;
 
 const TableImg = styled.img`
@@ -122,8 +158,18 @@ const TableImg = styled.img`
  * @description
  * @property {ReactNode} children - use CDS Badge component as children
  */
-export const BadgeTd = ({ size, children }: { size: TdSizeType; children: ReactNode }) => {
-  return <TableBadge height={TABLE_TD_HEIGHT[size]}>{children}</TableBadge>;
+export const BadgeTd = ({
+  size,
+  children,
+  ...props
+}: {
+  children: ReactNode;
+} & CommonTdProps) => {
+  return (
+    <TableBadge height={TABLE_TD_HEIGHT[size]} {...props}>
+      {children}
+    </TableBadge>
+  );
 };
 
 const TableBadge = styled(TableDefaultTd)`
@@ -141,13 +187,13 @@ export const SwitchTd = ({
   size,
   children,
   direction = 'left',
+  ...props
 }: {
-  size: TdSizeType;
   children: ReactNode;
   direction?: SwitchTdDirection;
-}) => {
+} & CommonTdProps) => {
   return (
-    <TableSwitch height={TABLE_TD_HEIGHT[size]} direction={direction}>
+    <TableSwitch height={TABLE_TD_HEIGHT[size]} direction={direction} {...props}>
       {children}
     </TableSwitch>
   );
@@ -163,8 +209,18 @@ const TableSwitch = styled(TableDefaultTd)<{ direction: SwitchTdDirection }>`
  * @description
  * @property {ReactNode} children - use CDS Select component as children
  */
-export const SelectTd = ({ size, children }: { size: TdSizeType; children: ReactNode }) => {
-  return <TableSelect height={TABLE_TD_HEIGHT[size]}>{children}</TableSelect>;
+export const SelectTd = ({
+  size,
+  children,
+  ...props
+}: {
+  children: ReactNode;
+} & CommonTdProps) => {
+  return (
+    <TableSelect height={TABLE_TD_HEIGHT[size]} {...props}>
+      {children}
+    </TableSelect>
+  );
 };
 
 const TableSelect = styled(TableDefaultTd)`
@@ -176,8 +232,18 @@ const TableSelect = styled(TableDefaultTd)`
  * @description
  * @property {ReactNode} children - use CDS Checkbox component as children
  */
-export const CheckboxTd = ({ size, children }: { size: TdSizeType; children: ReactNode }) => {
-  return <TableCheckbox height={TABLE_TD_HEIGHT[size]}>{children}</TableCheckbox>;
+export const CheckboxTd = ({
+  size,
+  children,
+  ...props
+}: {
+  children: ReactNode;
+} & CommonTdProps) => {
+  return (
+    <TableCheckbox height={TABLE_TD_HEIGHT[size]} {...props}>
+      {children}
+    </TableCheckbox>
+  );
 };
 
 const TableCheckbox = styled(TableDefaultTd)`
@@ -190,8 +256,18 @@ const TableCheckbox = styled(TableDefaultTd)`
  * @description
  * @property {ReactNode} children - use CDS Radio component as children
  */
-export const RadioTd = ({ size, children }: { size: TdSizeType; children: ReactNode }) => {
-  return <TableRadio height={TABLE_TD_HEIGHT[size]}>{children}</TableRadio>;
+export const RadioTd = ({
+  size,
+  children,
+  ...props
+}: {
+  children: ReactNode;
+} & CommonTdProps) => {
+  return (
+    <TableRadio height={TABLE_TD_HEIGHT[size]} {...props}>
+      {children}
+    </TableRadio>
+  );
 };
 
 const TableRadio = styled(TableDefaultTd)`
@@ -211,9 +287,20 @@ const TABLE_KEBAB_TD_WIDTH: Record<TdSizeType, number> = {
  * @description
  * @property {ReactNode} children - use CDS Kebab component as children
  */
-export const IconTd = ({ size, children }: { size: TdSizeType; children: ReactNode }) => {
+export const IconTd = ({
+  size,
+  children,
+  ...props
+}: {
+  children: ReactNode;
+} & CommonTdProps) => {
   return (
-    <TableIcon valign="middle" height={TABLE_TD_HEIGHT[size]} width={TABLE_KEBAB_TD_WIDTH[size]}>
+    <TableIcon
+      valign="middle"
+      height={TABLE_TD_HEIGHT[size]}
+      width={TABLE_KEBAB_TD_WIDTH[size]}
+      {...props}
+    >
       {children}
     </TableIcon>
   );

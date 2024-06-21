@@ -569,6 +569,89 @@ export function WithEllipsis() {
   );
 }
 
+export const CustomStyle = () => {
+  const size = 'm';
+
+  return (
+    <Table.Container>
+      <Table.Thead>
+        <Table.Tr readOnly>
+          <Table.Th.Default width={FIXED_TH_WIDTH.IMAGE[size]} text="" size={size} />
+          <Table.Th.Default width="100px" text="Label" size={size} />
+          <Table.Th.Default
+            width="100px"
+            text="Label"
+            size={size}
+            background={'#f0f0f0'}
+            borderLeft={'1px solid #000'}
+            borderRight={'1px solid #000'}
+          />
+          <Table.Th.Default width="100px" text="Label" size={size} />
+          <Table.Th.Default width="100px" text="Label" size={size} />
+          <Table.Th.Default width="100px" text="Label" size={size} />
+          <Table.Th.Default width="100px" text="Badge" size={size} />
+          <Table.Th.Default width="120px" text="Select" size={size} />
+          <Table.Th.Default width="50px" text="Switch" size={size} />
+          <Table.Th.Default width={FIXED_TH_WIDTH.RADIO_ITEM[size]} text=" " size={size} />
+          <Table.Th.Default width={FIXED_TH_WIDTH.KEBAB_MENU[size]} text=" " size={size} />
+          <Table.Th.Checkbox
+            checkboxType={{
+              selected: true,
+              onSelect: () => {},
+            }}
+            size={size}
+          />
+        </Table.Tr>
+      </Table.Thead>
+      <Table.Tbody>
+        {MOCK_DATA.map((d, index) => (
+          <Table.Tr readOnly key={index.toString() + 'Items'} onClick={() => {}}>
+            <Table.Td.Img src={d.img} size={size} />
+            <Table.Td.Text size={size}>{d.Label1}</Table.Td.Text>
+            <Table.Td.Text
+              size={size}
+              background={'#f0f0f0'}
+              borderLeft={'1px solid #000'}
+              borderRight={'1px solid #000'}
+            >
+              {d.Label1}
+            </Table.Td.Text>
+            <Table.Td.Text size={size}>{d.Label1}</Table.Td.Text>
+            <Table.Td.Text size={size}>{d.Label1}</Table.Td.Text>
+            <Table.Td.Text size={size}>{d.Label1}</Table.Td.Text>
+            <Table.Td.Badge size={size}>
+              <Badge dotted variant="green" label={d.Label1} />
+            </Table.Td.Badge>
+            <Table.Td.Select size={size}>
+              <Select
+                selectedValue="1"
+                onSelect={() => {}}
+                options={[
+                  { label: 'Option 1', value: '1' },
+                  { label: 'Option 2', value: '2' },
+                  { label: 'Option 3', value: '3' },
+                ]}
+              />
+            </Table.Td.Select>
+            <Table.Td.Switch size={size}>
+              <Switch checked onChange={() => {}} />
+            </Table.Td.Switch>
+            <Table.Td.Radio size={size}>
+              <Radio.Item value={index} selected onSelect={() => {}} />
+            </Table.Td.Radio>
+            <Table.Td.Icon size={size}>
+              <Icon.DotsHori />
+            </Table.Td.Icon>
+            <Table.Td.Checkbox size={size}>
+              <Checkbox selected onSelect={() => {}} />
+            </Table.Td.Checkbox>
+          </Table.Tr>
+        ))}
+      </Table.Tbody>
+    </Table.Container>
+  );
+};
+
 const Container = styled.div`
   display: flex;
   align-items: center;

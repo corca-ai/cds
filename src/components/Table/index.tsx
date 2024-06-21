@@ -1,6 +1,6 @@
 import { TableContainer } from './TableContainer';
 import { Tbody } from './Tbody';
-import Td, { FixedCellType, TdSizeType } from './Td';
+import Td, { FixedCellType, TdSizeType, CommonTdProps } from './Td';
 import Th, {
   FIXED_TH_WIDTH,
   TABLE_TH_STYLE,
@@ -26,4 +26,5 @@ export type {
   TableThStyleType,
   DefaultThProps,
   CheckboxThProps,
+  CommonTdProps,
 };
