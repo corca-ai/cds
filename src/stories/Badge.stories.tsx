@@ -48,6 +48,23 @@ export function Variant() {
   );
 }
 
+export function Width() {
+  return (
+    <>
+      <BadgeContainer>
+        {badgeVariants.map(variant => (
+          <Badge label="Example Badge Long Text" variant={variant} key={variant} />
+        ))}
+      </BadgeContainer>
+      <BadgeContainer>
+        {badgeVariants.map(variant => (
+          <Badge dotted label="Example Badge Long Text" variant={variant} key={variant} />
+        ))}
+      </BadgeContainer>
+    </>
+  );
+}
+
 const Container = styled.div`
   display: flex;
   gap: 40px;

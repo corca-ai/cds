@@ -33,6 +33,7 @@ export const variantColors: {
 };
 
 const Container = styled.div<{ bg: string }>`
+  width: fit-content;
   display: inline-flex;
   gap: 6px;
   justify-content: center;
