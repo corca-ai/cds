@@ -14,9 +14,7 @@ import { Tr, TrProps } from './Tr';
 
 const Table = { Container: TableContainer, Thead, Th, Tbody, Tr, Td } as const;
 
-export default Table;
-
-export { FIXED_TH_WIDTH, TABLE_TH_STYLE };
+export { Table, FIXED_TH_WIDTH, TABLE_TH_STYLE };
 export type {
   FixedCellType,
   TdSizeType,
