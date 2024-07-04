@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 
 import { B1, Badge, Checkbox, Radio, Select, Switch } from '../components';
 import Icon from '../components/Icon';
-import Table from '../components/Table';
+import { Table } from '../components/Table';
 import { type TdSizeType } from '../components/Table/Td';
 import { FIXED_TH_WIDTH, type ThSizeType } from '../components/Table/Th';
 

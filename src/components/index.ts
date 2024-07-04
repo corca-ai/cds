@@ -1,5 +1,5 @@
 export { default as Icon } from './Icon';
-export { default as Table } from './Table';
+export * from './Table';
 export { default as DatePicker } from './DatePicker';
 export * from './Badge';
 export * from './BottomBar';
