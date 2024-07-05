@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { type SupportLocale } from '../../utils/types/locale.types';
+import { type DatePickerLocale } from '../../utils/types/locale.types';
 import DatePicker from '../DatePicker';
 import { B3 } from '../Text';
 
@@ -23,11 +23,11 @@ const DatePickerItem = styled.div`
 `;
 
 export interface FilterDateRangeProps {
-  dateRange: [Date, Date];
-  changeValue: (dateRange: [Date, Date]) => void;
+  dateRange: Array<Date>;
+  changeValue: (dateRange: Array<Date>) => void;
   startDateLabel?: string;
   endDateLabel?: string;
-  language: SupportLocale;
+  language: DatePickerLocale;
 }
 
 export function FilterDateRange({
@@ -46,7 +46,7 @@ export function FilterDateRange({
             changeValue([date, dateRange[1]]);
           }}
           language={language}
-          maxDate={dateRange[1]}
+          maxDate={dateRange[1] as Date}
           placeholderText="Start Date"
         />
         {startDateLabel && <B3>{startDateLabel}</B3>}

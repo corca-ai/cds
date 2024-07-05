@@ -47,7 +47,7 @@ export function SingleDate() {
       />
       Vietnamese
       <DatePicker.Date
-        selected={dateEn}
+        selected={dateVi}
         onChange={setDateVi}
         language={'vi'}
         inputProps={{ width: 400 }}
@@ -96,7 +96,7 @@ export function DateTime() {
       />
       Vietnamese
       <DatePicker.DateTime
-        selected={dateEn}
+        selected={dateVi}
         onChange={setDateVi}
         language={'vi'}
         inputProps={{ width: 400 }}
