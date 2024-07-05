@@ -4,6 +4,7 @@ import { PropsWithChildren, ReactElement } from 'react';
 import styled from '@emotion/styled';
 
 import { color, typography } from '../styles';
+import { B5 } from '../Text';
 
 export type Placement = 'top' | 'bottom' | 'left' | 'right';
 export type Position = 'start' | 'end' | 'center';
@@ -32,7 +33,7 @@ export function Tooltip({
       <TooltipWrapper className="tooltip-box">
         {withArrow && <TooltipArrow placement={placement} />}
         <TooltipBubble withArrow={withArrow} placement={placement} position={position}>
-          {content}
+          <B5 c="white">{content}</B5>
         </TooltipBubble>
       </TooltipWrapper>
     </TooltipContainer>
@@ -218,13 +219,13 @@ const TooltipBubble = styled.div<BubbleProps>`
   max-width: 300px;
   cursor: help;
   background: ${color['main-black']};
-  color: ${color.white};
   font-size: ${typography.size.xxs}px;
   font-weight: ${typography.weight.regular};
   padding: 7px 10px;
   border-radius: 8px;
   white-space: pre-wrap;
   word-break: break-all;
+  line-height: normal;
 
   ${props => getBubbleMixin(props)}
 `;
