@@ -26,8 +26,8 @@ const DatePickerItem = styled.div`
  *  dateRange - [startDate, endDate]
  */
 export interface FilterDateRangeProps {
-  dateRange: Array<Date>;
-  changeValue: (dateRange: Array<Date>) => void;
+  dateRange: Array<Date | null>;
+  changeValue: (dateRange: Array<Date | null>) => void;
   startDateLabel?: string;
   endDateLabel?: string;
   language: DatePickerLocale;
