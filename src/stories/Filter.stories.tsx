@@ -74,7 +74,7 @@ const INIT_FILTER_VALUE: FilterValues = {
   생성일: '0',
 };
 
-type CustomValue = [Date, Date] | [null, null];
+type CustomValue = Array<Date | null>;
 const INIT_CUSTOM_VALUE: CustomValue = [null, null];
 
 const SelectedValueWrapper = styled.div`
@@ -124,7 +124,7 @@ export function Basic() {
               />
               {filterValues[category.label] === '직접입력' && (
                 <Filter.DateRange
-                  dateRange={customValue as [Date, Date]}
+                  dateRange={customValue}
                   changeValue={value => {
                     setCustomValue(value);
                   }}
