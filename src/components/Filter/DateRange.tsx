@@ -22,6 +22,9 @@ const DatePickerItem = styled.div`
   }
 `;
 
+/**
+ *  dateRange - [startDate, endDate]
+ */
 export interface FilterDateRangeProps {
   dateRange: Array<Date>;
   changeValue: (dateRange: Array<Date>) => void;
@@ -30,6 +33,9 @@ export interface FilterDateRangeProps {
   language: DatePickerLocale;
 }
 
+/**
+ * @param dateRange - [startDate, endDate]
+ */
 export function FilterDateRange({
   dateRange,
   changeValue,
@@ -46,7 +52,7 @@ export function FilterDateRange({
             changeValue([date, dateRange[1]]);
           }}
           language={language}
-          maxDate={dateRange[1] as Date}
+          maxDate={dateRange[1]}
           placeholderText="Start Date"
         />
         {startDateLabel && <B3>{startDateLabel}</B3>}
