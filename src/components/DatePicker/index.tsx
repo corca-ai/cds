@@ -1,5 +1,6 @@
 import { DateTime, CustomTimeInputProps } from './DateTime';
 import { SingleDate, DatePickerProps, CustomInputProps } from './SingleDate';
+import { type DatePickerLocale } from '../../utils/types/locale.types';
 export * from './constant';
 
 /**
@@ -8,4 +9,4 @@ export * from './constant';
 const DatePicker = { Date: SingleDate, DateTime };
 export default DatePicker;
 
-export type { DatePickerProps, CustomInputProps, CustomTimeInputProps };
+export type { DatePickerProps, CustomInputProps, CustomTimeInputProps, DatePickerLocale };

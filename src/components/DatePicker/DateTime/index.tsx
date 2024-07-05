@@ -12,7 +12,7 @@ import {
   HeaderText,
   HeaderWrapper,
 } from '../SingleDate';
-import { LOCALE, MONTHS } from '../constant';
+import { MONTHS } from '../constant';
 import { CustomTimeInput } from './CustomTimeInput';
 export * from './CustomTimeInput';
 
@@ -33,7 +33,7 @@ export function DateTime({
       <DatePicker
         {...props}
         ref={datePickerRef}
-        locale={LOCALE[language]}
+        locale={language}
         selected={newDate}
         onChange={date => setNewDate(date)}
         required={inputProps?.required}

@@ -1,18 +1,7 @@
-import en from 'date-fns/locale/en-US';
-import ko from 'date-fns/locale/ko';
-import vi from 'date-fns/locale/vi';
-
+import { type DatePickerLocale } from '../../utils/types/locale.types';
 import { AMPM } from './DateTime/CustomTimeInput';
-import { type SupportLocale } from '../../utils/types/locale.types';
-import { Locale } from 'date-fns';
 
-export const LOCALE: Record<SupportLocale, Locale> = {
-  ko,
-  en,
-  vn: vi,
-};
-
-export const AMPM_FORMAT: Record<SupportLocale, Record<AMPM, AMPM | '오전' | '오후'>> = {
+export const AMPM_FORMAT: Record<DatePickerLocale, Record<AMPM, AMPM | '오전' | '오후'>> = {
   ko: {
     AM: '오전',
     PM: '오후',
@@ -21,7 +10,7 @@ export const AMPM_FORMAT: Record<SupportLocale, Record<AMPM, AMPM | '오전' | '
     AM: AMPM.AM,
     PM: AMPM.PM,
   },
-  vn: {
+  vi: {
     AM: AMPM.AM,
     PM: AMPM.PM,
   },

@@ -27,6 +27,7 @@ export default {
 export function SingleDate() {
   const [dateKo, setDateKo] = useState<Date | null>(null);
   const [dateEn, setDateEn] = useState<Date | null>(null);
+  const [dateVi, setDateVi] = useState<Date | null>(null);
   const [dateErr, setDateErr] = useState<Date | null>(null);
   return (
     <>
@@ -42,6 +43,13 @@ export function SingleDate() {
         selected={dateEn}
         onChange={setDateEn}
         language={'en'}
+        inputProps={{ width: 400 }}
+      />
+      Vietnamese
+      <DatePicker.Date
+        selected={dateEn}
+        onChange={setDateVi}
+        language={'vi'}
         inputProps={{ width: 400 }}
       />
       Disabled
@@ -68,6 +76,7 @@ export function SingleDate() {
 export function DateTime() {
   const [dateKo, setDateKo] = useState<Date | null>(null);
   const [dateEn, setDateEn] = useState<Date | null>(null);
+  const [dateVi, setDateVi] = useState<Date | null>(null);
   const [dateErr, setDateErr] = useState<Date | null>(null);
   return (
     <>
@@ -83,6 +92,13 @@ export function DateTime() {
         selected={dateEn}
         onChange={setDateEn}
         language={'en'}
+        inputProps={{ width: 400 }}
+      />
+      Vietnamese
+      <DatePicker.DateTime
+        selected={dateEn}
+        onChange={setDateVi}
+        language={'vi'}
         inputProps={{ width: 400 }}
       />
       Disabled

@@ -4,18 +4,18 @@ import DatePicker, { type ReactDatePickerProps } from 'react-datepicker';
 import styled from '@emotion/styled';
 
 import { formatDateByLanguage } from '../../../utils/date';
-import { type SupportLocale } from '../../../utils/types/locale.types';
+import { type DatePickerLocale } from '../../../utils/types/locale.types';
 import Icon from '../../Icon';
 import { DateInput, type DateInputProps } from '../../Input/DateInput';
 import { color } from '../../styles';
-import { LOCALE, MONTHS } from '../constant';
+import { MONTHS } from '../constant';
 
 export interface DatePickerProps extends ReactDatePickerProps {
   selected: Date | null;
   onChange: (date: Date) => void;
-  language: SupportLocale;
+  language: DatePickerLocale;
   inputProps?: Omit<DateInputProps, 'disabled'>;
-  dateFormatter?: (date: Date, language: SupportLocale) => string;
+  dateFormatter?: (date: Date, language: DatePickerLocale) => string;
 }
 
 export function SingleDate({
@@ -33,7 +33,7 @@ export function SingleDate({
       <DatePicker
         {...props}
         ref={datePickerRef}
-        locale={LOCALE[language]}
+        locale={language}
         selected={selected}
         required={inputProps?.required}
         onChange={date => {

@@ -1,1 +1,4 @@
-export type SupportLocale = 'ko' | 'en' | 'vn';
+/**
+ * this should follow the official country code
+ */
+export type DatePickerLocale = 'ko' | 'en' | 'vi';
