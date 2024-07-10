@@ -25,7 +25,7 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    dts(),
+    dts({ exclude: ['src/**/*.stories.ts', 'src/**/*.stories.tsx'] }),
     viteStaticCopy({
       targets: [
         {
