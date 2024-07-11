@@ -4,16 +4,16 @@ import DatePicker from 'react-datepicker';
 import { formatDateTimeByLanguage } from '../../../utils/date';
 import Icon from '../../Icon';
 import { color } from '../../styles';
+import { MONTHS } from '../constant';
+import { CustomTimeInput } from './CustomTimeInput';
+import { DatePickerProps } from '../common/types';
 import {
   CustomInput,
-  DatePickerProps,
   DatepickerWrapper,
   HeaderButton,
   HeaderText,
   HeaderWrapper,
-} from '../SingleDate';
-import { MONTHS } from '../constant';
-import { CustomTimeInput } from './CustomTimeInput';
+} from '../common/common';
 export * from './CustomTimeInput';
 
 export function DateTime({
@@ -24,12 +24,11 @@ export function DateTime({
   dateFormatter,
   ...props
 }: DatePickerProps) {
-  const [newDate, setNewDate] = useState<Date | null>(selected || new Date());
+  const [newDate, setNewDate] = useState<Date | null>(selected ?? new Date());
   const datePickerRef = useRef<DatePicker>(null);
 
   return (
     <DatepickerWrapper monthContainerPadding="20px 16px 18px 16px">
-      {/* @ts-ignore NOTE: need update react types without it*/}
       <DatePicker
         {...props}
         ref={datePickerRef}
@@ -43,8 +42,8 @@ export function DateTime({
             onClick={() => datePickerRef.current?.setOpen(true)}
             date={
               dateFormatter
-                ? dateFormatter(selected!, language)
-                : formatDateTimeByLanguage(selected!, language)
+                ? dateFormatter(selected || new Date(), language)
+                : formatDateTimeByLanguage(selected || new Date(), language)
             }
           />
         }
@@ -52,11 +51,12 @@ export function DateTime({
         customTimeInput={
           <CustomTimeInput
             setNewDate={(date: Date) => setNewDate(date)}
-            newDate={newDate!}
+            newDate={newDate ?? new Date()}
             language={language}
             onConfirm={() => {
+              if (newDate === null) return;
               // onConfirm Button is located here because of style customizing
-              onChange(newDate!);
+              onChange(newDate);
               datePickerRef.current?.setOpen(false);
             }}
           />
