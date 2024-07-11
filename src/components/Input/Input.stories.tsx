@@ -11,12 +11,13 @@ import {
   type TextInputProps,
   color,
   ColorPickerInput,
-} from '../components';
-import Icon from '../components/Icon';
-import { BaseInput, type InputTooltipProps } from '../components/Input/InputContainer';
-import { NumberInput } from '../components/Input/NumberInput';
+} from '..';
+import Icon from '../Icon';
+import { BaseInput, type InputTooltipProps } from './InputContainer';
+import { NumberInput } from './NumberInput';
 import { useState } from 'react';
-import { FileInput, FileInputProps } from '../components/Input/FileInput';
+import { FileInput, FileInputProps } from './FileInput';
+import { CurrencyInput } from './CurrencyInput';
 
 export default {
   title: 'Components/Input',
@@ -338,3 +339,43 @@ const IconTextWrapper = styled.div`
   align-items: center;
   gap: 50px;
 `;
+
+export const CurrencyInputDefault: StoryFn<typeof CurrencyInput> = args => {
+  const [value, setValue] = useState<number>(0);
+  return <CurrencyInput {...args} value={value} onChange={value => value && setValue(value)} />;
+};
+
+CurrencyInputDefault.args = {
+  language: 'ko',
+};
+
+CurrencyInputDefault.argTypes = {
+  language: { type: { name: 'enum', value: ['ko', 'en', 'vi'] } },
+};
+
+export const CurrencyLanguageValdationStory = () => {
+  return (
+    <div>
+      <CurrencyInput language="ko" value={0} onChange={() => {}} />
+      <CurrencyInput language="en" value={0} onChange={() => {}} />
+      <CurrencyInput language="vi" value={0} onChange={() => {}} />
+    </div>
+  );
+};
+
+export const CurrencyRangeStory: StoryFn<typeof CurrencyInput> = args => {
+  const [value, setValue] = useState<number>(49);
+  return (
+    <CurrencyInput
+      {...args}
+      value={value}
+      language="ko"
+      onChange={value => value && setValue(value)}
+    />
+  );
+};
+
+CurrencyRangeStory.args = {
+  min: 50,
+  max: 100,
+};
