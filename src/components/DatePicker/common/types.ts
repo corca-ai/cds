@@ -7,5 +7,5 @@ export interface DatePickerProps extends ReactDatePickerProps {
   onChange: (date: Date) => void;
   language: Language;
   inputProps?: Omit<DateInputProps, 'disabled'>;
-  dateFormatter?: (date: Date, language: Language) => string;
+  dateFormatter?: (date: Date | undefined | null, language: Language) => string;
 }

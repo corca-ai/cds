@@ -12,6 +12,7 @@ import {
   HeaderWrapper,
 } from '../common/common';
 import { DatePickerProps } from '../common/types';
+import { convertLanguageToLocale } from '../../../utils/i18n';
 
 export function SingleDate({
   selected,
@@ -27,7 +28,7 @@ export function SingleDate({
       <DatePicker
         {...props}
         ref={datePickerRef}
-        locale={language}
+        locale={convertLanguageToLocale(language)}
         selected={selected}
         required={inputProps?.required}
         onChange={date => {

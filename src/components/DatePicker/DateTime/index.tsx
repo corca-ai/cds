@@ -14,6 +14,7 @@ import {
   HeaderText,
   HeaderWrapper,
 } from '../common/common';
+import { convertLanguageToLocale } from '../../../utils/i18n';
 export * from './CustomTimeInput';
 
 export function DateTime({
@@ -32,7 +33,7 @@ export function DateTime({
       <DatePicker
         {...props}
         ref={datePickerRef}
-        locale={language}
+        locale={convertLanguageToLocale(language)}
         selected={newDate}
         onChange={date => setNewDate(date)}
         required={inputProps?.required}

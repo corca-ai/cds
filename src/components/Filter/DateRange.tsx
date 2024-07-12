@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { type DatePickerLocale } from '../../utils/types/locale.types';
+import { type Language } from '../../utils/types/locale.types';
 import DatePicker from '../DatePicker';
 import { B3 } from '../Text';
 
@@ -30,7 +30,7 @@ export interface FilterDateRangeProps {
   changeValue: (dateRange: Array<Date | null>) => void;
   startDateLabel?: string;
   endDateLabel?: string;
-  language: DatePickerLocale;
+  language: Language;
 }
 
 /**

@@ -1,6 +1,6 @@
 import { type Language } from './types/locale.types';
 
-export const formatDateByLanguage = (date: Date, language: Language) => {
+export const formatDateByLanguage = (date: Date | undefined | null, language: Language) => {
   if (!date) {
     return;
   }

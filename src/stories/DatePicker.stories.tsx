@@ -166,3 +166,49 @@ const Container = styled.div`
   padding-top: 100px;
   gap: 20px;
 `;
+
+export function DateRangePicker() {
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+
+  return (
+    <Container>
+      <DatePicker.Range
+        selected={startDate}
+        startDate={startDate}
+        endDate={endDate}
+        onChange={dates => {
+          console.log(dates);
+          const [start, end] = dates;
+          setStartDate(start);
+          setEndDate(end);
+        }}
+        language={'en'}
+      />
+      <DatePicker.Range
+        selected={startDate}
+        startDate={startDate}
+        endDate={endDate}
+        onChange={dates => {
+          console.log(dates);
+          const [start, end] = dates;
+          setStartDate(start);
+          setEndDate(end);
+        }}
+        language={'ko'}
+      />
+      <DatePicker.Range
+        selected={startDate}
+        startDate={startDate}
+        endDate={endDate}
+        onChange={dates => {
+          console.log(dates);
+          const [start, end] = dates;
+          setStartDate(start);
+          setEndDate(end);
+        }}
+        language={'vi'}
+      />
+    </Container>
+  );
+}
