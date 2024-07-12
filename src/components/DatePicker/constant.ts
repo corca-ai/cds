@@ -1,7 +1,7 @@
-import { type DatePickerLocale } from '../../utils/types/locale.types';
+import { type Language } from '../../utils/types/locale.types';
 import { AMPM } from './DateTime/CustomTimeInput';
 
-export const AMPM_FORMAT: Record<DatePickerLocale, Record<AMPM, AMPM | '오전' | '오후'>> = {
+export const AMPM_FORMAT: Record<Language, Record<AMPM, AMPM | '오전' | '오후'>> = {
   ko: {
     AM: '오전',
     PM: '오후',

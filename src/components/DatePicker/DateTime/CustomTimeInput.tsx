@@ -6,7 +6,7 @@ import { Button } from '../../Button';
 import { B3 } from '../../Text';
 import { color, typography } from '../../styles';
 import { AMPM_FORMAT } from '../constant';
-import { DatePickerLocale } from 'src/utils';
+import { Language } from 'src/utils';
 
 export interface Time {
   hh: string;
@@ -22,7 +22,7 @@ export enum AMPM {
 
 export interface CustomTimeInputProps {
   newDate: Date;
-  language: DatePickerLocale;
+  language: Language;
   onConfirm: () => void;
   setNewDate: (date: Date) => void;
 }

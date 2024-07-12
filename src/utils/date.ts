@@ -1,6 +1,6 @@
-import { type DatePickerLocale } from './types/locale.types';
+import { type Language } from './types/locale.types';
 
-export const formatDateByLanguage = (date: Date, language: DatePickerLocale) => {
+export const formatDateByLanguage = (date: Date, language: Language) => {
   if (!date) {
     return;
   }
@@ -18,7 +18,7 @@ export const formatDateByLanguage = (date: Date, language: DatePickerLocale) => 
   }
 };
 
-export const formatDateTimeByLanguage = (date: Date, language: DatePickerLocale) => {
+export const formatDateTimeByLanguage = (date: Date, language: Language) => {
   if (!date) {
     return;
   }
