@@ -25,7 +25,7 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    dts({ exclude: ['src/**/*.stories.ts', 'src/**/*.stories.tsx'] }),
+    dts({ tsconfigPath: './tsconfig.build.json' }),
     viteStaticCopy({
       targets: [
         {
