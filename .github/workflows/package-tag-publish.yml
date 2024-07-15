@@ -1,5 +1,5 @@
 name: CDS Tag Publish
-
+run-name: CDS Tag Publish ${{ github.ref_name }}
 on:
   workflow_dispatch:
     
@@ -7,7 +7,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
     steps:
       - uses: actions/checkout@v3
@@ -25,6 +25,7 @@ jobs:
           key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-
+
       - if: steps.pnpm-cache.outputs.cache-hit != 'true'
         run: pnpm install --no-frozen-lockfile
 
@@ -34,12 +35,28 @@ jobs:
         id: tag-meta
         run: |
           BRANCH_SLUG=$(echo "${GITHUB_REF#refs/heads/}" | sed 's/\//-/g')
-          SHORT_SHA=$(echo "${GITHUB_SHA::6}")
-          echo "BRANCH_SLUG=${BRANCH_SLUG}" >> $GITHUB_OUTPUT
-          echo "SHORT_SHA=${SHORT_SHA}" >> $GITHUB_OUTPUT
+          TIME=$(date +%s)
+          echo "BRANCH_SLUG=${BRANCH_SLUG}" >> "$GITHUB_OUTPUT"
+          echo "TIME=${TIME}" >> "$GITHUB_OUTPUT"
 
-      - uses: JS-DevTools/npm-publish@v3
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
-          tag: ${{ steps.tag-meta.outputs.BRANCH_SLUG }}-${{ steps.tag-meta.outputs.SHORT_SHA }}
+
+      - name: Publish Dev Tag
+        env:
+          TAG_NAME: ${{ steps.tag-meta.outputs.BRANCH_SLUG }}-${{ steps.tag-meta.outputs.TIME }}
+        run: |
+          rm -rf src .husky .github .storybook .prettierrc .eslint.config.js pnpm-lock.yaml vercel.json vite.config.js tsconfig.json tsconfig.build.json tsconfig.node.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          CURRENT_VERSION=$(pnpm pkg get version | tr -d '"')
+          pnpm version $CURRENT_VERSION-$TAG_NAME --no-git-tag-version
+          git add .
+          git add -f dist
+          git commit -m "chore: release v$CURRENT_VERSION-$TAG_NAME"
+          git tag -a v$CURRENT_VERSION-$TAG_NAME -m "Release v$CURRENT_VERSION-$TAG_NAME"
+          git push --tag
+        
+
+
+
+        
 
