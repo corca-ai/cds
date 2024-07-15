@@ -1,0 +1,47 @@
+name: CDS Tag Publish
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
+      - uses: actions/cache@v3
+        id: pnpm-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+      - if: steps.pnpm-cache.outputs.cache-hit != 'true'
+        run: pnpm install --no-frozen-lockfile
+
+      - run: pnpm run build
+
+      - name: Get SLUG and SHA
+        id: tag-meta
+        run: |
+          BRANCH_SLUG=$(echo "${GITHUB_REF#refs/heads/}" | sed 's/\//-/g')
+          SHORT_SHA=$(echo "${GITHUB_SHA::6}")
+          echo "BRANCH_SLUG=${BRANCH_SLUG}" >> $GITHUB_OUTPUT
+          echo "SHORT_SHA=${SHORT_SHA}" >> $GITHUB_OUTPUT
+
+      - uses: JS-DevTools/npm-publish@v3
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          tag: ${{ steps.tag-meta.outputs.BRANCH_SLUG }}-${{ steps.tag-meta.outputs.SHORT_SHA }}
+
