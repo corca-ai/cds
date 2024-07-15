@@ -1,9 +1,7 @@
-import _ from 'lodash';
-
 import { TextInput, TextInputProps } from './TextInput';
 
 const getIntegerOrNull = (value: number | string) => {
-  if (value !== '' && _.isNumber(Number(value))) {
+  if (value !== '' && isNumber(Number(value))) {
     return Math.round(Number(value));
   }
   return null;
@@ -27,4 +25,8 @@ export function NumberInput({ value, onChange, onBlur, ...props }: NumberInputPr
       {...props}
     />
   );
+}
+
+function isNumber(value: unknown): value is number {
+  return typeof value === 'number' && !isNaN(value);
 }
