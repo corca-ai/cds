@@ -1,6 +1,11 @@
 module.exports = {
-  framework: '@storybook/react-vite',
+  framework: {
+    name: '@storybook/react-vite',
+    options: {},
+  },
+
   stories: ['../**/*.stories.@(js|jsx|ts|tsx)'],
+
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
@@ -9,10 +14,9 @@ module.exports = {
     '@storybook/addon-designs',
   ],
 
-  core: {
-    builder: '@storybook/builder-vite',
-  },
   typescript: {
     reactDocgen: 'react-docgen-typescript',
   },
+
+  docs: {},
 };

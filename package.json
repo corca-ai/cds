@@ -10,7 +10,8 @@
   "styles": "dist/global.css",
   "repository": "https://github.com/corca-ai/cds",
   "scripts": {
-    "build": "tsc && vite build",
+    "build": "vite build",
+    "tsc": "tsc --noEmit",
     "lint": "eslint ./src",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -43,7 +44,6 @@
     "@storybook/addon-interactions": "8.2.2",
     "@storybook/addon-links": "8.2.2",
     "@storybook/addon-storysource": "8.2.2",
-    "@storybook/builder-vite": "8.2.2",
     "@storybook/react": "8.2.2",
     "@storybook/react-vite": "8.2.2",
     "@types/react-datepicker": "4.19.6",
