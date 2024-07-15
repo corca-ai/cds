@@ -8,7 +8,11 @@ module.exports = {
     '@storybook/addon-storysource',
     '@storybook/addon-designs',
   ],
+
   core: {
     builder: '@storybook/builder-vite',
+  },
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
   },
 };
