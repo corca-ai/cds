@@ -13,8 +13,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "vite build",
-    "tsc": "tsc --noEmit",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
     "lint": "eslint ./src",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -78,7 +78,8 @@
   "lint-staged": {
     "*.{ts,tsx}": [
       "prettier --parser=typescript --write",
-      "eslint --fix"
+      "eslint --fix",
+      "tsc --noEmit"
     ]
   }
 }
