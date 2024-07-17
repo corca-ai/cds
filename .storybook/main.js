@@ -1,4 +1,7 @@
-module.exports = {
+/**
+ * @type {import('@storybook/react-vite').StorybookConfig} StorybookConfig
+ */
+const config = {
   framework: {
     name: '@storybook/react-vite',
     options: {},
@@ -20,3 +23,5 @@ module.exports = {
 
   docs: {},
 };
+
+export default config;
