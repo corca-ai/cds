@@ -4,15 +4,23 @@
   "description": "Design System for Corca, Inc.",
   "private": false,
   "version": "0.0.29",
-  "type": "module",
   "packageManager": "pnpm@8.15.4",
-  "main": "dist/index.js",
-  "styles": "dist/global.css",
-  "repository": "https://github.com/corca-ai/cds",
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./esm/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
   "files": [
-    "dist"
+    "dist",
+    "esm"
   ],
   "sideEffects": false,
+  "repository": "https://github.com/corca-ai/cds",
   "scripts": {
     "build": "tsc --noEmit && vite build",
     "typecheck": "tsc --noEmit",
@@ -30,10 +38,8 @@
   "peerDependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.11.0",
-    "@types/react": "^18.2.60",
-    "@types/react-dom": "^18.2.19"
+    "@emotion/react": "*",
+    "@emotion/styled": "^11.11.0"
   },
   "devDependencies": {
     "react": "^18.0.0",
@@ -79,8 +85,7 @@
   "lint-staged": {
     "*.{ts,tsx}": [
       "prettier --parser=typescript --write",
-      "eslint --fix",
-      "tsc --noEmit"
+      "eslint --fix"
     ]
   }
 }
