@@ -1,4 +1,4 @@
-import { StoryFn } from '@storybook/react';
+import { ArgTypes, StoryFn } from '@storybook/react';
 
 import styled from '@emotion/styled';
 
@@ -50,7 +50,7 @@ const tooltipArgs: InputTooltipProps = {
   withArrow: true,
 };
 
-const argsType = {
+const argsType: ArgTypes = {
   error: {
     name: 'error',
     control: { type: 'text' },
@@ -69,6 +69,7 @@ TextInputDefault.args = {
   label: '텍스트를 입력받을 수 있는 입력창',
   placeholder: '텍스트를 입력해주세요.',
 };
+
 TextInputDefault.argTypes = argsType;
 
 const PasswordInputTemplate: StoryFn<typeof PasswordInput> = args => <PasswordInput {...args} />;

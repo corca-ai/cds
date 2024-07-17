@@ -1,4 +1,5 @@
-import { ComponentMeta, StoryFn } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
+
 import React from 'react';
 
 import styled from '@emotion/styled';
@@ -27,7 +28,7 @@ export default {
       },
     },
   },
-} as ComponentMeta<typeof Tabs>;
+} as Meta<typeof Tabs>;
 
 export function Default() {
   const [selected, setSelected] = React.useState('1');
