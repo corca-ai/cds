@@ -1,4 +1,4 @@
-import type { DatePickerLocale } from 'src/utils';
+import type { DatePickerLocale } from 'src/legacy/utils';
 import Icon from '../Icon';
 import { NumberInput } from './NumberInput';
 import type { NumberInputProps } from './NumberInput';

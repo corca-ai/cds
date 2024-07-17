@@ -6,7 +6,7 @@ import { Button } from '../../Button';
 import { B3 } from '../../Text';
 import { color, typography } from '../../styles';
 import { AMPM_FORMAT } from '../constant';
-import { DatePickerLocale } from 'src/utils';
+import { DatePickerLocale } from 'src/legacy/utils';
 
 export interface Time {
   hh: string;
