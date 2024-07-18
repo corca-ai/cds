@@ -9,22 +9,39 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, './src/index.ts'),
-      formats: ['es', 'cjs'],
       name: 'cds',
       fileName: 'index',
     },
+    sourcemap: true,
+    emptyOutDir: true,
     rollupOptions: {
-      external: ['react', 'react-dom', '@emotion/react', '@emotion/styled'],
-      output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
+      external: [
+        'react',
+        'react-dom',
+        '@emotion/react',
+        '@emotion/styled',
+        '@emotion/react/jsx-runtime',
+      ],
+      output: [
+        {
+          format: 'cjs',
+          preserveModulesRoot: 'src',
+          entryFileNames: '[name].js',
         },
-      },
+        {
+          format: 'es',
+          preserveModules: true,
+          preserveModulesRoot: 'src',
+          entryFileNames: '[name].mjs',
+        },
+      ],
     },
   },
   plugins: [
-    react(),
+    react({
+      jsxImportSource: '@emotion/react',
+      jsxRuntime: 'automatic',
+    }),
     dts({ tsconfigPath: './tsconfig.build.json' }),
     viteStaticCopy({
       targets: [
