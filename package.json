@@ -27,7 +27,7 @@
     "lint": "eslint ./src",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "husky"
+    "postinstall": "husky"
   },
   "dependencies": {
     "date-fns": "3.3.1",
