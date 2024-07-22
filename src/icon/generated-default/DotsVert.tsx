@@ -1,0 +1,36 @@
+import type { SVGProps } from 'react';
+import { Ref, forwardRef } from 'react';
+interface SVGRProps {
+  title?: string;
+  titleId?: string;
+  size?: number;
+}
+const DotsVert = (
+  {
+    title = 'DotsVert',
+    titleId = 'CDS-DotsVertIcon',
+    size = 20,
+    color = '#363738',
+    ...props
+  }: SVGProps<SVGSVGElement> & SVGRProps,
+  ref: Ref<SVGSVGElement>,
+) => (
+  <svg
+    width={size}
+    height={size}
+    fill="none"
+    viewBox="0 0 20 20"
+    color={color}
+    ref={ref}
+    aria-labelledby={titleId}
+    {...props}
+  >
+    {title ? <title id={titleId}>{title}</title> : null}
+    <path
+      fill="currentColor"
+      d="M11.5 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0M11.5 10a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0M11.5 15.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"
+    />
+  </svg>
+);
+const ForwardRef = forwardRef(DotsVert);
+export { ForwardRef as DotsVert };

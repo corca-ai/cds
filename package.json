@@ -28,7 +28,7 @@
     "lint": "eslint ./src",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "icongen": "svgr --out-dir ./src/icon/generated-default -- ./src/icon/assets",
+    "icongen": "svgr --out-dir ./src/icon/generated-default --index-template ./tools/svgrIndexTemplate.cjs -- ./src/icon/assets",
     "postinstall": "husky && panda codegen"
   },
   "dependencies": {
@@ -59,6 +59,7 @@
     "@storybook/react": "8.2.2",
     "@storybook/react-vite": "8.2.2",
     "@svgr/cli": "8.1.0",
+    "@svgr/core": "^8.1.0",
     "@types/react-datepicker": "4.19.6",
     "@types/eslint__js": "8.42.3",
     "@typescript-eslint/eslint-plugin": "5.62.0",
