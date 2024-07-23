@@ -1,1 +1,1 @@
-export const component = 'component';
+export { Button } from './button';
