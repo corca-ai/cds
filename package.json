@@ -12,6 +12,31 @@
       "import": "./dist/index.mjs",
       "types": "./dist/index.d.ts"
     },
+    "./core": {
+      "require": "./dist/core/index.js",
+      "import": "./dist/core/index.mjs",
+      "types": "./dist/core/index.d.ts"
+    },
+    "./icon": {
+      "require": "./dist/icon/index.js",
+      "import": "./dist/icon/index.mjs",
+      "types": "./dist/icon/index.d.ts"
+    },
+    "./composite": {
+      "require": "./dist/composite/index.js",
+      "import": "./dist/composite/index.mjs",
+      "types": "./dist/composite/index.d.ts"
+    },
+    "./component": {
+      "require": "./dist/component/index.js",
+      "import": "./dist/component/index.mjs",
+      "types": "./dist/component/index.d.ts"
+    },
+    "./legacy": {
+      "require": "./dist/legacy/index.js",
+      "import": "./dist/legacy/index.mjs",
+      "types": "./dist/legacy/index.d.ts"
+    },
     "./package.json": "./package.json"
   },
   "main": "./dist/index.js",
