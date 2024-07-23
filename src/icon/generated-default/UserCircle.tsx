@@ -1,10 +1,6 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef } from 'react';
-interface SVGRProps {
-  title?: string;
-  titleId?: string;
-  size?: number;
-}
+import type { IconProps } from '../share/props';
 const UserCircle = (
   {
     title = 'UserCircle',
@@ -12,7 +8,7 @@ const UserCircle = (
     size = 20,
     color = '#363738',
     ...props
-  }: SVGProps<SVGSVGElement> & SVGRProps,
+  }: SVGProps<SVGSVGElement> & IconProps,
   ref: Ref<SVGSVGElement>,
 ) => (
   <svg

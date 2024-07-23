@@ -33,16 +33,7 @@ export default {
   },
   template: (variables, { tpl }) => {
     variables.componentName = variables.componentName.replace(/^Svg/, '');
-    variables.interfaces[0].body.body.push({
-      type: 'TSPropertySignature',
-      key: { type: 'Identifier', name: 'size' },
-      typeAnnotation: {
-        type: 'TSTypeAnnotation',
-        typeAnnotation: { type: 'TSNumberKeyword' },
-      },
-      kind: null,
-      optional: true,
-    });
+
     variables.props.forEach(prop => {
       if (prop.type === 'ObjectPattern') {
         prop.properties = [
@@ -96,13 +87,41 @@ export default {
           },
           prop.properties[prop.properties.length - 1],
         ];
+
+        prop.typeAnnotation = {
+          type: 'TSTypeAnnotation',
+          typeAnnotation: {
+            type: 'TSIntersectionType',
+            types: [
+              {
+                type: 'TSTypeReference',
+                typeName: { type: 'Identifier', name: 'SVGProps' },
+                typeParameters: {
+                  type: 'TSTypeParameterInstantiation',
+                  params: [
+                    {
+                      type: 'TSTypeReference',
+                      typeName: { type: 'Identifier', name: 'SVGSVGElement' },
+                      typeParameters: null,
+                    },
+                  ],
+                },
+              },
+              {
+                type: 'TSTypeReference',
+                typeName: { type: 'Identifier', name: 'IconProps' },
+                typeParameters: null,
+              },
+            ],
+          },
+        };
       }
       return prop;
     });
 
     return tpl`
     ${variables.imports}
-    ${variables.interfaces}
+    import type { IconProps } from '../share/props';
     
     const ${variables.componentName} = (${variables.props}) => (
       ${variables.jsx}
