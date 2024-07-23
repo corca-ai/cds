@@ -12,11 +12,6 @@
       "import": "./dist/index.mjs",
       "types": "./dist/index.d.ts"
     },
-    "./core": {
-      "require": "./dist/core/index.js",
-      "import": "./dist/core/index.mjs",
-      "types": "./dist/core/index.d.ts"
-    },
     "./icon": {
       "require": "./dist/icon/index.js",
       "import": "./dist/icon/index.mjs",

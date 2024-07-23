@@ -1,2 +1,4 @@
-export * from './legacy/utils';
-export * from './legacy/components';
+export * from './component';
+export * from './composite';
+export * from './icon';
+export * from './token';
