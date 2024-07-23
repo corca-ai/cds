@@ -8,7 +8,15 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, './src/index.ts'),
+      entry: {
+        index: resolve(__dirname, './src/index.ts'),
+        core: resolve(__dirname, './src/core/index.ts'),
+        icon: resolve(__dirname, './src/icon/index.ts'),
+        component: resolve(__dirname, './src/component/index.ts'),
+        composite: resolve(__dirname, './src/composite/index.ts'),
+        legacy: resolve(__dirname, './src/legacy/index.ts'),
+        token: resolve(__dirname, './src/token/index.ts'),
+      },
       name: 'cds',
       fileName: 'index',
     },
