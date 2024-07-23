@@ -5,18 +5,15 @@ import dts from 'vite-plugin-dts';
 import react from '@vitejs/plugin-react';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 
+// tsconfg 설정 인식이 잘 안됨. 설정파일이라서 그냥 무시하도록 설정
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import packageJson from './package.json';
+
 export default defineConfig({
   build: {
     lib: {
-      entry: {
-        index: resolve(__dirname, './src/index.ts'),
-        core: resolve(__dirname, './src/core/index.ts'),
-        icon: resolve(__dirname, './src/icon/index.ts'),
-        component: resolve(__dirname, './src/component/index.ts'),
-        composite: resolve(__dirname, './src/composite/index.ts'),
-        legacy: resolve(__dirname, './src/legacy/index.ts'),
-        token: resolve(__dirname, './src/token/index.ts'),
-      },
+      entry: convertExportsToEntries(packageJson.exports),
       name: 'cds',
       fileName: 'index',
     },
@@ -61,3 +58,16 @@ export default defineConfig({
     }),
   ],
 });
+
+function convertExportsToEntries(exports: object) {
+  const entries: Record<string, string> = {};
+
+  for (const key in exports) {
+    if (key === './package.json') continue; // Ignore package.json entry
+    const entryPath = key === '.' ? './src/index.ts' : `src/${key}/index.ts`;
+    const formattedKey = key === '.' ? 'index' : `${key.slice(2)}/index`;
+    entries[formattedKey] = resolve(__dirname, entryPath);
+  }
+
+  return entries;
+}
