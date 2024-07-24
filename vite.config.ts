@@ -63,7 +63,8 @@ function convertExportsToEntries(exports: object) {
   const entries: Record<string, string> = {};
 
   for (const key in exports) {
-    if (key === './package.json') continue; // Ignore package.json entry
+    // Ignore regular expression patterns that end with *.*
+    if (/^\.\S+[^/]+\.[^/]+$/.test(key)) continue;
     const entryPath = key === '.' ? './src/index.ts' : `src/${key}/index.ts`;
     const formattedKey = key === '.' ? 'index' : `${key.slice(2)}/index`;
     entries[formattedKey] = resolve(__dirname, entryPath);
