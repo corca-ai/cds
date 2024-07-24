@@ -30,15 +30,15 @@ const cdsPreset = definePreset({
         etc: {
           white: { value: '#ffffff' },
           focus: { value: '#3b79d7' },
-          active: {
-            30: { value: '#b10e1c' },
-            20: { value: '#fc685f' },
-            10: { value: '#ffe7e6' },
-          },
           error: {
-            30: { value: '#037847' },
-            20: { value: '#14ba6d' },
+            10: { value: '#ffe7e6' },
+            20: { value: '#fc685f' },
+            30: { value: '#b10e1c' },
+          },
+          active: {
             10: { value: '#ecfdf3' },
+            20: { value: '#14ba6d' },
+            30: { value: '#037847' },
           },
         },
       },
@@ -124,4 +124,5 @@ export default defineConfig({
   polyfill: true,
   // The output directory for your css system
   outdir: 'styled-system',
+  jsxFramework: 'react',
 });
