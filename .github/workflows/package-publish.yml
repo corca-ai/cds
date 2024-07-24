@@ -28,7 +28,7 @@ jobs:
             styled-system
           key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: |
-              ${{ runner.os }}-pnpm-
+            ${{ runner.os }}-pnpm-
       - if: steps.pnpm-cache.outputs.cache-hit != 'true'
         run: pnpm install --no-frozen-lockfile
 
