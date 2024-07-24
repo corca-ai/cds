@@ -32,6 +32,8 @@
       "import": "./dist/legacy/index.mjs",
       "types": "./dist/legacy/index.d.ts"
     },
+    "./cds.css": "./dist/cds.css",
+    "./global.css": "./dist/global.css",
     "./package.json": "./package.json"
   },
   "main": "./dist/index.js",
@@ -43,7 +45,7 @@
   "sideEffects": false,
   "repository": "https://github.com/corca-ai/cds",
   "scripts": {
-    "build": "tsc --noEmit && vite build && panda cssgen --outfile dist/index.css",
+    "build": "tsc --noEmit && vite build && panda cssgen --outfile dist/cds.css",
     "typecheck": "tsc --noEmit",
     "lint": "eslint ./src",
     "storybook": "storybook dev -p 6006",
