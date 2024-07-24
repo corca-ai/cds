@@ -51,7 +51,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "icongen": "svgr --out-dir ./src/icon/generated-default --index-template ./tools/svgrIndexTemplate.cjs -- ./src/icon/assets",
-    "postinstall": "husky && panda codegen"
+    "postinstall": "husky",
+    "prepare": "panda codegen"
   },
   "dependencies": {
     "date-fns": "3.3.1",
