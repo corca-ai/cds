@@ -1,4 +1,5 @@
 import '../src/global.css';
+import '../src/cds.css';
 import './styles.css';
 
 /** @type { import('@storybook/react').Preview } */

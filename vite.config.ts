@@ -5,10 +5,15 @@ import dts from 'vite-plugin-dts';
 import react from '@vitejs/plugin-react';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 
+// tsconfg 설정 인식이 잘 안됨. 설정파일이라서 그냥 무시하도록 설정
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import packageJson from './package.json';
+
 export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, './src/index.ts'),
+      entry: convertExportsToEntries(packageJson.exports),
       name: 'cds',
       fileName: 'index',
     },
@@ -53,3 +58,17 @@ export default defineConfig({
     }),
   ],
 });
+
+function convertExportsToEntries(exports: object) {
+  const entries: Record<string, string> = {};
+
+  for (const key in exports) {
+    // Ignore regular expression patterns that end with *.*
+    if (/^\.\S+[^/]+\.[^/]+$/.test(key)) continue;
+    const entryPath = key === '.' ? './src/index.ts' : `src/${key}/index.ts`;
+    const formattedKey = key === '.' ? 'index' : `${key.slice(2)}/index`;
+    entries[formattedKey] = resolve(__dirname, entryPath);
+  }
+
+  return entries;
+}
