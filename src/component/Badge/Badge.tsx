@@ -13,10 +13,10 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 }
 
 export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(function Badge(badgeProps, ref) {
-  const { className, label, variant, dotted } = badgeProps;
+  const { className, label, variant, dotted, ...props } = badgeProps;
   const classes = badgeSlot({ variant, dotted });
   return (
-    <span ref={ref} {...badgeProps} className={cx(classes.root, className)}>
+    <span ref={ref} {...props} className={cx(classes.root, className)}>
       <span className={classes.text}>{label}</span>
     </span>
   );
