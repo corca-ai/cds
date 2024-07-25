@@ -1,3 +1,6 @@
+import tsconfigPaths from 'vite-tsconfig-paths';
+import { mergeConfig } from 'vite';
+
 /**
  * @type {import('@storybook/react-vite').StorybookConfig} StorybookConfig
  */
@@ -22,6 +25,11 @@ const config = {
   },
 
   docs: {},
+  async viteFinal(config) {
+    return mergeConfig(config, {
+      plugins: [tsconfigPaths()],
+    });
+  },
 };
 
 export default config;
