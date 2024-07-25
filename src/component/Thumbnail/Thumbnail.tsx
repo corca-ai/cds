@@ -19,16 +19,12 @@ export const Thumbnail = forwardRef<HTMLDivElement, ThumbnailProps>(function Thu
       ref={ref}
       {...props}
       className={cx(classes.root, className)}
-      style={{ width: size, height: size }}
+      style={{
+        width: size,
+        height: size,
+      }}
     >
-      {url && (
-        <img
-          src={url}
-          alt={alt}
-          className={cx(classes.image)}
-          style={{ width: size, height: size }}
-        />
-      )}
+      {url && <img src={url} alt={alt} className={cx(classes.image)} />}
     </div>
   );
 });
@@ -48,6 +44,8 @@ const thumbnailSlot = sva({
     image: {
       objectFit: 'cover',
       borderRadius: '4px',
+      width: '100%',
+      height: '100%',
     },
   },
 });
