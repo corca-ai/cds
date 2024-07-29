@@ -30,6 +30,8 @@ export const Switch = forwardRef<HTMLLabelElement, SwitchProps>(function Switch(
   );
 });
 
+Switch.displayName = 'Switch';
+
 const switchSlot = sva({
   slots: ['root', 'checkbox', 'slider', 'text', 'textOn', 'textOff'],
   base: {
@@ -150,30 +152,6 @@ const switchSlot = sva({
         },
         text: {
           color: 'grey.60',
-        },
-      },
-    },
-    {
-      checked: true,
-      disabled: false,
-      css: {
-        slider: {
-          bg: 'main.black',
-          '&::before': {
-            transform: 'translateX(23px)',
-          },
-        },
-      },
-    },
-    {
-      checked: false,
-      disabled: false,
-      css: {
-        slider: {
-          bg: 'grey.40',
-          '&::before': {
-            transform: 'translateX(3px)',
-          },
         },
       },
     },
