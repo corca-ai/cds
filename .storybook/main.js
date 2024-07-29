@@ -18,6 +18,7 @@ const config = {
     '@storybook/addon-interactions',
     '@storybook/addon-storysource',
     '@storybook/addon-designs',
+    '@storybook/addon-interactions',
   ],
 
   typescript: {
