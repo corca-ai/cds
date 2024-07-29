@@ -12,7 +12,7 @@ import {
 import { cva, cx } from 'styled-system/css';
 import { SystemStyleObject } from 'styled-system/types';
 
-export const TimeInput = forwardRef(function _TimeInput<T extends TimeValue>(
+export const TileField = forwardRef(function _TimeField<T extends TimeValue>(
   dateInputProps: RacTimeFieldProps<T>,
   ref: React.Ref<HTMLDivElement>,
 ) {
@@ -35,7 +35,7 @@ export const TimeInput = forwardRef(function _TimeInput<T extends TimeValue>(
     </RacTimeField>
   );
 });
-TimeInput.displayName = 'TimeInput';
+TileField.displayName = 'TileField';
 
 const dateInputCva = cva({
   base: {

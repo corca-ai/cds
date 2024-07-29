@@ -63,7 +63,7 @@ function CalanderHeading(props: { className?: string }) {
   const context = useContext(RacHeadingContext);
   if (context && 'children' in context && typeof context.children === 'string') {
     return (
-      <RacHeading className={props.className} aria-hidden={false}>
+      <RacHeading className={props.className} aria-hidden={false} aria-label={context.children}>
         {context.children.split(' ').map((text, index) => (
           <span key={index}>{text}</span>
         ))}

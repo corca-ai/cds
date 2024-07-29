@@ -1,15 +1,15 @@
 import { Meta, StoryObj } from '@storybook/react/*';
-import { TimeInput } from './TimeInput';
+import { TileField } from './TileField';
 import { parseDateTime } from '@internationalized/date';
 import { useState } from 'react';
 import { I18nProvider, TimeValue } from 'react-aria-components';
 import { Locale } from 'src/core/locales';
 
 export default {
-  component: TimeInput,
-} as Meta<typeof TimeInput>;
+  component: TileField,
+} as Meta<typeof TileField>;
 
-type Story = StoryObj<typeof TimeInput>;
+type Story = StoryObj<typeof TileField>;
 
 export const Default: Story = {
   args: {
@@ -32,7 +32,7 @@ export const LocaleTest = () => {
       {[Locale.ko, Locale.en, Locale.vi].map(locale => (
         <I18nProvider key={locale} locale={locale}>
           <h2>{locale}</h2>
-          <TimeInput value={time} onChange={value => setTime(value)} />
+          <TileField value={time} onChange={value => setTime(value)} />
         </I18nProvider>
       ))}
     </div>
@@ -46,20 +46,20 @@ export const GraunlarityTest = () => {
   return (
     <div>
       <h2>hour</h2>
-      <TimeInput value={time} onChange={value => setTime(value)} granularity="hour" />
+      <TileField value={time} onChange={value => setTime(value)} granularity="hour" />
       <h2>minute</h2>
-      <TimeInput value={time} onChange={value => setTime(value)} granularity="minute" />
+      <TileField value={time} onChange={value => setTime(value)} granularity="minute" />
       <h2>second</h2>
-      <TimeInput value={time} onChange={value => setTime(value)} granularity="second" />
+      <TileField value={time} onChange={value => setTime(value)} granularity="second" />
       <br />
       <label>result : {time.toString()}</label>
       <br />
       <h2>hour</h2>
-      <TimeInput value={time2} onChange={value => setTime2(value)} granularity="hour" />
+      <TileField value={time2} onChange={value => setTime2(value)} granularity="hour" />
       <h2>minute</h2>
-      <TimeInput value={time2} onChange={value => setTime2(value)} granularity="minute" />
+      <TileField value={time2} onChange={value => setTime2(value)} granularity="minute" />
       <h2>second</h2>
-      <TimeInput value={time2} onChange={value => setTime2(value)} granularity="second" />
+      <TileField value={time2} onChange={value => setTime2(value)} granularity="second" />
       <br />
       <label>result : {time2.toString()}</label>
     </div>
