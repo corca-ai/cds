@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { cx, sva } from '../../../styled-system/css';
+import { cx, sva } from '../../styled-system/css';
 
 export interface ThumbnailProps extends React.HTMLAttributes<HTMLDivElement> {
   url: string | null;

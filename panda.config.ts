@@ -123,6 +123,6 @@ export default defineConfig({
 
   polyfill: true,
   // The output directory for your css system
-  outdir: 'styled-system',
+  outdir: './src/styled-system',
   jsxFramework: 'react',
 });

@@ -1,7 +1,7 @@
 import { Thumbnail } from './Thumbnail';
 import type { Meta, StoryFn } from '@storybook/react';
-import { hstack, vstack } from '../../../styled-system/patterns';
-import { css } from '../../../styled-system/css';
+import { hstack, vstack } from '../../styled-system/patterns';
+import { css } from '../../styled-system/css';
 
 export default {
   component: Thumbnail,

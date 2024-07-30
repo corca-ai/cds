@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from '@storybook/react';
 import { Badge } from './Badge';
-import { hstack, vstack } from '../../../styled-system/patterns';
+import { hstack, vstack } from '../../styled-system/patterns';
 
 export default {
   component: Badge,

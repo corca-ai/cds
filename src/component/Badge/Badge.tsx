@@ -1,5 +1,5 @@
 import { forwardRef, ReactNode } from 'react';
-import { cx, RecipeVariantProps, sva } from '../../../styled-system/css';
+import { cx, RecipeVariantProps, sva } from '../../styled-system/css';
 
 type BadgeVaraint = NonNullable<RecipeVariantProps<typeof badgeSlot>>['variant'];
 
