@@ -54,6 +54,10 @@ export default defineConfig({
           src: ['src/*.css'],
           dest: resolve(__dirname, 'dist'),
         },
+        {
+          src: ['src/styled-system/types/*.d.ts'],
+          dest: resolve(__dirname, 'dist/styled-system/types'),
+        },
       ],
     }),
   ],
