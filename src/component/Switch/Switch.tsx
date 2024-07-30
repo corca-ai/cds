@@ -32,18 +32,13 @@ export const Switch = forwardRef<HTMLLabelElement, SwitchProps>(function Switch(
 
 Switch.displayName = 'Switch';
 
-const SWITCH_WIDTH = 38;
-const SWITCH_HEIGHT = 18;
-const SWITCH_CIRCLE_SIZE = 12;
-const SWITCH_CIRCLE_GAP = 3;
-
 const switchSlot = sva({
   slots: ['root', 'checkbox', 'slider', 'text', 'textOn', 'textOff'],
   base: {
     root: {
       position: 'relative',
-      width: `${SWITCH_WIDTH}px`,
-      height: `${SWITCH_HEIGHT}px`,
+      width: '38px',
+      height: '18px',
       userSelect: 'none',
       display: 'inline-block',
       cursor: 'pointer',
@@ -62,16 +57,20 @@ const switchSlot = sva({
       borderRadius: '10px',
       display: 'flex',
       alignItems: 'center',
-      transition: 'background 0.2s ease',
+      transitionDuration: '0.2s',
+      transitionTimingFunction: 'ease',
+      border: '3px solid',
       '&::before': {
         content: '""',
         zIndex: 10,
-        width: `${SWITCH_CIRCLE_SIZE}px`,
-        height: `${SWITCH_CIRCLE_SIZE}px`,
+        height: '100%',
+        aspectRatio: 1,
         backgroundColor: 'etc.white',
         borderRadius: '50%',
-        transition: 'transform 0.2s ease, background-color 0.2s ease',
-        transform: `translateX(${SWITCH_CIRCLE_GAP}px)`,
+        transitionDuration: '0.2s',
+        transitionTimingFunction: 'ease',
+        position: 'absolute',
+        left: '0%',
       },
     },
     text: {
@@ -82,10 +81,10 @@ const switchSlot = sva({
       lineHeight: '1.2',
     },
     textOn: {
-      left: '5px',
+      left: '2px',
     },
     textOff: {
-      right: '3.5px',
+      right: '1px',
     },
   },
   variants: {
@@ -93,8 +92,10 @@ const switchSlot = sva({
       true: {
         slider: {
           backgroundColor: 'main.black',
+          borderColor: 'main.black',
           '&::before': {
-            transform: `translateX(${SWITCH_WIDTH - SWITCH_CIRCLE_SIZE - SWITCH_CIRCLE_GAP}px)`,
+            left: '100%',
+            transform: 'translateX(-100%)',
           },
         },
         textOn: {
@@ -107,8 +108,9 @@ const switchSlot = sva({
       false: {
         slider: {
           backgroundColor: 'grey.40',
+          borderColor: 'grey.40',
           '&::before': {
-            transform: `translateX(${SWITCH_CIRCLE_GAP}px)`,
+            left: '0%',
           },
         },
         textOn: {
