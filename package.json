@@ -27,6 +27,11 @@
       "import": "./dist/component/index.mjs",
       "types": "./dist/component/index.d.ts"
     },
+    "./token": {
+      "require": "./dist/token/index.js",
+      "import": "./dist/token/index.mjs",
+      "types": "./dist/token/index.d.ts"
+    },
     "./legacy": {
       "require": "./dist/legacy/index.js",
       "import": "./dist/legacy/index.mjs",
