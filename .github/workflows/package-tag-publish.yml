@@ -23,7 +23,7 @@ jobs:
         with:
           path: |
             node_modules
-            styled-system
+            src/styled-system
           key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-
