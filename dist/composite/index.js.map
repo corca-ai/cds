@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sources":["../../src/composite/index.ts"],"sourcesContent":["export const composite = 'composite';\n"],"names":["composite"],"mappings":"gFAAO,MAAMA,EAAY"}
