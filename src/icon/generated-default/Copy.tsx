@@ -1,10 +1,10 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef } from 'react';
 import type { IconProps } from '../share/props';
-const Copy = (
+const IconCopy = (
   {
-    title = 'Copy',
-    titleId = 'CDS-CopyIcon',
+    title = 'IconCopy',
+    titleId = 'CDS-IconCopyIcon',
     size = 20,
     color = '#363738',
     ...props
@@ -31,5 +31,5 @@ const Copy = (
     />
   </svg>
 );
-const ForwardRef = forwardRef(Copy);
-export { ForwardRef as Copy };
+const ForwardRef = forwardRef(IconCopy);
+export { ForwardRef as IconCopy };

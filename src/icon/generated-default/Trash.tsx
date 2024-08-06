@@ -1,10 +1,10 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef } from 'react';
 import type { IconProps } from '../share/props';
-const Trash = (
+const IconTrash = (
   {
-    title = 'Trash',
-    titleId = 'CDS-TrashIcon',
+    title = 'IconTrash',
+    titleId = 'CDS-IconTrashIcon',
     size = 20,
     color = '#363738',
     ...props
@@ -34,5 +34,5 @@ const Trash = (
     />
   </svg>
 );
-const ForwardRef = forwardRef(Trash);
-export { ForwardRef as Trash };
+const ForwardRef = forwardRef(IconTrash);
+export { ForwardRef as IconTrash };

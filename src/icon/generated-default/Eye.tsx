@@ -1,10 +1,10 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef } from 'react';
 import type { IconProps } from '../share/props';
-const Eye = (
+const IconEye = (
   {
-    title = 'Eye',
-    titleId = 'CDS-EyeIcon',
+    title = 'IconEye',
+    titleId = 'CDS-IconEyeIcon',
     size = 20,
     color = '#363738',
     ...props
@@ -38,5 +38,5 @@ const Eye = (
     />
   </svg>
 );
-const ForwardRef = forwardRef(Eye);
-export { ForwardRef as Eye };
+const ForwardRef = forwardRef(IconEye);
+export { ForwardRef as IconEye };

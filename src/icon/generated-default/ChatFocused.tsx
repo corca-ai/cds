@@ -1,10 +1,10 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef } from 'react';
 import type { IconProps } from '../share/props';
-const ChatFocused = (
+const IconChatFocused = (
   {
-    title = 'ChatFocused',
-    titleId = 'CDS-ChatFocusedIcon',
+    title = 'IconChatFocused',
+    titleId = 'CDS-IconChatFocusedIcon',
     size = 20,
     color = '#363738',
     ...props
@@ -32,5 +32,5 @@ const ChatFocused = (
     />
   </svg>
 );
-const ForwardRef = forwardRef(ChatFocused);
-export { ForwardRef as ChatFocused };
+const ForwardRef = forwardRef(IconChatFocused);
+export { ForwardRef as IconChatFocused };

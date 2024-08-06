@@ -1,10 +1,10 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef } from 'react';
 import type { IconProps } from '../share/props';
-const Clock = (
+const IconClock = (
   {
-    title = 'Clock',
-    titleId = 'CDS-ClockIcon',
+    title = 'IconClock',
+    titleId = 'CDS-IconClockIcon',
     size = 20,
     color = '#363738',
     ...props
@@ -34,5 +34,5 @@ const Clock = (
     />
   </svg>
 );
-const ForwardRef = forwardRef(Clock);
-export { ForwardRef as Clock };
+const ForwardRef = forwardRef(IconClock);
+export { ForwardRef as IconClock };

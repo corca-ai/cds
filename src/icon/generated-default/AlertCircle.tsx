@@ -1,10 +1,10 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef } from 'react';
 import type { IconProps } from '../share/props';
-const AlertCircle = (
+const IconAlertCircle = (
   {
-    title = 'AlertCircle',
-    titleId = 'CDS-AlertCircleIcon',
+    title = 'IconAlertCircle',
+    titleId = 'CDS-IconAlertCircleIcon',
     size = 20,
     color = '#363738',
     ...props
@@ -34,5 +34,5 @@ const AlertCircle = (
     />
   </svg>
 );
-const ForwardRef = forwardRef(AlertCircle);
-export { ForwardRef as AlertCircle };
+const ForwardRef = forwardRef(IconAlertCircle);
+export { ForwardRef as IconAlertCircle };

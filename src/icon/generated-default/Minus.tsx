@@ -1,10 +1,10 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef } from 'react';
 import type { IconProps } from '../share/props';
-const Minus = (
+const IconMinus = (
   {
-    title = 'Minus',
-    titleId = 'CDS-MinusIcon',
+    title = 'IconMinus',
+    titleId = 'CDS-IconMinusIcon',
     size = 20,
     color = '#363738',
     ...props
@@ -30,5 +30,5 @@ const Minus = (
     />
   </svg>
 );
-const ForwardRef = forwardRef(Minus);
-export { ForwardRef as Minus };
+const ForwardRef = forwardRef(IconMinus);
+export { ForwardRef as IconMinus };

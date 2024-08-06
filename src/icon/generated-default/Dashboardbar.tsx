@@ -1,10 +1,10 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef } from 'react';
 import type { IconProps } from '../share/props';
-const Dashboardbar = (
+const IconDashboardbar = (
   {
-    title = 'Dashboardbar',
-    titleId = 'CDS-DashboardbarIcon',
+    title = 'IconDashboardbar',
+    titleId = 'CDS-IconDashboardbarIcon',
     size = 20,
     color = '#363738',
     ...props
@@ -30,5 +30,5 @@ const Dashboardbar = (
     />
   </svg>
 );
-const ForwardRef = forwardRef(Dashboardbar);
-export { ForwardRef as Dashboardbar };
+const ForwardRef = forwardRef(IconDashboardbar);
+export { ForwardRef as IconDashboardbar };

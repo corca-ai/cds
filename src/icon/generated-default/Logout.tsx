@@ -1,10 +1,10 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef } from 'react';
 import type { IconProps } from '../share/props';
-const Logout = (
+const IconLogout = (
   {
-    title = 'Logout',
-    titleId = 'CDS-LogoutIcon',
+    title = 'IconLogout',
+    titleId = 'CDS-IconLogoutIcon',
     size = 20,
     color = '#363738',
     ...props
@@ -32,5 +32,5 @@ const Logout = (
     />
   </svg>
 );
-const ForwardRef = forwardRef(Logout);
-export { ForwardRef as Logout };
+const ForwardRef = forwardRef(IconLogout);
+export { ForwardRef as IconLogout };

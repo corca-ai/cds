@@ -1,10 +1,10 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef } from 'react';
 import type { IconProps } from '../share/props';
-const EditSquare = (
+const IconEditSquare = (
   {
-    title = 'EditSquare',
-    titleId = 'CDS-EditSquareIcon',
+    title = 'IconEditSquare',
+    titleId = 'CDS-IconEditSquareIcon',
     size = 20,
     color = '#363738',
     ...props
@@ -31,5 +31,5 @@ const EditSquare = (
     />
   </svg>
 );
-const ForwardRef = forwardRef(EditSquare);
-export { ForwardRef as EditSquare };
+const ForwardRef = forwardRef(IconEditSquare);
+export { ForwardRef as IconEditSquare };
