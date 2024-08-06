@@ -1,10 +1,10 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef } from 'react';
 import type { IconProps } from '../share/props';
-const ArrowLeftLarge = (
+const IconArrowLeftLarge = (
   {
-    title = 'ArrowLeftLarge',
-    titleId = 'CDS-ArrowLeftLargeIcon',
+    title = 'IconArrowLeftLarge',
+    titleId = 'CDS-IconArrowLeftLargeIcon',
     size = 20,
     color = '#363738',
     ...props
@@ -30,5 +30,5 @@ const ArrowLeftLarge = (
     />
   </svg>
 );
-const ForwardRef = forwardRef(ArrowLeftLarge);
-export { ForwardRef as ArrowLeftLarge };
+const ForwardRef = forwardRef(IconArrowLeftLarge);
+export { ForwardRef as IconArrowLeftLarge };

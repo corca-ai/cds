@@ -1,10 +1,10 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef } from 'react';
 import type { IconProps } from '../share/props';
-const Calendar = (
+const IconCalendar = (
   {
-    title = 'Calendar',
-    titleId = 'CDS-CalendarIcon',
+    title = 'IconCalendar',
+    titleId = 'CDS-IconCalendarIcon',
     size = 20,
     color = '#363738',
     ...props
@@ -30,5 +30,5 @@ const Calendar = (
     />
   </svg>
 );
-const ForwardRef = forwardRef(Calendar);
-export { ForwardRef as Calendar };
+const ForwardRef = forwardRef(IconCalendar);
+export { ForwardRef as IconCalendar };

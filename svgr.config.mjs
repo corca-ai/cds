@@ -32,7 +32,7 @@ export default {
     ],
   },
   template: (variables, { tpl }) => {
-    variables.componentName = variables.componentName.replace(/^Svg/, '');
+    variables.componentName = `Icon${variables.componentName.replace(/^Svg/, '')}`;
 
     variables.props.forEach(prop => {
       if (prop.type === 'ObjectPattern') {

@@ -1,10 +1,10 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef } from 'react';
 import type { IconProps } from '../share/props';
-const Search = (
+const IconSearch = (
   {
-    title = 'Search',
-    titleId = 'CDS-SearchIcon',
+    title = 'IconSearch',
+    titleId = 'CDS-IconSearchIcon',
     size = 20,
     color = '#363738',
     ...props
@@ -30,5 +30,5 @@ const Search = (
     />
   </svg>
 );
-const ForwardRef = forwardRef(Search);
-export { ForwardRef as Search };
+const ForwardRef = forwardRef(IconSearch);
+export { ForwardRef as IconSearch };

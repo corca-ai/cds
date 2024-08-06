@@ -1,10 +1,10 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef } from 'react';
 import type { IconProps } from '../share/props';
-const SortAscending = (
+const IconSortAscending = (
   {
-    title = 'SortAscending',
-    titleId = 'CDS-SortAscendingIcon',
+    title = 'IconSortAscending',
+    titleId = 'CDS-IconSortAscendingIcon',
     size = 20,
     color = '#363738',
     ...props
@@ -38,5 +38,5 @@ const SortAscending = (
     />
   </svg>
 );
-const ForwardRef = forwardRef(SortAscending);
-export { ForwardRef as SortAscending };
+const ForwardRef = forwardRef(IconSortAscending);
+export { ForwardRef as IconSortAscending };

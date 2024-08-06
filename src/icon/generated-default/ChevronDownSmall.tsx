@@ -1,10 +1,10 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef } from 'react';
 import type { IconProps } from '../share/props';
-const ChevronDownSmall = (
+const IconChevronDownSmall = (
   {
-    title = 'ChevronDownSmall',
-    titleId = 'CDS-ChevronDownSmallIcon',
+    title = 'IconChevronDownSmall',
+    titleId = 'CDS-IconChevronDownSmallIcon',
     size = 20,
     color = '#363738',
     ...props
@@ -30,5 +30,5 @@ const ChevronDownSmall = (
     />
   </svg>
 );
-const ForwardRef = forwardRef(ChevronDownSmall);
-export { ForwardRef as ChevronDownSmall };
+const ForwardRef = forwardRef(IconChevronDownSmall);
+export { ForwardRef as IconChevronDownSmall };

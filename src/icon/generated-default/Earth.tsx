@@ -1,10 +1,10 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef } from 'react';
 import type { IconProps } from '../share/props';
-const Earth = (
+const IconEarth = (
   {
-    title = 'Earth',
-    titleId = 'CDS-EarthIcon',
+    title = 'IconEarth',
+    titleId = 'CDS-IconEarthIcon',
     size = 20,
     color = '#363738',
     ...props
@@ -30,5 +30,5 @@ const Earth = (
     />
   </svg>
 );
-const ForwardRef = forwardRef(Earth);
-export { ForwardRef as Earth };
+const ForwardRef = forwardRef(IconEarth);
+export { ForwardRef as IconEarth };

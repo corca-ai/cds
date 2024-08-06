@@ -1,10 +1,10 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef } from 'react';
 import type { IconProps } from '../share/props';
-const Filter = (
+const IconFilter = (
   {
-    title = 'Filter',
-    titleId = 'CDS-FilterIcon',
+    title = 'IconFilter',
+    titleId = 'CDS-IconFilterIcon',
     size = 20,
     color = '#363738',
     ...props
@@ -28,5 +28,5 @@ const Filter = (
     />
   </svg>
 );
-const ForwardRef = forwardRef(Filter);
-export { ForwardRef as Filter };
+const ForwardRef = forwardRef(IconFilter);
+export { ForwardRef as IconFilter };

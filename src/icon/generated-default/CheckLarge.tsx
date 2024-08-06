@@ -1,10 +1,10 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef } from 'react';
 import type { IconProps } from '../share/props';
-const CheckLarge = (
+const IconCheckLarge = (
   {
-    title = 'CheckLarge',
-    titleId = 'CDS-CheckLargeIcon',
+    title = 'IconCheckLarge',
+    titleId = 'CDS-IconCheckLargeIcon',
     size = 20,
     color = '#363738',
     ...props
@@ -30,5 +30,5 @@ const CheckLarge = (
     />
   </svg>
 );
-const ForwardRef = forwardRef(CheckLarge);
-export { ForwardRef as CheckLarge };
+const ForwardRef = forwardRef(IconCheckLarge);
+export { ForwardRef as IconCheckLarge };

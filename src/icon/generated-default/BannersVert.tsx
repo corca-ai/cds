@@ -1,10 +1,10 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef } from 'react';
 import type { IconProps } from '../share/props';
-const BannersVert = (
+const IconBannersVert = (
   {
-    title = 'BannersVert',
-    titleId = 'CDS-BannersVertIcon',
+    title = 'IconBannersVert',
+    titleId = 'CDS-IconBannersVertIcon',
     size = 20,
     color = '#363738',
     ...props
@@ -34,5 +34,5 @@ const BannersVert = (
     />
   </svg>
 );
-const ForwardRef = forwardRef(BannersVert);
-export { ForwardRef as BannersVert };
+const ForwardRef = forwardRef(IconBannersVert);
+export { ForwardRef as IconBannersVert };

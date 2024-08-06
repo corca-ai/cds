@@ -1,10 +1,10 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef } from 'react';
 import type { IconProps } from '../share/props';
-const InformationCircleSmall = (
+const IconInformationCircleSmall = (
   {
-    title = 'InformationCircleSmall',
-    titleId = 'CDS-InformationCircleSmallIcon',
+    title = 'IconInformationCircleSmall',
+    titleId = 'CDS-IconInformationCircleSmallIcon',
     size = 20,
     color = '#363738',
     ...props
@@ -34,5 +34,5 @@ const InformationCircleSmall = (
     />
   </svg>
 );
-const ForwardRef = forwardRef(InformationCircleSmall);
-export { ForwardRef as InformationCircleSmall };
+const ForwardRef = forwardRef(IconInformationCircleSmall);
+export { ForwardRef as IconInformationCircleSmall };

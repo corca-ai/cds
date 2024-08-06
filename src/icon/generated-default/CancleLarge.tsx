@@ -1,10 +1,10 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef } from 'react';
 import type { IconProps } from '../share/props';
-const CancleLarge = (
+const IconCancleLarge = (
   {
-    title = 'CancleLarge',
-    titleId = 'CDS-CancleLargeIcon',
+    title = 'IconCancleLarge',
+    titleId = 'CDS-IconCancleLargeIcon',
     size = 20,
     color = '#363738',
     ...props
@@ -28,5 +28,5 @@ const CancleLarge = (
     />
   </svg>
 );
-const ForwardRef = forwardRef(CancleLarge);
-export { ForwardRef as CancleLarge };
+const ForwardRef = forwardRef(IconCancleLarge);
+export { ForwardRef as IconCancleLarge };
