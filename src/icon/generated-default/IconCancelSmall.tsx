@@ -1,10 +1,10 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef } from 'react';
 import type { IconProps } from '../share/props';
-const IconCancleLarge = (
+const IconCancelSmall = (
   {
-    title = 'IconCancleLarge',
-    titleId = 'CDS-IconCancleLargeIcon',
+    title = 'IconCancelSmall',
+    titleId = 'CDS-IconCancelSmallIcon',
     size = 20,
     color = '#363738',
     ...props
@@ -15,7 +15,7 @@ const IconCancleLarge = (
     width={size}
     height={size}
     fill="none"
-    viewBox="0 0 24 24"
+    viewBox="0 0 20 20"
     color={color}
     ref={ref}
     aria-labelledby={titleId}
@@ -24,9 +24,9 @@ const IconCancleLarge = (
     {title ? <title id={titleId}>{title}</title> : null}
     <path
       fill="currentColor"
-      d="M17.44 19.56a1.5 1.5 0 0 0 2.12-2.12L14.122 12l5.44-5.44a1.5 1.5 0 0 0-2.122-2.12L12 9.878l-5.44-5.44a1.5 1.5 0 1 0-2.12 2.122L9.878 12l-5.44 5.44a1.5 1.5 0 0 0 2.122 2.12L12 14.122z"
+      d="M12.72 13.78a.75.75 0 1 0 1.06-1.06L11.06 10l2.72-2.72a.75.75 0 0 0-1.06-1.06L10 8.94 7.28 6.22a.75.75 0 0 0-1.06 1.06L8.94 10l-2.72 2.72a.75.75 0 1 0 1.06 1.06L10 11.06z"
     />
   </svg>
 );
-const ForwardRef = forwardRef(IconCancleLarge);
-export { ForwardRef as IconCancleLarge };
+const ForwardRef = forwardRef(IconCancelSmall);
+export { ForwardRef as IconCancelSmall };
