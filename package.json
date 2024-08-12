@@ -3,7 +3,7 @@
   "author": "Corca <contact@corca.ai>",
   "description": "Design System for Corca, Inc.",
   "private": false,
-  "version": "0.0.30",
+  "version": "0.0.31",
   "packageManager": "pnpm@8.15.4",
   "type": "module",
   "exports": {
@@ -51,7 +51,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "icongen": "svgr --out-dir ./src/icon/generated-default --index-template ./tools/svgrIndexTemplate.cjs -- ./src/icon/assets",
-    "postinstall": "husky && panda codegen"
+    "prepare": "husky && panda codegen"
   },
   "dependencies": {
     "date-fns": "3.3.1",
