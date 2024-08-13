@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
-
+// app-router로 마이그레이션하면 제거될 코드입니디.
 const fs = require('fs');
 const path = require('path');
 
