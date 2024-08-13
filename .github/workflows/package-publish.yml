@@ -33,6 +33,7 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - run: pnpm run build
+      - run: node ./tools/removePacakgeType.cjs
 
       - uses: JS-DevTools/npm-publish@v1
         with:
