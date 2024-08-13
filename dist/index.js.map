@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sources":["../src/token/index.ts"],"sourcesContent":["export const token = 'token';\n"],"names":["token"],"mappings":"qMAAaA,EAAQ"}

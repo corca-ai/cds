@@ -1,0 +1,459 @@
+:root:not(#\#) {
+  --made-with-panda: '🐼';
+}
+
+*:not(#\#),:not(#\#)::before,:not(#\#)::after,:not(#\#)::backdrop {
+  --blur: /*-*/ /*-*/;
+  --brightness: /*-*/ /*-*/;
+  --contrast: /*-*/ /*-*/;
+  --grayscale: /*-*/ /*-*/;
+  --hue-rotate: /*-*/ /*-*/;
+  --invert: /*-*/ /*-*/;
+  --saturate: /*-*/ /*-*/;
+  --sepia: /*-*/ /*-*/;
+  --drop-shadow: /*-*/ /*-*/;
+  --backdrop-blur: /*-*/ /*-*/;
+  --backdrop-brightness: /*-*/ /*-*/;
+  --backdrop-contrast: /*-*/ /*-*/;
+  --backdrop-grayscale: /*-*/ /*-*/;
+  --backdrop-hue-rotate: /*-*/ /*-*/;
+  --backdrop-invert: /*-*/ /*-*/;
+  --backdrop-opacity: /*-*/ /*-*/;
+  --backdrop-saturate: /*-*/ /*-*/;
+  --backdrop-sepia: /*-*/ /*-*/;
+  --gradient-from-position: /*-*/ /*-*/;
+  --gradient-to-position: /*-*/ /*-*/;
+  --gradient-via-position: /*-*/ /*-*/;
+  --scroll-snap-strictness: proximity;
+  --border-spacing-x: 0;
+  --border-spacing-y: 0;
+  --translate-x: 0;
+  --translate-y: 0;
+  --rotate: 0;
+  --rotate-x: 0;
+  --rotate-y: 0;
+  --skew-x: 0;
+  --skew-y: 0;
+  --scale-x: 1;
+  --scale-y: 1;
+}
+
+:where(:root, :host):not(#\#):not(#\#) {
+  --colors-main-black: #292929;
+  --colors-main-yellow: #ffd464;
+  --colors-grey-10: #f8f9fb;
+  --colors-grey-20: #f3f4f6;
+  --colors-grey-30: #e4e5e9;
+  --colors-grey-40: #ced1d6;
+  --colors-grey-50: #aaacaf;
+  --colors-grey-60: #737678;
+  --colors-grey-70: #515354;
+  --colors-grey-80: #363738;
+  --colors-etc-white: #ffffff;
+  --colors-etc-focus: #3b79d7;
+  --colors-etc-error-10: #ffe7e6;
+  --colors-etc-error-20: #fc685f;
+  --colors-etc-error-30: #b10e1c;
+  --colors-etc-active-10: #ecfdf3;
+  --colors-etc-active-20: #14ba6d;
+  --colors-etc-active-30: #037847;
+}
+
+.textStyle_b6:not(#\#):not(#\#):not(#\#):not(#\#) {
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.textStyle_b1:not(#\#):not(#\#):not(#\#):not(#\#) {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.textStyle_b2:not(#\#):not(#\#):not(#\#):not(#\#) {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.d_flex:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  display: flex;
+}
+
+.gap_40:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  gap: 40px;
+}
+
+.gap_20:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  gap: 20px;
+}
+
+.w_fit-content:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  width: fit-content;
+}
+
+.d_inline-flex:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  display: inline-flex;
+}
+
+.gap_6px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  gap: 6px;
+}
+
+.h_22px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  height: 22px;
+}
+
+.p_2px_8px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  padding: 2px 8px;
+}
+
+.bdr_10px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  border-radius: 10px;
+}
+
+.bg_etc\.active\.10:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  background: var(--colors-etc-active-10);
+}
+
+.bg_\#E9EAED:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  background: #E9EAED;
+}
+
+.bg_\#FFF7CC:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  background: #FFF7CC;
+}
+
+.bg_etc\.error\.10:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  background: var(--colors-etc-error-10);
+}
+
+.c_etc\.active\.30:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  color: var(--colors-etc-active-30);
+}
+
+.c_\#343F51:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  color: #343F51;
+}
+
+.c_\#E87E00:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  color: #E87E00;
+}
+
+.c_etc\.error\.30:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  color: var(--colors-etc-error-30);
+}
+
+.c_etc\.white:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  color: var(--colors-etc-white);
+}
+
+.bg_etc\.focus:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  background: var(--colors-etc-focus);
+}
+
+.m_10:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  margin: 10px;
+}
+
+.bdr_4px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  border-radius: 4px;
+}
+
+.bg_grey\.30:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  background: var(--colors-grey-30);
+}
+
+.bx-sh_0px_0px_0px_1px_rgba\(0\,_0\,_0\,_0\.08\)_inset:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.08) inset;
+}
+
+.ov_hidden:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  overflow: hidden;
+}
+
+.obj-f_cover:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  object-fit: cover;
+}
+
+.w_100\%:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  width: 100%;
+}
+
+.h_100\%:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  height: 100%;
+}
+
+.pos_relative:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  position: relative;
+}
+
+.max-w_8xl:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  max-width: 8xl;
+}
+
+.mx_auto:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  margin-inline: auto;
+}
+
+.px_4:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  padding-inline: 4px;
+}
+
+.md_6:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  md: 6px;
+}
+
+.lg_8:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  lg: 8px;
+}
+
+.w_473:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  width: 473px;
+}
+
+.gap_12:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  gap: 12px;
+}
+
+.direction_column:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  direction: column;
+}
+
+.w_400:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  width: 400px;
+}
+
+.w_150:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  width: 150px;
+}
+
+.w_100px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  width: 100px;
+}
+
+.w_120px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  width: 120px;
+}
+
+.w_50px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  width: 50px;
+}
+
+.bg_\#f0f0f0:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  background: #f0f0f0;
+}
+
+.bd-l_1px_solid_\#000:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  border-left: 1px solid #000;
+}
+
+.bd-r_1px_solid_\#000:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  border-right: 1px solid #000;
+}
+
+.w_300:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  width: 300px;
+}
+
+.direction_bottom-center:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  direction: bottom-center;
+}
+
+.direction_bottom-start:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  direction: bottom-start;
+}
+
+.direction_bottom-end:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  direction: bottom-end;
+}
+
+.direction_left-start:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  direction: left-start;
+}
+
+.direction_left-center:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  direction: left-center;
+}
+
+.direction_left-end:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  direction: left-end;
+}
+
+.direction_right-start:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  direction: right-start;
+}
+
+.direction_right-center:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  direction: right-center;
+}
+
+.direction_right-end:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  direction: right-end;
+}
+
+.direction_top-start:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  direction: top-start;
+}
+
+.direction_top-center:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  direction: top-center;
+}
+
+.direction_top-end:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  direction: top-end;
+}
+
+.c_transparent:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  color: transparent;
+}
+
+.h_32:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  height: 32px;
+}
+
+.c_main-black:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  color: main-black;
+}
+
+.w_310:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  width: 310px;
+}
+
+.bdr_8:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  border-radius: 8px;
+}
+
+.bdr_0:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  border-radius: 0;
+}
+
+.bdr_12:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  border-radius: 12px;
+}
+
+.bdr_4:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  border-radius: 4px;
+}
+
+.bdr_3:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  border-radius: 3px;
+}
+
+.direction_row:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  direction: row;
+}
+
+.flex_0_0_auto:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  flex: 0 0 auto;
+}
+
+.bdr_9999px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  border-radius: 9999px;
+}
+
+.cursor_text:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  cursor: text;
+}
+
+.rotate_none:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  rotate: none;
+}
+
+.cursor_auto:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  cursor: auto;
+}
+
+.cursor_pointer:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  cursor: pointer;
+}
+
+.rotate_rotate\(180deg\):not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  rotate: rotate(180deg);
+}
+
+.w_25:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  width: 25px;
+}
+
+.h_25:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  height: 25px;
+}
+
+.fill_none:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  fill: none;
+}
+
+.direction_left:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  direction: left;
+}
+
+.w_auto:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  width: auto;
+}
+
+.w_54:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  width: 54px;
+}
+
+.h_54:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  height: 54px;
+}
+
+.ai_center:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  align-items: center;
+}
+
+.jc_center:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  justify-content: center;
+}
+
+.flex-d_row:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  flex-direction: row;
+}
+
+.flex-d_column:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  flex-direction: column;
+}
+
+.content_Arrow_Tooltip:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  content: Arrow Tooltip;
+}
+
+.content_No_Arrow_Tooltip:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  content: No Arrow Tooltip;
+}
+
+.content_Corca_Design_System_TooltipCorca_Design_System_TooltipCorca_Design_System_TooltipCorca_Design_System_TooltipCorca_Design_System_TooltipCorca_Design_System_TooltipCorca_Design_System_Tooltip:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  content: Corca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design System TooltipCorca Design System Tooltip;
+}
+
+.before\:w_6px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#)::before {
+  width: 6px;
+}
+
+.before\:h_6px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#)::before {
+  height: 6px;
+}
+
+.before\:bdr_50\%:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#)::before {
+  border-radius: 50%;
+}
+
+.before\:bg_etc\.active\.20:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#)::before {
+  background: var(--colors-etc-active-20);
+}
+
+.before\:bg_\#6C778B:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#)::before {
+  background: #6C778B;
+}
+
+.before\:bg_\#E87E00:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#)::before {
+  background: #E87E00;
+}
+
+.before\:bg_etc\.error\.30:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#)::before {
+  background: var(--colors-etc-error-30);
+}
+
+.before\:content_\"\":not(#\#):not(#\#):not(#\#):not(#\#):not(#\#)::before {
+  content: "";
+}
