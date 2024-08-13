@@ -34,6 +34,8 @@ jobs:
 
       - run: pnpm run build
 
+      - run: node ./tools/removePacakgeType.cjs
+
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
