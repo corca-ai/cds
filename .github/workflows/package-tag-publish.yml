@@ -46,7 +46,8 @@ jobs:
         env:
           TAG_NAME: ${{ steps.tag-meta.outputs.BRANCH_SLUG }}-${{ steps.tag-meta.outputs.TIME }}
         run: |
-          rm -rf src .husky .github .storybook .prettierrc .eslint.config.js pnpm-lock.yaml vercel.json vite.config.js tsconfig.json tsconfig.build.json tsconfig.node.json
+          node ./tools/removePacakgeType.cjs
+          rm -rf tools src .husky .github .storybook .prettierrc .eslint.config.js pnpm-lock.yaml vercel.json vite.config.js tsconfig.json tsconfig.build.json tsconfig.node.json
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           CURRENT_VERSION=$(pnpm pkg get version | tr -d '"')
