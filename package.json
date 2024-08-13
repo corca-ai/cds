@@ -5,6 +5,7 @@
   "private": false,
   "version": "0.0.31",
   "packageManager": "pnpm@8.15.4",
+  "type": "module",
   "exports": {
     ".": {
       "require": "./dist/index.js",
