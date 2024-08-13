@@ -5,7 +5,6 @@
   "private": false,
   "version": "0.0.31",
   "packageManager": "pnpm@8.15.4",
-  "type": "module",
   "exports": {
     ".": {
       "require": "./dist/index.js",
@@ -51,7 +50,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "icongen": "svgr --out-dir ./src/icon/generated-default --index-template ./tools/svgrIndexTemplate.cjs -- ./src/icon/assets",
-    "prepare": "husky && panda codegen"
+    "prepare": "husky && panda codegen",
+    "prepublishOnly": "node tools/removePacakgeType.cjs"
   },
   "dependencies": {
     "date-fns": "3.3.1",
