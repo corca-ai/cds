@@ -13,6 +13,12 @@ export default tseslint.config(
     plugins: {
       'react-hooks': reactHooks,
     },
+    languageOptions: {
+      globals: {
+        module: true,
+        require: true,
+      },
+    },
     rules: {
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'error',
