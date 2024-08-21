@@ -1,1 +1,1 @@
-export * from './dist/component/index.d.ts';
+export * from './dist/component';
