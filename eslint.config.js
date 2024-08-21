@@ -1,6 +1,7 @@
 // @ts-check
 
 import eslint from '@eslint/js';
+import globals from 'globals';
 
 import tseslint from 'typescript-eslint';
 import reactJsxRuntime from 'eslint-plugin-react/configs/jsx-runtime.js';
@@ -15,8 +16,8 @@ export default tseslint.config(
     },
     languageOptions: {
       globals: {
-        module: true,
-        require: true,
+        ...globals.browser,
+        ...globals.node,
       },
     },
     rules: {
