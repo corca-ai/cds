@@ -1,1 +1,1 @@
-module.exports = require('./dist/legacy.js');
+module.exports = require('./dist/legacy');

@@ -54,10 +54,6 @@ export default defineConfig({
           src: ['src/*.css'],
           dest: resolve(__dirname, 'dist'),
         },
-        {
-          src: ['src/component.js', 'src/legacy.js', 'src/core.js', 'src/icon.js'],
-          dest: resolve(__dirname),
-        },
       ],
     }),
   ],
