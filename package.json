@@ -13,22 +13,22 @@
       "types": "./dist/index.d.ts"
     },
     "./icon": {
-      "require": "./dist/icon/index.js",
+      "require": "./icon.js",
       "import": "./dist/icon/index.mjs",
       "types": "./dist/icon/index.d.ts"
     },
     "./composite": {
-      "require": "./dist/composite/index.js",
+      "require": "./composite.js",
       "import": "./dist/composite/index.mjs",
       "types": "./dist/composite/index.d.ts"
     },
     "./component": {
-      "require": "./dist/component/index.js",
+      "require": "./component.js",
       "import": "./dist/component/index.mjs",
       "types": "./dist/component/index.d.ts"
     },
     "./legacy": {
-      "require": "./dist/legacy/index.js",
+      "require": "./legacy.js",
       "import": "./dist/legacy/index.mjs",
       "types": "./dist/legacy/index.d.ts"
     },
