@@ -3,7 +3,7 @@
   "author": "Corca <contact@corca.ai>",
   "description": "Design System for Corca, Inc.",
   "private": false,
-  "version": "0.0.32",
+  "version": "0.0.33",
   "packageManager": "pnpm@8.15.4",
   "type": "module",
   "exports": {
@@ -13,22 +13,22 @@
       "types": "./dist/index.d.ts"
     },
     "./icon": {
-      "require": "./dist/icon/index.js",
+      "require": "./icon.js",
       "import": "./dist/icon/index.mjs",
       "types": "./dist/icon/index.d.ts"
     },
     "./composite": {
-      "require": "./dist/composite/index.js",
+      "require": "./composite.js",
       "import": "./dist/composite/index.mjs",
       "types": "./dist/composite/index.d.ts"
     },
     "./component": {
-      "require": "./dist/component/index.js",
+      "require": "./component.js",
       "import": "./dist/component/index.mjs",
       "types": "./dist/component/index.d.ts"
     },
     "./legacy": {
-      "require": "./dist/legacy/index.js",
+      "require": "./legacy.js",
       "import": "./dist/legacy/index.mjs",
       "types": "./dist/legacy/index.d.ts"
     },
@@ -40,7 +40,17 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "component.js",
+    "composite.js",
+    "icon.js",
+    "legacy.js",
+    "token.js",
+    "component.d.ts",
+    "composite.d.ts",
+    "icon.d.ts",
+    "legacy.d.ts",
+    "token.d.ts"
   ],
   "sideEffects": false,
   "repository": "https://github.com/corca-ai/cds",
@@ -95,6 +105,7 @@
     "eslint-plugin-prettier": "3.4.0",
     "eslint-plugin-react": "7.33.2",
     "eslint-plugin-react-hooks": "4.6.0",
+    "globals": "^15.9.0",
     "husky": "9.0.11",
     "lint-staged": "15.2.2",
     "prettier": "2.8.8",

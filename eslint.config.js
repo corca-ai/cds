@@ -1,6 +1,7 @@
 // @ts-check
 
 import eslint from '@eslint/js';
+import globals from 'globals';
 
 import tseslint from 'typescript-eslint';
 import reactJsxRuntime from 'eslint-plugin-react/configs/jsx-runtime.js';
@@ -12,6 +13,12 @@ export default tseslint.config(
   {
     plugins: {
       'react-hooks': reactHooks,
+    },
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
     },
     rules: {
       'react-hooks/rules-of-hooks': 'error',

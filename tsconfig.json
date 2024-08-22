@@ -27,6 +27,6 @@
     "importHelpers": true
   },
   "include": ["src", "styled-system"],
-  "exclude": ["**/dist/**, **/node_modules"],
+  "exclude": ["**/dist/**, **/node_modules", "./*.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
