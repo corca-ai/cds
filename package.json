@@ -3,9 +3,8 @@
   "author": "Corca <contact@corca.ai>",
   "description": "Design System for Corca, Inc.",
   "private": false,
-  "version": "0.0.35",
+  "version": "0.0.35-fix-multi-select-placeholder-NONE-1728021687",
   "packageManager": "pnpm@8.15.4",
-  "type": "module",
   "exports": {
     ".": {
       "require": "./dist/index.js",
