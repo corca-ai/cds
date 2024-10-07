@@ -75,12 +75,10 @@ export function MultiSelectInput<T extends string | number>({
 }
 
 export interface SearchInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'width'> {
-  width?: number;
-  tooltip?: SelectInputTooltipProps;
   showIcon?: boolean;
 }
 
-export function SearchInput({ width, tooltip, showIcon = true, ...props }: SearchInputProps) {
+export function SearchInput({ showIcon = true, ...props }: SearchInputProps) {
   return (
     <SearchInputChildWrapper>
       {showIcon && (
@@ -184,12 +182,12 @@ const CancelButtonWrapper = styled.div`
 `;
 
 const SelectInputWrapper = styled.div<{ width?: number; cursor?: string }>`
-  width: ${({ width }) => `${width}px` ?? '100%'};
+  width: ${({ width }) => (width ? `${width}px` : '100%')};
   position: relative;
   cursor: ${({ cursor }) => cursor ?? 'auto'};
 `;
 
-const MainInputSection = styled.div<{
+const MainInputSection = styled.input<{
   error?: string;
   isRightSection?: boolean;
   isLeftSection?: boolean;
