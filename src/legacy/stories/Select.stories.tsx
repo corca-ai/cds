@@ -141,7 +141,7 @@ export function Default() {
       />
       <MultiSelect
         width={400}
-        placeholder="placeholder text"
+        placeholder="플레이스 홀더 placeholder text"
         label="Searchable Multi Select"
         description="Searchable and not searchable is available."
         selectedValues={selectedItems}

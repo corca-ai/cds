@@ -199,6 +199,9 @@ const Placeholder = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  display: flex;
+  align-items: center;
 `;
 
 const MainInputSection = styled.div<{
