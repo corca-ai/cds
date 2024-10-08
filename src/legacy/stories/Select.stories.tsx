@@ -140,7 +140,8 @@ export function Default() {
         options={[{ label: '공백이없이라벨이긴예시', value: 'long' }, ...BASIC]}
       />
       <MultiSelect
-        placeholder="placeholder"
+        width={400}
+        placeholder="플레이스 홀더 placeholder text"
         label="Searchable Multi Select"
         description="Searchable and not searchable is available."
         selectedValues={selectedItems}

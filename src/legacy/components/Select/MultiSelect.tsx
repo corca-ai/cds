@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react';
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react';
 
 import styled from '@emotion/styled';
 
@@ -49,9 +49,7 @@ export function MultiSelect<T extends string | number>({
   const [focusedItemIdx, setFocusedItemIdx] = useState(-1);
   const [searchInputValue, setSearchInputValue] = useState<string | null>(null);
 
-  const selectedOptionItem = useMemo(() => {
-    return options.filter(option => selectedValues.includes(option.value as T));
-  }, [options.length, selectedValues?.length, options?.[0]?.value, selectedValues?.[0]]);
+  const selectedOptionItem = options.filter(option => selectedValues.includes(option.value as T));
 
   const optionItems: BasicOptionItem[] = useMemo(() => {
     if (search.searchable && searchInputValue) {
@@ -67,51 +65,46 @@ export function MultiSelect<T extends string | number>({
       return searchFilteredOptions;
     }
     return options;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search.searchable, options, options.length, searchInputValue]);
 
-  const clearDropdownAndSearch = useCallback(() => {
+  const clearDropdownAndSearch = () => {
     setSearchInputValue('');
     setFocusedItemIdx(-1);
     setShowDropdown(false);
-  }, [setSearchInputValue, setFocusedItemIdx, setShowDropdown]);
+  };
 
-  const onOptionListChange = useCallback(
-    (item: BasicOptionItem<T>) => {
-      if (item.value === CREATE_VALUE) {
-        onCreate?.(String(searchInputValue));
-        onSelect(searchInputValue as T);
-      } else if (selectedValues.includes(item.value as T)) {
-        onDeleteSingle(item.value as T);
-      } else {
-        onSelect(item.value as T);
-      }
-    },
-    [onCreate, searchInputValue, selectedValues, onDeleteSingle, onSelect],
-  );
+  const onOptionListChange = (item: BasicOptionItem<T>) => {
+    if (item.value === CREATE_VALUE) {
+      onCreate?.(String(searchInputValue));
+      onSelect(searchInputValue as T);
+    } else if (selectedValues.includes(item.value as T)) {
+      onDeleteSingle(item.value as T);
+    } else {
+      onSelect(item.value as T);
+    }
+  };
 
-  const handleKeyUpEvent = useCallback(
-    (event: KeyboardEvent<HTMLInputElement>) => {
-      switch (event.key) {
-        case 'ArrowDown':
-          return setFocusedItemIdx(prev => (prev === optionItems.length - 1 ? -1 : prev + 1));
-        case 'ArrowUp':
-          return setFocusedItemIdx(prev => (prev === -1 ? optionItems.length - 1 : prev - 1));
-        case 'Enter': {
-          if (focusedItemIdx === -1) {
-            return;
-          }
-
-          const item = optionItems[focusedItemIdx];
-          if (item.value === CREATE_VALUE) {
-            return;
-          }
-          onSelect(item.value as T);
-          clearDropdownAndSearch();
+  const handleKeyUpEvent = (event: KeyboardEvent<HTMLInputElement>) => {
+    switch (event.key) {
+      case 'ArrowDown':
+        return setFocusedItemIdx(prev => (prev === optionItems.length - 1 ? -1 : prev + 1));
+      case 'ArrowUp':
+        return setFocusedItemIdx(prev => (prev === -1 ? optionItems.length - 1 : prev - 1));
+      case 'Enter': {
+        if (focusedItemIdx === -1) {
+          return;
         }
+
+        const item = optionItems[focusedItemIdx];
+        if (item.value === CREATE_VALUE) {
+          return;
+        }
+        onSelect(item.value as T);
+        clearDropdownAndSearch();
       }
-    },
-    [setFocusedItemIdx, setShowDropdown, onSelect, optionItems, focusedItemIdx],
-  );
+    }
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -130,6 +123,7 @@ export function MultiSelect<T extends string | number>({
       return;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleKeyEvent = (event: any) => {
       handleKeyUpEvent(event);
     };
@@ -138,6 +132,7 @@ export function MultiSelect<T extends string | number>({
     return () => {
       document.removeEventListener('keyup', handleKeyEvent);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dropdownRef, showDropdown, optionItems, search.searchable, focusedItemIdx]);
 
   return (
@@ -185,7 +180,7 @@ export function MultiSelect<T extends string | number>({
 
 //TODO: make input width 100% available as default
 const SelectContainer = styled.div<{ width?: number }>`
-  width: ${({ width }) => `${width}px` ?? '100%'};
+  width: ${({ width }) => (width ? `${width}px` : '100%')};
   min-width: ${MULTI_SELECT_MIN_WIDTH}px;
 
   position: relative;

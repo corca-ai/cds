@@ -38,7 +38,7 @@ interface OptionListProps<T = string | number> {
   focusedItemIdx?: number;
 }
 
-const LIST_ITEM_HEIGHT = 32;
+const LIST_ITEM_HEIGHT = 36;
 
 const MINUS_ICON_CLASS_NAME = 'minus-icon';
 
@@ -97,11 +97,13 @@ export function OptionList<T = string | number>({
       return;
     }
     if (focusedItemIdx === -1) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       scrollRef.current!.children[0]?.scrollIntoView({
         block: 'nearest',
       });
       return;
     }
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     scrollRef.current!.children[focusedItemIdx]?.scrollIntoView({
       block: 'nearest',
     });
@@ -209,11 +211,13 @@ export function MultipleOptionList<T = string | number>({
       return;
     }
     if (focusedItemIdx === -1) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       scrollRef.current!.children[0]?.scrollIntoView({
         block: 'nearest',
       });
       return;
     }
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     scrollRef.current!.children[focusedItemIdx]?.scrollIntoView({
       block: 'nearest',
     });
@@ -253,7 +257,7 @@ const ListContainer = styled.ul<{
   maxDropdownItemsToShow: number;
 }>`
   display: flex;
-  width: ${({ width }) => `${width}px` ?? '100%'};
+  width: ${({ width }) => (width ? `${width}px` : '100%')};
   max-height: ${({ maxDropdownItemsToShow }) =>
     `${maxDropdownItemsToShow * (LIST_ITEM_HEIGHT + 4) + 20 - 4}px`};
   height: 100%;

@@ -46,6 +46,7 @@ export function MultiSelectInput<T extends string | number>({
   onDeleteAll,
   onClick,
   showIcon = true,
+  placeholder = '',
   ...props
 }: SelectInputBaseProps<T>) {
   const itemMaxWidth = useMemo(
@@ -59,6 +60,7 @@ export function MultiSelectInput<T extends string | number>({
       {description && <SelectInputDescription description={description} />}
       <SelectInputChildrenWrapper>
         <MainInputSection {...props} isRightSection={true}>
+          {!optionItems.length && <Placeholder> {placeholder}</Placeholder>}
           {optionItems.length > 0 && (
             <MultiSelectInputChildContents<T>
               {...{ width, onDeleteSingle, optionItems, onDeleteAll, itemMaxWidth }}
@@ -187,7 +189,22 @@ const SelectInputWrapper = styled.div<{ width?: number; cursor?: string }>`
   cursor: ${({ cursor }) => cursor ?? 'auto'};
 `;
 
-const MainInputSection = styled.input<{
+const Placeholder = styled.span`
+  width: 100%;
+  height: 20px;
+
+  color: ${color['grey-50']};
+  font-size: ${typography.size.xs}px;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  display: flex;
+  align-items: center;
+`;
+
+const MainInputSection = styled.div<{
   error?: string;
   isRightSection?: boolean;
   isLeftSection?: boolean;
@@ -202,7 +219,6 @@ const MainInputSection = styled.input<{
   font-style: normal;
   font-weight: 500;
   font-size: ${typography.size.xs}px;
-  text-align: center;
 
   color: ${color['grey-80']};
   background: ${color['white']};
@@ -221,11 +237,6 @@ const MainInputSection = styled.input<{
     background: ${color['grey-10']};
     color: ${color['grey-50']};
     cursor: not-allowed;
-  }
-
-  &::placeholder {
-    color: ${color['grey-50']};
-    font-size: ${typography.size.xs}px;
   }
 
   ${({ error }) =>
